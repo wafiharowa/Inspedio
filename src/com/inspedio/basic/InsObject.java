@@ -1,5 +1,6 @@
 package com.inspedio.basic;
 
+import com.inspedio.core.InsGlobal;
 import com.inspedio.helper.InsCamera;
 
 /**
@@ -49,22 +50,27 @@ public class InsObject extends InsBasic{
 	/**
 	 * Instantiates a <code>InsObject</code>.
 	 * 
-	 * @param	X		The X-coordinate of the point in space.
-	 * @param	Y		The Y-coordinate of the point in space.
+	 * @param	X		The X-coordinate of the point in world space.
+	 * @param	Y		The Y-coordinate of the point in world space.
+	 * @param	Width	Desired width of object.
+	 * @param	Height	Desired height of object.
 	 */
-	public InsObject(int X, int Y)
+	public InsObject(int X, int Y, int Width, int Height)
 	{
-		this(X, Y, 0, 0);
+		super(X, Y, Width, Height);
+		this.init();
 	}
 	/**
 	 * Instantiates a <code>InsObject</code>.
 	 * 
-	 * @param	X		The X-coordinate of the point in space.
-	 * @param	Y		The Y-coordinate of the point in space.
-	 * @param	Width	Desired width of the rectangle.
-	 * @param	Height	Desired height of the rectangle.
+	 * @param	spritePath	Location of sprite image in res folder
+	 * @param	X			The X-coordinate of the point in world space.
+	 * @param	Y			The Y-coordinate of the point in world space.
+	 * @param	Width		Desired width of object.
+	 * @param	Height		Desired height of object.
+	 * @param	useCache	TRUE if you want sprite generated from cache.
 	 */
-	public InsObject(int X, int Y, int Width, int Height)
+	public InsObject(String spritePath, int X, int Y, int Width, int Height, boolean useCache)
 	{
 		super(X, Y, Width, Height);
 		this.init();
@@ -72,23 +78,79 @@ public class InsObject extends InsBasic{
 	
 	private void init()
 	{
-		//this.camera = InsGlobal.camera;
+		this.camera = InsGlobal.camera;
 		this.absolute = false;
 		this.frame = 0;	
 	}
 	
+	/**
+	 * Override this function to null out variables or
+	 * manually call destroy() on class members if necessary.
+	 * Don't forget to call super.destroy()!
+	 */
+	public void destroy()
+	{
+		super.destroy();
+		this.camera = null;
+		this.sprite = null;
+	}
 	
-	public void preUpdate() {
+	/**
+	 * Updating Sprite Animation, or handles keystate here
+	 */
+	public void update()
+	{
+		super.update();
 	}
-
-	public void update() {
+	
+	
+	/**
+	 * Set Sprite X and Y depend on Camera, setting its frame
+	 * then Draw sprite to canvas
+	 */
+	public void draw()
+	{
+		super.draw();
+		if(this.sprite != null)
+		{
+			if(absolute)
+			{
+				this.sprite.setPosition(this.x, this.y);
+				this.sprite.setFrame(this.frame);
+				this.sprite.draw();
+			}
+			else
+			{
+				
+				if(this.isOnScreen())
+				{
+					this.sprite.setPosition((this.x - this.camera.x), (this.y - this.camera.y));
+					this.sprite.setFrame(this.frame);
+					this.sprite.draw();
+				}
+			}	
+		}
 	}
-
-	public void postUpdate() {
+	
+	/**
+	 * Check whether the object is currently on screen camera
+	 * 
+	 * @return	TRUE if the object is on screen
+	 */
+	public boolean isOnScreen()
+	{
+		return (this.x <= this.camera.x + this.camera.width) && (this.camera.x <= this.x + this.width) && (this.y <= this.camera.y + this.camera.height) && (this.camera.y <= this.y + this.height);
 	}
-
-	public void draw() {
-		
+	
+	
+	/**
+	 * Set Sprite and automatically adjust Width and Height
+	 */
+	public void setSprite(InsSprite s)
+	{
+		this.sprite = s;
+		this.width = s.frameWidth;
+		this.height = s.frameHeight;
 	}
 
 }

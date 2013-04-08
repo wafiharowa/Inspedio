@@ -34,13 +34,13 @@ public class InsGroup extends InsAtom{
 	public void preUpdate() {
 		if(!this.deleted)
 		{
-			InsAtom basic;
+			InsAtom atom;
 			for(int i = 0; i < members.size(); i++)
 			{
-				basic = (InsAtom) members.elementAt(i);
-				if((basic != null) && basic.exists && basic.active)
+				atom = (InsAtom) members.elementAt(i);
+				if((atom != null) && atom.exists && atom.active)
 				{
-					basic.preUpdate();
+					atom.preUpdate();
 				}
 			}
 		}
@@ -53,13 +53,13 @@ public class InsGroup extends InsAtom{
 	{
 		if(!this.deleted)
 		{
-			InsAtom basic;
+			InsAtom atom;
 			for(int i = 0; i < members.size(); i++)
 			{
-				basic = (InsAtom) members.elementAt(i);
-				if((basic != null) && basic.exists && basic.active)
+				atom = (InsAtom) members.elementAt(i);
+				if((atom != null) && atom.exists && atom.active)
 				{
-					basic.update();
+					atom.update();
 				}
 			}
 		}
@@ -71,13 +71,13 @@ public class InsGroup extends InsAtom{
 	public void postUpdate() {
 		if(!this.deleted)
 		{
-			InsAtom basic;
+			InsAtom atom;
 			for(int i = 0; i < members.size(); i++)
 			{
-				basic = (InsAtom) members.elementAt(i);
-				if((basic != null) && basic.exists && basic.active)
+				atom = (InsAtom) members.elementAt(i);
+				if((atom != null) && atom.exists && atom.active)
 				{
-					basic.postUpdate();
+					atom.postUpdate();
 				}
 			}
 		}
@@ -90,13 +90,13 @@ public class InsGroup extends InsAtom{
 	{
 		if(!this.deleted)
 		{
-			InsAtom basic;
+			InsAtom atom;
 			for(int i = 0; i < members.size(); i++)
 			{
-				basic = (InsAtom) members.elementAt(i);
-				if((basic != null) && basic.exists && basic.visible)
+				atom = (InsAtom) members.elementAt(i);
+				if((atom != null) && atom.exists && atom.visible)
 				{
-					basic.draw();
+					atom.draw();
 				}
 			}
 		}
@@ -113,13 +113,13 @@ public class InsGroup extends InsAtom{
 	 */
 	public void clear()
 	{
-		InsAtom basic;
+		InsAtom atom;
 		for(int i = 0; i < members.size(); i++)
 		{
-			basic = (InsAtom) members.elementAt(i);
-			if(basic != null)
+			atom = (InsAtom) members.elementAt(i);
+			if(atom != null)
 			{
-				basic.destroy();
+				atom.destroy();
 			}
 		}
 		members.removeAllElements();
@@ -154,6 +154,5 @@ public class InsGroup extends InsAtom{
 	{
 		return members.removeElement(obj);	
 	}
-	
 	
 }

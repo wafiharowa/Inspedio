@@ -1,5 +1,8 @@
 package com.inspedio.basic;
 
+import com.inspedio.core.InsGlobal;
+import com.inspedio.helper.InsKeys;
+
 /**
  * InsBasic represent any game object which have position and size.<br>
  * 
@@ -76,7 +79,7 @@ public class InsBasic extends InsAtom{
 	}
 
 	public void update() {
-		
+		handleKeyState(InsGlobal.keys);
 	}
 
 	public void postUpdate() {
@@ -87,4 +90,28 @@ public class InsBasic extends InsAtom{
 		
 	}
 	
+	/**
+	 * Override this to implement keyHandler
+	 */
+	protected void handleKeyState(InsKeys key)
+	{
+	}
+	
+	/**
+	 * Override this to implement touchPressed behavior
+	 * 
+	 * @return	TRUE if you want touchEvent to not passed to next Object
+	 */
+	protected boolean onTouchPressed(){
+		return false;
+	}
+	
+	/**
+	 * Override this to implement touchReleased behavior
+	 * 
+	 * @return	TRUE if you want touchEvent to not passed to next Object
+	 */
+	protected boolean onTouchReleased(){
+		return false;
+	}	
 }
