@@ -7,6 +7,9 @@ import com.inspedio.basic.InsSprite;
 
 /**
  * This is helper class for caching assets
+ * 
+ * @author Hyude
+ * @version 1.0
  */
 public class InsCache {
 

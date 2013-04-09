@@ -13,7 +13,7 @@ import com.inspedio.helper.InsPointer;
  * Because of that, State Constructor should be emptied, and object initiation should be declared on <code>create()</code><br>
  * 
  * @author Hyude
- * 
+ * @version 1.0
  */
 public class InsState extends InsGroup{
 

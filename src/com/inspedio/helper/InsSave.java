@@ -7,6 +7,12 @@ import java.io.DataOutputStream;
 
 import javax.microedition.rms.RecordStore;
 
+/**
+ * This is a helper class for Save/Load feature. It may be tweaked in the future
+ * 
+ * @author Hyude
+ * @version 1.0
+ */
 public class InsSave {
 
 	/**

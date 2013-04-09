@@ -6,7 +6,8 @@ import com.inspedio.core.InsCanvas;
  * This is the helper class for key input
  * Useful for global detection of keyEvent (Pressed, Released, etc)
  * 
- * @author Wafi Harowa
+ * @author Hyude
+ * @version 1.0
  */
 public class InsKeys {
 	public static final int KEY_COUNT = 9;

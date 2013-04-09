@@ -6,10 +6,19 @@ import javax.microedition.lcdui.Image;
 
 import com.inspedio.core.InsGlobal;
 
+/**
+ * InsImage is primitives for Image (not Sprite). Use this for Background or other large single image.
+ * 
+ * @author Hyude
+ * @version 1.0
+ */
 public class InsImage extends InsBasic{
 
 	public String filepath;
 	public Image image;
+	/**
+	 * Construct Image from given filePath
+	 */
 	public InsImage(String Filepath)
 	{
 		super(0, 0, 0, 0);

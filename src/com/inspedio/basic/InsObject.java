@@ -5,7 +5,7 @@ import com.inspedio.helper.InsCamera;
 
 /**
  * InsObject is a game object that have its own Sprite<br>
- * InsObject have individual frame to enable caching, so many object can share single sprite<br>
+ * InsObject have individual frame to enable caching, so many object can share single sprite
  * 
  * @author Hyude
  * @version 1.0
@@ -23,18 +23,13 @@ public class InsObject extends InsBasic{
 	 */
 	public InsCamera camera;
 	/**
-	 * Current frame sprite, change this on update to do animation (not sprite.frame)
-	 * If you use <code>InsAssets</code> for caching Image
-	 * All unit with same Class will point toward same Sprite (for memory efficiency)
-	 * During draw, the sprite frame will be changed before draw
-	 * So multiple unit with different frame can be drawn independently regardless of Sprite's actual frame. 
-	 * 
+	 * Current frame sprite, change this on update to do animation (not sprite.frame).<br>
 	 * Frame can also be managed with <code>InsAnimm</code> for better handling
 	 */
 	public int frame;
 	/**
-	 * Controls whether the position of this objects affected by camera or not.
-	 * Most Objects during play, such as Player, Monster are diplayed relative to their camera.
+	 * Controls whether the position of this objects affected by camera or not.<br>
+	 * Most Objects during play, such as Player, Monster are diplayed relative to their camera.<br>
 	 * Absolute objects are those who are not affected by camera, such as HUD.
 	 */
 	public boolean absolute;

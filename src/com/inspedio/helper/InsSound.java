@@ -8,6 +8,13 @@ import javax.microedition.media.Player;
 
 import com.inspedio.core.InsGlobal;
 
+/**
+ * This is a helper class for Playing Sound (BGM and SFX).<br>
+ * While J2ME supports .midi, .wav, and .mp3, it is highly recommended to use only .midi for optimization purpose.
+ * 
+ * @author Hyude
+ * @version 1.0
+ */
 public class InsSound {
 
 	public static final int BGM = -1;

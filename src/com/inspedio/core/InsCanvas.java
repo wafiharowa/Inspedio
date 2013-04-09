@@ -4,6 +4,15 @@ import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
 
+import com.inspedio.helper.primitive.InsPoint;
+
+/**
+ * <code>InsCanvas</code> is how engine render its graphic.<br>
+ * It also function as an input detector.
+ * 
+ * @author Hyude
+ * @version 1.0
+ */
 public class InsCanvas extends GameCanvas{
 
 	public static final int PORTRAIT = 0;
@@ -48,6 +57,12 @@ public class InsCanvas extends GameCanvas{
 		
 		System.out.println("Screen Width : " + InsGlobal.screenWidth);
 		System.out.println("Screen Height : " + InsGlobal.screenHeight);
+	}
+	
+	protected InsPoint transformPoint(int X, int Y){
+		InsPoint p = new InsPoint();
+		
+		return p;
 	}
 	
 	/**
