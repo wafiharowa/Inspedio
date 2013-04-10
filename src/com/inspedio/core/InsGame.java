@@ -282,7 +282,7 @@ public class InsGame implements Runnable {
 		try
 		{
 			long curtime = System.currentTimeMillis();
-			this.handleKeyEvent();
+			this.updateKeyState();
 			if(!this.state.deleted)
 			{
 				if(this.switchStateRequested)
@@ -316,9 +316,17 @@ public class InsGame implements Runnable {
 	}
 	
 	/**
-	 * Handle Key event and store keystate into InsGlobal.keys
+	 * Update KeyEvent State (Pressed, Released, etc)
 	 */
-	public void handleKeyEvent()
+	public void updateKeyState()
+	{
+		InsGlobal.keys.updateKeyState(InsGlobal.canvas.getKeyStates());
+	}
+	
+	/**
+	 * Update PointerEvent State (Pressed, Released, etc)
+	 */
+	public void updatepointerState()
 	{
 		InsGlobal.keys.updateKeyState(InsGlobal.canvas.getKeyStates());
 	}

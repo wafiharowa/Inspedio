@@ -92,4 +92,19 @@ public abstract class InsAtom {
 	 * Usually it doesn't need to be modified, unless you want some special draw implementation such as draw 1 pixel background repeatedly.
 	 */
 	public abstract void draw();
+	
+	/**
+	 * Method for handling pointerPressed
+	 */
+	public abstract boolean onPointerPressed(int X, int Y);
+	
+	/**
+	 * Method for handling pointerReleased
+	 */
+	public abstract boolean onPointerReleased(int X, int Y);
+	
+	/**
+	 * Method for handling pointerDragged
+	 */
+	public abstract boolean onPointerDragged(int X, int Y);
 }

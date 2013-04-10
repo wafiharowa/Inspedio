@@ -5,6 +5,7 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
 
 import com.inspedio.helper.primitive.InsPoint;
+import com.inspedio.helper.primitive.InsPointerEvent;
 
 /**
  * <code>InsCanvas</code> is how engine render its graphic.<br>
@@ -42,6 +43,7 @@ public class InsCanvas extends GameCanvas{
 		this.setFullScreenMode(true);
 		this.game = Game;
 		this.graphic = getGraphics();
+		InsGlobal.hasTouchScreen = this.hasPointerEvents();
 		this.setScreenSize(getWidth(), getHeight());
 	}
 	
@@ -59,10 +61,25 @@ public class InsCanvas extends GameCanvas{
 		System.out.println("Screen Height : " + InsGlobal.screenHeight);
 	}
 	
-	protected InsPoint transformPoint(int X, int Y){
+	/**
+	 * Transform Coordinate touched depend on Orientation
+	 */
+	protected InsPoint transformCoordinate(int X, int Y){
 		InsPoint p = new InsPoint();
 		
 		return p;
+	}
+	
+	protected void pointerPressed(int X, int Y){
+		InsGlobal.pointer.addEvent(new InsPointerEvent(X, Y, InsPointerEvent.PRESSED));
+	}
+	
+	protected void pointerReleased(int X, int Y){
+		InsGlobal.pointer.addEvent(new InsPointerEvent(X, Y, InsPointerEvent.RELEASED));
+	}
+	
+	protected void pointerDragged(int X, int Y){
+		InsGlobal.pointer.addEvent(new InsPointerEvent(X, Y, InsPointerEvent.DRAGGED));
 	}
 	
 	/**

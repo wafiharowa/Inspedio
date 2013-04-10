@@ -93,7 +93,17 @@ public class InsState extends InsGroup{
 	 */
 	public void handlePointerEvent(InsPointer pointer)
 	{
+		for(int i = 0; i < pointer.pressed.length; i++){
+			this.onPointerPressed(pointer.pressed[i].x, pointer.pressed[i].y);
+		}
 		
+		for(int i = 0; i < pointer.released.length; i++){
+			this.onPointerReleased(pointer.released[i].x, pointer.released[i].y);
+		}
+		
+		for(int i = 0; i < pointer.dragged.length; i++){
+			this.onPointerDragged(pointer.dragged[i].x, pointer.dragged[i].y);
+		}
 	}
 	
 	/**

@@ -97,6 +97,11 @@ public class InsGlobal{
 	public static int score;
 	
 	/**
+	 * Whether device has touch Screen support
+	 */
+	public static boolean hasTouchScreen;
+	
+	/**
 	 * Whether BGM muted or not
 	 */
 	public static boolean muteBGM;
@@ -171,9 +176,10 @@ public class InsGlobal{
 	}
 	
 	/**
-	 * Switch from the current game state to the one specified here.
-	 * set useLoader to TRUE if you want to switch into heavy assets state
-	 * If you want to use your own loader, you can change <code>InsGlobal.loader</code> attribute
+	 * Switch from the current game state to the one specified here.<br>
+	 * set useLoader to TRUE if you want to switch into heavy assets state/<br>
+	 * If you want to use your own loader, you can change <code>InsGlobal.loader</code> or define it during constructing <code>InsGame</code><br>
+	 * 
 	 */
 	public static void switchState(InsState State, boolean useLoader)
 	{

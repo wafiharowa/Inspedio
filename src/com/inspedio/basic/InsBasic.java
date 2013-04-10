@@ -113,5 +113,38 @@ public class InsBasic extends InsAtom{
 	 */
 	protected boolean onTouchReleased(){
 		return false;
-	}	
+	}
+
+	/**
+	 * Override this to implement touchDragged behavior
+	 * 
+	 * @return	TRUE if you want touchEvent to not passed to next Object
+	 */
+	protected boolean onTouchDragged(){
+		return false;
+	}
+	
+	/**
+	 * Do not override this unless you want to spesificly access coordinate touched
+	 */
+	public boolean onPointerPressed(int X, int Y) {
+		if((X >= 0 && X <= this.width) && (Y >= 0 && Y <= this.height)){
+			return onTouchPressed();
+		}
+		return false;
+	}
+
+	public boolean onPointerReleased(int X, int Y) {
+		if((X >= 0 && X <= this.width) && (Y >= 0 && Y <= this.height)){
+			return onTouchReleased();
+		}
+		return false;
+	}
+
+	public boolean onPointerDragged(int X, int Y) {
+		if((X >= 0 && X <= this.width) && (Y >= 0 && Y <= this.height)){
+			return onTouchDragged();
+		}
+		return false;
+	}
 }
