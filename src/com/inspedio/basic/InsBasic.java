@@ -125,9 +125,11 @@ public class InsBasic extends InsAtom{
 	}
 	
 	/**
-	 * Do not override this unless you want to spesificly access coordinate touched
+	 * Do not override this unless you want to specifically access coordinate touched
 	 */
 	public boolean onPointerPressed(int X, int Y) {
+		X -= this.x;
+		Y -= this.y;
 		if((X >= 0 && X <= this.width) && (Y >= 0 && Y <= this.height)){
 			return onTouchPressed();
 		}
@@ -135,6 +137,8 @@ public class InsBasic extends InsAtom{
 	}
 
 	public boolean onPointerReleased(int X, int Y) {
+		X -= this.x;
+		Y -= this.y;
 		if((X >= 0 && X <= this.width) && (Y >= 0 && Y <= this.height)){
 			return onTouchReleased();
 		}
@@ -142,6 +146,8 @@ public class InsBasic extends InsAtom{
 	}
 
 	public boolean onPointerDragged(int X, int Y) {
+		X -= this.x;
+		Y -= this.y;
 		if((X >= 0 && X <= this.width) && (Y >= 0 && Y <= this.height)){
 			return onTouchDragged();
 		}

@@ -13,9 +13,9 @@ import com.inspedio.helper.primitive.InsPointerEvent;
  */
 public class InsPointer {
 	
-	public InsPointerEvent[] pressed;
-	public InsPointerEvent[] released;
-	public InsPointerEvent[] dragged;
+	public InsPointerEvent[] pressed = new InsPointerEvent[0];
+	public InsPointerEvent[] released = new InsPointerEvent[0];
+	public InsPointerEvent[] dragged = new InsPointerEvent[0];
 	
 	protected Vector pressedEvents;
 	protected Vector releasedEvents;

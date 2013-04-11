@@ -3,11 +3,11 @@ package com.inspedio.core;
 import java.util.Random;
 
 import javax.microedition.midlet.MIDlet;
-
 import com.inspedio.basic.InsState;
 import com.inspedio.helper.InsCache;
 import com.inspedio.helper.InsCamera;
 import com.inspedio.helper.InsKeys;
+import com.inspedio.helper.InsPointer;
 import com.inspedio.helper.InsSave;
 
 /**
@@ -181,6 +181,7 @@ public class InsGame implements Runnable {
 		InsGlobal.canvas = this.canvas;
 		InsGlobal.graphic = this.canvas.graphic;
 		InsGlobal.keys = new InsKeys();
+		InsGlobal.pointer = new InsPointer();	
 		InsGlobal.camera = new InsCamera();
 		InsGlobal.cache = new InsCache();
 		InsGlobal.randomizer = new Random(System.currentTimeMillis());

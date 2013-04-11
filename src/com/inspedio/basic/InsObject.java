@@ -147,5 +147,47 @@ public class InsObject extends InsBasic{
 		this.width = s.frameWidth;
 		this.height = s.frameHeight;
 	}
+	
+	/**
+	 * Do not override this unless you want to spesificly access coordinate touched
+	 */
+	public boolean onPointerPressed(int X, int Y) {
+		if(!absolute){
+			X = X - this.camera.x;
+			Y = y - this.camera.y;
+		}
+		X -= this.x;
+		Y -= this.y;
+		if((X >= 0 && X <= this.width) && (Y >= 0 && Y <= this.height)){
+			return onTouchPressed();
+		}
+		return false;
+	}
+
+	public boolean onPointerReleased(int X, int Y) {
+		if(!absolute){
+			X = X - this.camera.x;
+			Y = Y - this.camera.y;
+		}
+		X -= this.x;
+		Y -= this.y;
+		if((X >= 0 && X <= this.width) && (Y >= 0 && Y <= this.height)){
+			return onTouchReleased();
+		}
+		return false;
+	}
+
+	public boolean onPointerDragged(int X, int Y) {
+		if(!absolute){
+			X = X - this.camera.x;
+			Y = Y - this.camera.y;
+		}
+		X -= this.x;
+		Y -= this.y;
+		if((X >= 0 && X <= this.width) && (Y >= 0 && Y <= this.height)){
+			return onTouchDragged();
+		}
+		return false;
+	}
 
 }
