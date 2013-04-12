@@ -24,7 +24,7 @@ public class InsCanvas extends GameCanvas{
 	public static final int COLOR_WHITE = 0xFFFFFF;
 	public static final int COLOR_YELLOW = 0xCCCC33;
 	
-	public static int FPS_COLOR = COLOR_BLACK;
+	public static int FPS_COLOR = COLOR_WHITE;
 	
 	
 	public static final Font defaultFont = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL);

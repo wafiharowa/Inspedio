@@ -11,4 +11,10 @@ public class RunState extends InsState{
 		runner = new Runner(InsGlobal.screenWidth / 2, InsGlobal.screenHeight / 2);
 		this.add(runner);
 	}
+	
+	public boolean onPointerPressed(int X, int Y) {
+		this.runner.setMoveTarget(X, Y);
+		System.out.println(X + "," + Y);
+		return super.onPointerPressed(X, Y);
+	}
 }

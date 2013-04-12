@@ -112,7 +112,7 @@ public class InsGlobal{
 	/**
 	 * Set this to TRUE to display FPS
 	 */
-	public static boolean displayFPS = false;
+	public static boolean displayFPS = true;
 	/**
 	 * Current Update per Second
 	 */
