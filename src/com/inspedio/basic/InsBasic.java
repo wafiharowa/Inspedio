@@ -30,6 +30,14 @@ public class InsBasic extends InsAtom{
 	public int height;
 	
 	/**
+	 * Instantiates a default <code>InsBasic</code> object.
+	 */
+	public InsBasic()
+	{
+		this(0, 0, 0, 0);
+	}
+	
+	/**
 	 * Instantiates a <code>InsBasic</code> with given size and position.
 	 * 
 	 * @param	X		The X-coordinate of the point in world space.

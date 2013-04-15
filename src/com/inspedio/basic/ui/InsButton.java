@@ -1,10 +1,18 @@
 package com.inspedio.basic.ui;
 
-import com.inspedio.basic.InsBasic;
+import javax.microedition.lcdui.Graphics;
+
+import com.inspedio.basic.InsText;
+import com.inspedio.basic.geom.InsRect;
 import com.inspedio.helper.primitive.InsCallback;
 
-public class InsButton extends InsBasic{
+public class InsButton extends InsRect{
 
+	protected int x;
+	protected int y;
+	protected int width;
+	protected int height;
+	
 	/**
 	 * Callback event when Button Clicked
 	 */
@@ -14,21 +22,36 @@ public class InsButton extends InsBasic{
 	 */
 	protected InsCallback onReleasedCallback;
 	/**
-	 * Set this to FALSE to let object behind it to get Event. Defaulted to false
+	 * Callback event when Button Hold
+	 */
+	protected InsCallback onHoldCallback;
+	/**
+	 * Set this to FALSE to let object behind it to get Event. Defaulted to true
 	 */
 	public boolean onPressedReturn = true;
 	/**
-	 * Set this to FALSE to let object behind it to get Event. Defaulted to false
+	 * Set this to FALSE to let object behind it to get Event. Defaulted to true
 	 */
 	public boolean onReleasedReturn = true;
+	/**
+	 * Set this to FALSE to let object behind it to get Event. Defaulted to true
+	 */
+	public boolean onHoldReturn = true;
 	
 	/**
 	 * Button Caption
 	 */
-	protected String caption;
+	public InsText caption;
 	
-	public InsButton(int X, int Y, int Width, int Height) {
+	/**
+	 * Instantiate a new Button
+	 */
+	public InsButton(int X, int Y, int Width, int Height, String Caption, int Color) {
 		super(X, Y, Width, Height);
+		this.color = Color;
+		this.caption = new InsText();
+		this.caption.setValue(Caption, X, Y, Graphics.HCENTER | Graphics.BASELINE, true);
+		this.setMiddlePoint(X, Y);
 	}
 	
 	public boolean onTouchPressed(){
@@ -46,6 +69,14 @@ public class InsButton extends InsBasic{
 		}
 		return false;
 	}
+	
+	public boolean onTouchDragged(){
+		if(onHoldCallback != null){
+			this.onHoldCallback.call();
+			return onHoldReturn;
+		}
+		return false;
+	}
 
 	/**
 	 * Set Callback to handle Click Event
@@ -60,4 +91,33 @@ public class InsButton extends InsBasic{
 	public void setReleasedCallback(InsCallback c){
 		this.onReleasedCallback = c;
 	}
+	
+	/**
+	 * Set Callback to handle Hold Event
+	 */
+	public void setHoldCallback(InsCallback c){
+		this.onHoldCallback = c;
+	}
+	
+	public void draw(){
+		super.draw();
+		this.caption.draw();
+	}
+	
+	public void setText(String Text){
+		this.caption.text = Text;
+	}
+	
+	public void setTextColor(int Color){
+		this.caption.color = Color;
+	}
+	
+	/**
+	 * Use this to set Button position.
+	 */
+	public void setMiddlePoint(int X, int Y){
+		super.setMiddlePoint(X, Y);
+		this.caption.setPosition(X, Y);
+	}
+	
 }
