@@ -10,7 +10,7 @@ import com.inspedio.helper.InsSave;
 
 public class Main extends MIDlet{
 
-	private static final int FPS = 30;
+	private static final int FPS = 25;
 	private static final int MaxFrameSkip = 3;
 	
 	protected InsGame game;
@@ -19,7 +19,7 @@ public class Main extends MIDlet{
 	{
 		try
 		{
-			this.game = new InsGame(this, new MenuState(), FPS, MaxFrameSkip, new InsLoader(), new InsSave("Runner"));
+			this.game = new InsGame(this, new MenuState(), FPS, MaxFrameSkip, new InsLoader(), new InsSave("Runner"), InsGame.LOCK_PORTRAIT);
 		}
 		catch (Exception e)
 		{

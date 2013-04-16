@@ -22,6 +22,11 @@ import com.inspedio.helper.InsSound;
  */
 
 public class InsGlobal{
+	
+	public static final int PORTRAIT = 0;
+	public static final int LANDSCAPE = 1;
+	
+	
 	/**
 	 * Pointer to <code>MIDlet</code> object
 	 */
@@ -91,6 +96,11 @@ public class InsGlobal{
 	 * The height of screen in game pixels
 	 */
 	public static int screenHeight;
+	/**
+	 * The Orientation of SCreen, either LANDSCAPE or PORTRAIT
+	 */
+	public static int screenOrientation;
+	
 	
 	public static int level;
 	public static int stage;

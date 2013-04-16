@@ -21,7 +21,18 @@ import com.inspedio.helper.InsSave;
  * @author Hyude
  */
 public class InsGame implements Runnable {
-
+	
+	/**
+	 * When Game is locked only for Portrait Mode
+	 */
+	public static final int LOCK_PORTRAIT = 0x01;
+	/**
+	 * When Game is locked only for Landscape Mode
+	 */
+	public static final int LOCK_LANDSCAPE = 0x10;
+	
+	//public static final int ENABLE_BOTH = 0x11;
+	
 	/**
 	 * Current game state.
 	 */
@@ -137,10 +148,11 @@ public class InsGame implements Runnable {
 	 * @param	MaxFrameSkip	Maximum frame skip allowed. Standard = 5
 	 * @param	Loader			<code>InsLoader</code> used for Assets loading when creating state
 	 * @param	SaveLoad		<code>InsSave</code> used for save load data into RecordStore	
+	 * @param	DisplayMode		Either PORTRAIT or LANDSCAPE
 	 */
-	public InsGame(MIDlet Midlet, InsState InitialState, int FPS, int MaxFrameSkip, InsLoader Loader, InsSave SaveLoad)
+	public InsGame(MIDlet Midlet, InsState InitialState, int FPS, int MaxFrameSkip, InsLoader Loader, InsSave SaveLoad, int DisplayMode)
 	{
-		initGame();
+		initGame(DisplayMode);
 		InsGlobal.midlet = Midlet;
 		InsGlobal.save = SaveLoad;
 		this.requestedState = InitialState;
@@ -174,9 +186,9 @@ public class InsGame implements Runnable {
 		this.switchState(false);
 	}
 	
-	private void initGame()
+	private void initGame(int Mode)
 	{
-		this.canvas = new InsCanvas(this);
+		this.canvas = new InsCanvas(this, Mode);
 		InsGlobal.game = this;
 		InsGlobal.canvas = this.canvas;
 		InsGlobal.graphic = this.canvas.graphic;
@@ -211,9 +223,34 @@ public class InsGame implements Runnable {
 	 */
 	public void run() {
 		long sleepTime;
-		long elapsedTime;
+		long elapsedTime = 0;
+		int quotaTime = this.framePeriod;	// Time allocated in current cycle
+		int diffTime = 0;					// Positive if process on time. Negative when late
 		int frameSkipped = 0;
 		this.beginTime = System.currentTimeMillis();	
+		
+		/*
+		while(this.running){
+			try{
+					this.beginTime = System.currentTimeMillis();
+					
+					if(quotaTime > 0){
+						this.update();
+						this.render();
+						this.nextCycle();
+					}
+						
+					elapsedTime = System.currentTimeMillis() - this.beginTime;
+					quotaTime += this.framePeriod - diffTime;
+					
+					
+					
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}*/
+		
 		
 		while(this.running)
 		{
@@ -308,8 +345,7 @@ public class InsGame implements Runnable {
 				this.state.postUpdate();
 			}
 			this.updateCount++;
-			InsGlobal.cycleCount++;
-			this.updateTime += System.currentTimeMillis() - curtime;
+			this.updateTime += (System.currentTimeMillis() - curtime);
 		}
 		catch (Exception e)
 		{
@@ -352,7 +388,7 @@ public class InsGame implements Runnable {
 			}
 			this.canvas.flushGraphics();
 			this.renderCount++;
-			this.renderTime += System.currentTimeMillis() - curtime;
+			this.renderTime += (System.currentTimeMillis() - curtime);
 		}
 		catch (Exception e)
 		{
@@ -390,6 +426,7 @@ public class InsGame implements Runnable {
 	 */
 	protected void nextCycle()
 	{
+		InsGlobal.cycleCount++;
 		long curtime = System.currentTimeMillis();
 		
 		if((curtime - this.gameTimeMark) >= 1000)
