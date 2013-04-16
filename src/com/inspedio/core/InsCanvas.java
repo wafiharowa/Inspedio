@@ -6,7 +6,6 @@ import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.GameCanvas;
 import javax.microedition.lcdui.game.Sprite;
 
-import com.inspedio.helper.primitive.InsPoint;
 import com.inspedio.helper.primitive.InsPointerEvent;
 
 /**
@@ -51,7 +50,6 @@ public class InsCanvas extends GameCanvas{
 		this.setFullScreenMode(true);
 		this.game = Game;
 		this.displayMode = Mode;
-		this.graphic = getGraphics();
 		InsGlobal.hasTouchScreen = this.hasPointerEvents();
 		this.setScreenSize(getWidth(), getHeight());
 	}
@@ -89,6 +87,8 @@ public class InsCanvas extends GameCanvas{
 			this.bufferImage = Image.createImage(this.deviceWidth, this.deviceHeight);
 			this.graphic = this.bufferImage.getGraphics();
 			this.bufferGraphics = getGraphics();
+			
+			fixedOrientation = true;
 			
 			System.out.println("Screen Width : " + InsGlobal.screenWidth);
 			System.out.println("Screen Height : " + InsGlobal.screenHeight);
