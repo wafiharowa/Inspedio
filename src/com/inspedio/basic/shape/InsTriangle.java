@@ -1,4 +1,4 @@
-package com.inspedio.basic.geom;
+package com.inspedio.basic.shape;
 
 import com.inspedio.basic.InsBasic;
 import com.inspedio.core.InsGlobal;

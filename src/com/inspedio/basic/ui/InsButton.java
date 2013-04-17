@@ -3,7 +3,7 @@ package com.inspedio.basic.ui;
 import javax.microedition.lcdui.Graphics;
 
 import com.inspedio.basic.InsText;
-import com.inspedio.basic.geom.InsRect;
+import com.inspedio.basic.shape.InsRect;
 import com.inspedio.helper.primitive.InsCallback;
 
 public class InsButton extends InsRect{

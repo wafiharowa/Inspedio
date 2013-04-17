@@ -1,6 +1,6 @@
 package com.inspedio.basic.ui;
 
-import com.inspedio.basic.geom.InsRect;
+import com.inspedio.basic.shape.InsRect;
 import com.inspedio.helper.primitive.InsCallback;
 import com.inspedio.helper.primitive.InsPoint;
 
