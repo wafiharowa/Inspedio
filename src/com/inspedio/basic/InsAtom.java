@@ -1,5 +1,7 @@
 package com.inspedio.basic;
 
+import javax.microedition.lcdui.Graphics;
+
 /**
  * InsAtom is the atom of Game Engine.<br>
  * Every object used in game <b>MUST</b> inherit this.<br>
@@ -91,7 +93,7 @@ public abstract class InsAtom {
 	 * Draw implement how Object should be rendered/drawn.<br>
 	 * Usually it doesn't need to be modified, unless you want some special draw implementation such as draw 1 pixel background repeatedly.
 	 */
-	public abstract void draw();
+	public abstract void draw(Graphics g);
 	
 	/**
 	 * Method for handling pointerPressed

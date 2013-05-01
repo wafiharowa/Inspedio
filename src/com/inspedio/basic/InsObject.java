@@ -1,5 +1,7 @@
 package com.inspedio.basic;
 
+import javax.microedition.lcdui.Graphics;
+
 import com.inspedio.core.InsGlobal;
 import com.inspedio.helper.InsCamera;
 
@@ -103,16 +105,16 @@ public class InsObject extends InsBasic{
 	 * Set Sprite X and Y depend on Camera, setting its frame
 	 * then Draw sprite to canvas
 	 */
-	public void draw()
+	public void draw(Graphics g)
 	{
-		super.draw();
+		super.draw(g);
 		if(this.sprite != null)
 		{
 			if(absolute)
 			{
 				this.sprite.setPosition(this.x, this.y);
 				this.sprite.setFrame(this.frame);
-				this.sprite.draw();
+				this.sprite.draw(g);
 			}
 			else
 			{
@@ -121,7 +123,7 @@ public class InsObject extends InsBasic{
 				{
 					this.sprite.setPosition((this.x - this.camera.x), (this.y - this.camera.y));
 					this.sprite.setFrame(this.frame);
-					this.sprite.draw();
+					this.sprite.draw(g);
 				}
 			}	
 		}

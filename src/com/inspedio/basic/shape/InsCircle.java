@@ -1,15 +1,14 @@
 package com.inspedio.basic.shape;
 
-import com.inspedio.basic.InsBasic;
-import com.inspedio.core.InsGlobal;
+import javax.microedition.lcdui.Graphics;
 
-public class InsCircle extends InsBasic {
+import com.inspedio.basic.InsBasic;
+
+public class InsCircle extends InsShape {
 
 	public int radius;
 	public int startAngle;
 	public int arcAngle;
-	public int color;
-	public boolean fill;
 	
 	/**
 	 * Instantiate a new default Rectangle
@@ -31,22 +30,22 @@ public class InsCircle extends InsBasic {
 	{
 		super(X, Y, Radius, Radius);
 		this.radius = Radius;
-		this.color = 0;
+		this.fillColor = 0;
 		this.startAngle = 0;
 		this.arcAngle = 360;
 		this.fill = Fill;
 	}
 	
-	public void draw()
+	public void draw(Graphics g)
 	{
-		InsGlobal.graphic.setColor(this.color);
+		g.setColor(this.fillColor);
 		if(this.fill)
 		{
-			InsGlobal.graphic.fillArc(this.x - this.radius, this.y - this.radius, this.radius, this.radius, this.startAngle, this.arcAngle);
+			g.fillArc(this.x - this.radius, this.y - this.radius, this.radius, this.radius, this.startAngle, this.arcAngle);
 		}
 		else
 		{
-			InsGlobal.graphic.drawArc(this.x - this.radius, this.y - this.radius, this.radius, this.radius, this.startAngle, this.arcAngle);
+			g.drawArc(this.x - this.radius, this.y - this.radius, this.radius, this.radius, this.startAngle, this.arcAngle);
 		}
 	}
 	
@@ -57,7 +56,15 @@ public class InsCircle extends InsBasic {
 		this.radius = Radius;
 		this.startAngle = StartAngle;
 		this.arcAngle = ArcAngle;
-		this.color = Color;
+		this.fillColor = Color;
 		this.fill = Fill;
+	}
+
+	public boolean isInside(int X, int Y) {
+		return false;
+	}
+
+	public boolean isCollide(InsBasic b) {
+		return false;
 	}
 }

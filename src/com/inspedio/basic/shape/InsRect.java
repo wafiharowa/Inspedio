@@ -1,7 +1,8 @@
 package com.inspedio.basic.shape;
 
+import javax.microedition.lcdui.Graphics;
+
 import com.inspedio.basic.InsBasic;
-import com.inspedio.core.InsGlobal;
 
 /**
  * <code>InsRect</code> represent basic rectangle shape
@@ -9,16 +10,7 @@ import com.inspedio.core.InsGlobal;
  * @author Hyude
  * @version 1.0
  */
-public class InsRect extends InsBasic{
-
-	/**
-	 * The color to be drawn
-	 */
-	public int color;
-	/**
-	 * TRUE if you want to draw filled rectangle. FALSE if only border
-	 */
-	public boolean fill;
+public class InsRect extends InsShape{
 	
 	/**
 	 * Instantiate a new default Rectangle
@@ -26,8 +18,6 @@ public class InsRect extends InsBasic{
 	public InsRect()
 	{
 		this(0, 0, 10, 10);
-		this.color = 0;
-		this.fill = true;
 	}
 	
 	/**
@@ -41,31 +31,32 @@ public class InsRect extends InsBasic{
 	public InsRect(int X, int Y, int Width, int Height)
 	{
 		super(X, Y, Width, Height);
-		this.color = 0;
-		this.fill = true;
 	}
 	
-	public void draw()
+	public void draw(Graphics g)
 	{
-		InsGlobal.graphic.setColor(this.color);
 		if(this.fill)
 		{
-			InsGlobal.graphic.fillRect(this.x, this.y, this.width, this.height);
+			g.setColor(this.borderColor);
+			g.fillRect(this.x, this.y, this.width, this.height);
+			g.setColor(this.fillColor);
+			g.fillRect(this.x + this.borderWidth, this.y + this.borderWidth, this.width - (this.borderWidth * 2), this.height - (this.borderWidth * 2));
 		}
 		else
 		{
-			InsGlobal.graphic.drawRect(this.x, this.y, this.width, this.height);
+			g.setColor(this.borderColor);
+			for(int i = 0; i < this.borderWidth; i ++){
+				g.drawRect(this.x, this.y, this.width, this.height);
+			}
 		}
 	}
 	
-	public void setAttribute(int X, int Y, int Width, int Height, int Color, boolean Fill)
-	{
-		this.x = X;
-		this.y = Y;
-		this.width = Width;
-		this.height = Height;
-		this.color = Color;
-		this.fill = Fill;
+	public boolean isInside(int X, int Y) {
+		return ((X >= this.x) && (X <= this.x + this.width) && (Y >= this.y) && (Y <= this.y + this.height));
+	}
+
+	public boolean isCollide(InsBasic b) {
+		return (b.x < this.x + this.width) && (this.x < b.x + b.width) && (b.y < this.y + this.height) && (this.y < b.y + b.height);
 	}
 	
 }

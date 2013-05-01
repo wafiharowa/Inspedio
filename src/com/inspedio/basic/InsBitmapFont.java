@@ -1,5 +1,7 @@
 package com.inspedio.basic;
 
+import javax.microedition.lcdui.Graphics;
+
 import com.inspedio.core.InsGlobal;
 
 /**
@@ -71,9 +73,8 @@ public abstract class InsBitmapFont extends InsBasic{
 		this.hAlign = horizontalAlign;
 	}
 	
-	public void draw()
+	public void draw(Graphics g)
 	{
-		super.draw();
 		if(this.frameChar != null)
 		{
 			int refX = 0;
@@ -108,7 +109,7 @@ public abstract class InsBitmapFont extends InsBasic{
 			{
 				this.fontsheet.setFrame(this.frameChar[i]);
 				this.fontsheet.setPosition(refX + (i * this.fontsheet.frameWidth), refY);
-				this.fontsheet.draw();
+				this.fontsheet.draw(g);
 			}
 		}
 	}

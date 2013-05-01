@@ -2,6 +2,8 @@ package com.inspedio.basic;
 
 import java.util.Vector;
 
+import javax.microedition.lcdui.Graphics;
+
 /**
  * InsGroup is a collection of InsBasic used for grouping similar objects.<br>
  * It automatically called update() and draw() for all its member.<br>
@@ -86,7 +88,7 @@ public class InsGroup extends InsAtom{
 	/**
 	 * Simply Call <code>draw()</code> for all its member.
 	 */
-	public void draw()
+	public void draw(Graphics g)
 	{
 		if(!this.deleted)
 		{
@@ -96,7 +98,7 @@ public class InsGroup extends InsAtom{
 				atom = (InsAtom) members.elementAt(i);
 				if((atom != null) && atom.exists && atom.visible)
 				{
-					atom.draw();
+					atom.draw(g);
 				}
 			}
 		}

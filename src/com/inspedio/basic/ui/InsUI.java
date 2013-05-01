@@ -1,6 +1,6 @@
 package com.inspedio.basic.ui;
 
-import com.inspedio.basic.InsAtom;
+import com.inspedio.basic.InsBasic;
 
 /**
  * This is the basic of all UI element. You should extend this to implement your own UI.
@@ -9,46 +9,20 @@ import com.inspedio.basic.InsAtom;
  * @author Hyude
  * @version 1.0
  */
-public class InsUI extends InsAtom{
+public abstract class InsUI extends InsBasic{
 
 	public InsUI(){
-		super();
+		this(0, 0, 0, 0);
 	}
-
-	public void preUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void postUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void draw() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public boolean onPointerPressed(int X, int Y) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean onPointerReleased(int X, int Y) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean onPointerDragged(int X, int Y) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	
+	
+	public InsUI(int X, int Y, int Width, int Height){
+		super(X, Y, Width, Height);
+		this.calibratePosition();
+	}
+	
+	protected void calibratePosition(){
+		
+	}
+
 }

@@ -4,7 +4,6 @@ import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
 
 import com.inspedio.core.InsCanvas;
-import com.inspedio.core.InsGlobal;
 
 /**
  * InsText represent simple Text for Drawing
@@ -49,14 +48,13 @@ public class InsText extends InsBasic{
 		this.y = Y;
 	}
 	
-	public void draw()
+	public void draw(Graphics g)
 	{
-		super.draw();
 		if(this.visible)
 		{
-			InsGlobal.canvas.graphic.setFont(this.font);
-			InsGlobal.canvas.graphic.setColor(this.color);
-			InsGlobal.canvas.graphic.drawString(this.text, this.x, this.y, this.anchor);
+			g.setFont(this.font);
+			g.setColor(this.color);
+			g.drawString(this.text, this.x, this.y, this.anchor);
 		}
 	}
 }

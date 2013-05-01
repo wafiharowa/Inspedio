@@ -380,7 +380,7 @@ public class InsGame implements Runnable {
 			this.canvas.clearScreen();
 			if(!this.state.deleted)
 			{
-				this.state.draw();
+				this.state.draw(InsGlobal.graphic);
 			}
 			if(InsGlobal.displayFPS)
 			{

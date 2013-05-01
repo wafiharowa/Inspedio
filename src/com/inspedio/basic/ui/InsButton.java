@@ -48,7 +48,7 @@ public class InsButton extends InsRect{
 	 */
 	public InsButton(int X, int Y, int Width, int Height, String Caption, int Color) {
 		super(X, Y, Width, Height);
-		this.color = Color;
+		this.fillColor = Color;
 		this.caption = new InsText();
 		this.caption.setValue(Caption, X, Y, Graphics.HCENTER | Graphics.BASELINE, true);
 		this.setMiddlePoint(X, Y);
@@ -99,9 +99,8 @@ public class InsButton extends InsRect{
 		this.onHoldCallback = c;
 	}
 	
-	public void draw(){
-		super.draw();
-		this.caption.draw();
+	public void draw(Graphics g){
+		this.caption.draw(g);
 	}
 	
 	public void setText(String Text){

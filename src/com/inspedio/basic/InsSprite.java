@@ -5,7 +5,6 @@ import java.io.IOException;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
-import com.inspedio.core.InsGlobal;
 import com.inspedio.helper.primitive.InsPoint;
 
 /**
@@ -99,14 +98,6 @@ public class InsSprite {
 	public void destroy()
 	{
 		this.imageSource = null;
-	}
-	
-	/**
-	 * Draw Sprite to global canvas
-	 */
-	public void draw()
-	{
-		this.draw(InsGlobal.graphic);
 	}
 	
 	/**

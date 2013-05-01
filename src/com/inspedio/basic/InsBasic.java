@@ -1,5 +1,7 @@
 package com.inspedio.basic;
 
+import javax.microedition.lcdui.Graphics;
+
 import com.inspedio.core.InsGlobal;
 import com.inspedio.helper.InsKeys;
 
@@ -29,6 +31,8 @@ public class InsBasic extends InsAtom{
 	 */
 	public int height;
 	
+	protected InsAction action;
+	
 	/**
 	 * Instantiates a default <code>InsBasic</code> object.
 	 */
@@ -52,6 +56,7 @@ public class InsBasic extends InsAtom{
 		this.y = Y;
 		this.width = Width;
 		this.height = Height;
+		this.action = null;
 	}
 	
 	/**
@@ -88,14 +93,25 @@ public class InsBasic extends InsAtom{
 
 	public void update() {
 		handleKeyState(InsGlobal.keys);
+		if(this.action != null){
+			this.action.act();
+		}
 	}
 
 	public void postUpdate() {
 		
 	}
 
-	public void draw() {
+	public void draw(Graphics g) {
 		
+	}
+	
+	public void setAction(InsAction Action){
+		this.action = Action;
+	}
+	
+	public void unsetAction(){
+		this.action = null;
 	}
 	
 	/**

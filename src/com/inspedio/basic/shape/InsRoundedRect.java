@@ -1,6 +1,6 @@
 package com.inspedio.basic.shape;
 
-import com.inspedio.core.InsGlobal;
+import javax.microedition.lcdui.Graphics;
 
 
 public class InsRoundedRect extends InsRect{
@@ -26,16 +26,21 @@ public class InsRoundedRect extends InsRect{
 		this.archWidth = 5;
 	}
 	
-	public void draw()
+	public void draw(Graphics g)
 	{
-		InsGlobal.graphic.setColor(this.color);
 		if(this.fill)
 		{
-			InsGlobal.graphic.fillRoundRect(this.x, this.y, this.width, this.height, this.archWidth, this.archHeight);
+			g.setColor(this.borderColor);
+			g.fillRoundRect(this.x, this.y, this.width, this.height, this.archWidth, this.archHeight);
+			g.setColor(this.fillColor);
+			g.fillRoundRect(this.x + this.borderWidth, this.y + this.borderWidth, this.width - (this.borderWidth * 2), this.height - (this.borderWidth * 2), this.archWidth, this.archHeight);
 		}
 		else
 		{
-			InsGlobal.graphic.drawRoundRect(this.x, this.y, this.width, this.height, this.archWidth, this.archHeight);
+			g.setColor(this.borderColor);
+			for(int i = 0; i < this.borderWidth; i ++){
+				g.drawRoundRect(this.x, this.y, this.width, this.height, this.archWidth, this.archHeight);
+			}
 		}
 	}
 }
