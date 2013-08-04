@@ -1,9 +1,10 @@
 package sample.runningman;
 
-import com.inspedio.basic.InsAnimatedObject;
-import com.inspedio.basic.InsSprite;
-import com.inspedio.helper.InsKeys;
-import com.inspedio.helper.primitive.InsPoint;
+import com.inspedio.entity.InsAnimatedObject;
+import com.inspedio.entity.InsSprite;
+import com.inspedio.entity.primitive.InsPoint;
+import com.inspedio.enums.KeyCode;
+import com.inspedio.system.helper.InsKeys;
 
 public class Runner extends InsAnimatedObject{
 
@@ -23,22 +24,22 @@ public class Runner extends InsAnimatedObject{
 	}
 	
 	public void handleKeyState(InsKeys keys){
-		if(keys.keyPressed(InsKeys.DOWN)){
+		if(keys.keyPressed(KeyCode.DOWN)){
 			this.playAnimation("DOWN");
 			System.out.println("PRESSED DOWN");
 			this.y++;
 		}
-		else if(keys.keyPressed(InsKeys.UP)){
+		else if(keys.keyPressed(KeyCode.UP)){
 			this.playAnimation("UP");
 			System.out.println("PRESSED UP");
 			this.y--;
 		}
-		else if(keys.keyPressed(InsKeys.LEFT)){
+		else if(keys.keyPressed(KeyCode.LEFT)){
 			this.playAnimation("LEFT");
 			System.out.println("PRESSED LEFT");
 			this.x--;
 		}
-		else if(keys.keyPressed(InsKeys.RIGHT)){
+		else if(keys.keyPressed(KeyCode.RIGHT)){
 			this.playAnimation("RIGHT");
 			System.out.println("PRESSED RIGHT");
 			this.x++;

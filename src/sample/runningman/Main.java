@@ -4,9 +4,10 @@ import javax.microedition.lcdui.Display;
 import javax.microedition.midlet.MIDlet;
 import javax.microedition.midlet.MIDletStateChangeException;
 
-import com.inspedio.core.InsGame;
-import com.inspedio.core.InsLoader;
-import com.inspedio.helper.InsSave;
+import com.inspedio.enums.ScreenOrientation;
+import com.inspedio.system.core.InsGame;
+import com.inspedio.system.helper.InsLoader;
+import com.inspedio.system.helper.InsSave;
 
 public class Main extends MIDlet{
 
@@ -19,7 +20,8 @@ public class Main extends MIDlet{
 	{
 		try
 		{
-			this.game = new InsGame(this, new MenuState(), FPS, MaxFrameSkip, new InsLoader(), new InsSave("Runner"), InsGame.LOCK_PORTRAIT);
+			InsGame.init(this, new MenuState(), FPS, MaxFrameSkip, new InsLoader(), new InsSave("Runner"), ScreenOrientation.PORTRAIT);
+			this.game = InsGame.getInstance();
 		}
 		catch (Exception e)
 		{

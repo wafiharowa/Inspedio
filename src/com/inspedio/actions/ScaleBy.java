@@ -9,9 +9,9 @@ package com.inspedio.actions;
  * @author Hyude
  * @version 1.0
  */
-import com.inspedio.basic.InsAction;
-import com.inspedio.basic.shape.InsShape;
-import com.inspedio.helper.primitive.InsCallback;
+import com.inspedio.entity.InsAction;
+import com.inspedio.entity.basic.shape.InsShape;
+import com.inspedio.entity.primitive.InsCallback;
 
 public class ScaleBy extends InsAction{
 	

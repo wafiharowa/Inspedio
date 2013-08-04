@@ -1,8 +1,8 @@
 package com.inspedio.actions;
 
-import com.inspedio.basic.InsAction;
-import com.inspedio.basic.InsBasic;
-import com.inspedio.helper.primitive.InsCallback;
+import com.inspedio.entity.InsAction;
+import com.inspedio.entity.basic.InsBasic;
+import com.inspedio.entity.primitive.InsCallback;
 
 /**
  * Delay execution of action by given Frame Duration.

@@ -1,7 +1,7 @@
 package sample.runningman;
 
-import com.inspedio.basic.InsState;
-import com.inspedio.core.InsGlobal;
+import com.inspedio.entity.InsState;
+import com.inspedio.system.core.InsGlobal;
 
 public class RunState extends InsState{
 
@@ -14,7 +14,7 @@ public class RunState extends InsState{
 	
 	public boolean onPointerPressed(int X, int Y) {
 		this.runner.setMoveTarget(X, Y);
-		System.out.println(X + "," + Y);
+		//System.out.println(X + "," + Y);
 		return super.onPointerPressed(X, Y);
 	}
 }

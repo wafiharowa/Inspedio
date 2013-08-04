@@ -1,10 +1,10 @@
 package sample.runningman;
 
-import com.inspedio.basic.InsState;
-import com.inspedio.basic.ui.InsButton;
-import com.inspedio.core.InsCanvas;
-import com.inspedio.core.InsGlobal;
-import com.inspedio.helper.primitive.InsCallback;
+import com.inspedio.entity.InsState;
+import com.inspedio.entity.basic.ui.InsButton;
+import com.inspedio.entity.primitive.InsCallback;
+import com.inspedio.system.core.InsCanvas;
+import com.inspedio.system.core.InsGlobal;
 
 public class MenuState extends InsState{
 

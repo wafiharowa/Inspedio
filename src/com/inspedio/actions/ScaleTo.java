@@ -1,9 +1,9 @@
 package com.inspedio.actions;
 
-import com.inspedio.basic.InsAction;
-import com.inspedio.basic.InsBasic;
-import com.inspedio.basic.shape.InsShape;
-import com.inspedio.helper.primitive.InsCallback;
+import com.inspedio.entity.InsAction;
+import com.inspedio.entity.basic.InsBasic;
+import com.inspedio.entity.basic.shape.InsShape;
+import com.inspedio.entity.primitive.InsCallback;
 
 public class ScaleTo extends InsAction{
 
