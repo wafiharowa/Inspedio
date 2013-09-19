@@ -3,4 +3,7 @@ InspedioEngine
 
 J2ME Game Engine. Written by Wafi Harowa (a.k.a Hyude)
 
-This Code is free to use for non-commercial purpose. For commercial purpose, please ask my permission (Its usually will be free to for my friend/acknowledge). It just to let me know who use my code.
+This Code is free to use for commercial purpose, as long as you keep the Inspedio logo and in-game mark.
+If you wish you remove it completely, you can contact me to get permission.
+
+Email me at harowa_aja@yahoo.co.id
