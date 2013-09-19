@@ -41,7 +41,7 @@ public class InsText extends InsBasic{
 		{
 			g.setFont(this.font);
 			g.setColor(this.color);
-			g.drawString(this.text, this.position.x, this.position.y, this.align.getAnchorValue());
+			g.drawString(this.text, this.position.x, this.position.y, this.align.horizontal.getValue() | Graphics.BASELINE);
 		}
 	}
 }

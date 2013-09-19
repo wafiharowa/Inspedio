@@ -44,9 +44,7 @@ public class InsButton extends InsRect{
 	public InsButton(int X, int Y, int Width, int Height, String Caption, int Color) {
 		super(X, Y, Width, Height);
 		this.fillColor = Color;
-		this.caption = new InsText();
-		//this.caption.setValue(Caption, X, Y, Graphics.HCENTER | Graphics.BASELINE, true);
-		this.setMiddlePoint(X, Y);
+		this.caption = new InsText(Caption, X, Y);
 	}
 	
 	public boolean onTouchPressed(){
@@ -95,6 +93,7 @@ public class InsButton extends InsRect{
 	}
 	
 	public void draw(Graphics g){
+		super.draw(g);
 		this.caption.draw(g);
 	}
 	
@@ -106,12 +105,5 @@ public class InsButton extends InsRect{
 		this.caption.color = Color;
 	}
 	
-	/**
-	 * Use this to set Button position.
-	 */
-	public void setMiddlePoint(int X, int Y){
-		super.setMiddlePoint(X, Y);
-		this.caption.setPosition(X, Y);
-	}
 	
 }

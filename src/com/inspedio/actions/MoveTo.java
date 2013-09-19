@@ -1,7 +1,7 @@
 package com.inspedio.actions;
 
 import com.inspedio.entity.InsAction;
-import com.inspedio.entity.basic.InsBasic;
+import com.inspedio.entity.InsBasic;
 import com.inspedio.entity.primitive.InsCallback;
 
 /**
@@ -19,7 +19,7 @@ public class MoveTo extends InsAction{
 	}
 
 	public static MoveBy create(InsBasic Target, int DestinationX, int DestinationY, int FrameCount, InsCallback Callback){
-		return new MoveBy(Target, DestinationX - Target.x, DestinationY - Target.y, FrameCount, Callback);
+		return new MoveBy(Target, DestinationX - Target.position.x, DestinationY - Target.position.y, FrameCount, Callback);
 	}
 
 	public int act() {

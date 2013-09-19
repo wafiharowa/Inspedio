@@ -54,13 +54,13 @@ public class ScaleBy extends InsAction{
 	}
 
 	private void scale(int X, int Y){
-		this.target.width += X;
+		this.target.size.width += X;
 		this.scaleX -= X;
-		this.target.x -= (X * anchorX) / 2;
+		this.target.position.x -= (X * anchorX) / 2;
 		
-		this.target.height += Y;
+		this.target.size.height += Y;
 		this.scaleY -= Y;
-		this.target.y -= (Y * anchorY) / 2;
+		this.target.position.y -= (Y * anchorY) / 2;
 	}
 	
 	public static ScaleBy create(InsShape Target, int ScaleX, int ScaleY, InsCallback Callback, int FrameCount,  int AnchorX, int AnchorY){

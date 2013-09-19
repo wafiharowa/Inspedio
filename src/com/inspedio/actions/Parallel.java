@@ -1,7 +1,7 @@
 package com.inspedio.actions;
 
 import com.inspedio.entity.InsAction;
-import com.inspedio.entity.basic.InsBasic;
+import com.inspedio.entity.InsBasic;
 import com.inspedio.entity.primitive.InsCallback;
 
 /**

@@ -1,7 +1,7 @@
 package com.inspedio.actions;
 
 import com.inspedio.entity.InsAction;
-import com.inspedio.entity.basic.InsBasic;
+import com.inspedio.entity.InsBasic;
 import com.inspedio.entity.primitive.InsCallback;
 
 /**
@@ -43,10 +43,10 @@ public class MoveBy extends InsAction{
 	}
 	
 	private void move(int X, int Y){
-		this.target.x += X;
+		this.target.position.x += X;
 		this.distanceX -= X;
 		
-		this.target.y += Y;
+		this.target.position.y += Y;
 		this.distanceY -= Y;
 	}
 }

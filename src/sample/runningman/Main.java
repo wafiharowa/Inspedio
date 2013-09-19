@@ -20,7 +20,7 @@ public class Main extends MIDlet{
 	{
 		try
 		{
-			InsGame.init(this, new MenuState(), FPS, MaxFrameSkip, new InsLoader(), new InsSave("Runner"), ScreenOrientation.PORTRAIT);
+			InsGame.init(this, new MenuState(), FPS, MaxFrameSkip, new InsLoader(), new InsSave("Runner"), ScreenOrientation.LANDSCAPE);
 			this.game = InsGame.getInstance();
 		}
 		catch (Exception e)
