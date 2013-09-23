@@ -10,7 +10,7 @@ public class SampleSpriteState extends InsState{
 	InsAnimatedSprite sprite;
 	
 	public void create(){
-		sprite = new InsAnimatedSprite("sample/sprite/sprite.png", InsGlobal.screenWidth / 2, InsGlobal.screenHeight / 2, 32, 48);
+		sprite = new InsAnimatedSprite("com/sample/sprite/sprite.png", InsGlobal.screenWidth / 2, InsGlobal.screenHeight / 2, 32, 48);
 		sprite.addAnimation("DOWN", new int[]{0, 1, 2, 3});
 		sprite.addAnimation("LEFT", new int[]{4, 5, 6, 7});
 		sprite.addAnimation("RIGHT", new int[]{8, 9, 10, 11});
