@@ -4,6 +4,8 @@ import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
 
 import com.inspedio.entity.InsBasic;
+import com.inspedio.enums.FontSize;
+import com.inspedio.enums.FontStyle;
 import com.inspedio.system.core.InsCanvas;
 
 /**
@@ -11,9 +13,9 @@ import com.inspedio.system.core.InsCanvas;
  */
 public class InsText extends InsBasic{
 
-	public String text;
-	public Font font;
-	public int color;
+	protected String text;
+	protected Font font;
+	protected int color;
 	
 	public InsText()
 	{
@@ -33,6 +35,11 @@ public class InsText extends InsBasic{
 	public void setText(String Text)
 	{
 		this.text = Text;
+	}
+	
+	public void setFont(int Color, FontSize Size, FontStyle Style){
+		this.font = Font.getFont(Font.FACE_SYSTEM, Style.getValue(), Size.getValue());
+		this.color = Color;
 	}
 		
 	public void draw(Graphics g)

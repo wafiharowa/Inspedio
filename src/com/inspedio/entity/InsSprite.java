@@ -6,6 +6,7 @@ import com.inspedio.entity.basic.InsImage;
 import com.inspedio.enums.TransformType;
 import com.inspedio.system.core.InsGlobal;
 import com.inspedio.system.helper.InsCamera;
+import com.inspedio.system.helper.InsUtil;
 
 /**
  * InsSprite is a sprite-based game object<br>
@@ -21,7 +22,7 @@ public class InsSprite extends InsBasic{
 	 * The sprite of this unit.
 	 * Use <code>InsAssets</code> for caching sprite and use single sprite for multiple Object (thus using less memory)
 	 */
-	public InsImage image;
+	protected InsImage image;
 	
 	public TransformType transform;
 	/**
@@ -42,26 +43,6 @@ public class InsSprite extends InsBasic{
 	
 	// CONSTRUCTOR
 	/**
-	 * Instantiates a default <code>InsObject</code>.
-	 */
-	public InsSprite()
-	{
-		this(0, 0, 0, 0);
-	}
-	/**
-	 * Instantiates a <code>InsObject</code>.
-	 * 
-	 * @param	X		The X-coordinate of the point in world space.
-	 * @param	Y		The Y-coordinate of the point in world space.
-	 * @param	Width	Desired width of object.
-	 * @param	Height	Desired height of object.
-	 */
-	public InsSprite(int X, int Y, int Width, int Height)
-	{
-		super(X, Y, Width, Height);
-		this.init();
-	}
-	/**
 	 * Instantiates a <code>InsObject</code>.
 	 * 
 	 * @param	spritePath	Location of sprite image in res folder
@@ -74,6 +55,7 @@ public class InsSprite extends InsBasic{
 	{
 		super(X, Y, Width, Height);
 		this.init();
+		this.setImage(spritePath, Width, Height);
 	}
 	
 	private void init()
@@ -163,13 +145,10 @@ public class InsSprite extends InsBasic{
 	 */
 	public boolean isOverlap(int X, int Y){
 		if(absolute){
-			return ((X >= this.position.x && X <= this.position.x + this.size.width) && (Y >= this.position.y && Y <= this.position.x + this.size.height));
+			return ((InsUtil.Absolute(X - this.getMiddleX()) <= (this.size.width / 2)) && (InsUtil.Absolute(Y - this.getMiddleY()) <= (this.size.height / 2)));
 		} else {
-			return ((X + this.camera.position.x >= this.position.x && X + this.camera.position.x <= this.position.x + this.size.width) && (Y + this.camera.position.y >= this.position.y && Y + this.camera.position.y <= this.position.x + this.size.height));
+			return ((InsUtil.Absolute((X - this.camera.position.x) - this.getMiddleX()) <= (this.size.width / 2)) && (InsUtil.Absolute((Y - this.camera.position.y) - this.getMiddleY()) <= (this.size.height / 2)));
 		}
 	}
 
-	public void scaleBy(int X, int Y){
-		
-	}
 }

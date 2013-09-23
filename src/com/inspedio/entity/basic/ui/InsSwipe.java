@@ -1,10 +1,10 @@
 package com.inspedio.entity.basic.ui;
 
-import com.inspedio.entity.basic.shape.InsRect;
+import com.inspedio.entity.basic.InsShape;
 import com.inspedio.entity.primitive.InsCallback;
 import com.inspedio.entity.primitive.InsPoint;
 
-public class InsSwipe extends InsRect{
+public class InsSwipe extends InsShape{
 
 	protected InsPoint startPoint;
 	protected InsPoint endPoint;

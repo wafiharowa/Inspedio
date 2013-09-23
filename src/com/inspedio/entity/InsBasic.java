@@ -8,6 +8,7 @@ import com.inspedio.enums.HAlignment;
 import com.inspedio.enums.VAlignment;
 import com.inspedio.system.core.InsGlobal;
 import com.inspedio.system.helper.InsKeys;
+import com.inspedio.system.helper.InsUtil;
 import com.inspedio.system.helper.extension.InsAlignment;
 
 /**
@@ -173,16 +174,23 @@ public class InsBasic extends InsAtom{
 	 * Whether X and Y pointer is inside object
 	 */
 	public boolean isOverlap(int X, int Y){
-		return ((X >= this.position.x && X <= this.position.x + this.size.width) && (Y >= this.position.y && Y <= this.position.x + this.size.height));
+		return ((InsUtil.Absolute(X - this.getMiddleX()) <= (this.size.width / 2)) && (InsUtil.Absolute(Y - this.getMiddleY()) <= (this.size.height / 2)));
 	}
 	
-	public void moveBy(int X, int Y){
-		this.position.x += X;
-		this.position.y += Y;
+	public int getMiddleX(){
+		return this.position.x - (((this.align.horizontal.getValue()-1) * this.size.width) / 2); 
 	}
 	
-	public void scaleBy(int X, int Y){
-		this.size.width += X;
-		this.size.height += Y;
+	public int getMiddleY(){
+		return this.position.y - (((this.align.vertical.getValue()-1) * this.size.height) / 2); 
 	}
+	
+	public int getLeft(){
+		return this.position.x - ((this.align.horizontal.getValue() * this.size.width) / 2); 
+	}
+	
+	public int getTop(){
+		return this.position.y - ((this.align.vertical.getValue() * this.size.height) / 2); 
+	}
+	
 }

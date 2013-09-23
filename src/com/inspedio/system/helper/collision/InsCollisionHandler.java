@@ -3,6 +3,7 @@ package com.inspedio.system.helper.collision;
 import com.inspedio.entity.InsBasic;
 import com.inspedio.entity.InsGroup;
 import com.inspedio.enums.CollisionType;
+import com.inspedio.system.helper.InsUtil;
 
 public class InsCollisionHandler {
 
@@ -61,40 +62,20 @@ public class InsCollisionHandler {
 	}
 	
 	protected boolean isCollideBox(InsBasic obj1, InsBasic obj2){
-		int X1 = this.getMiddleX(obj1);
-		int Y1 = this.getMiddleY(obj1);
-		int X2 = this.getMiddleX(obj2);
-		int Y2 = this.getMiddleY(obj2);
+		int X1 = obj1.getMiddleX();
+		int Y1 = obj1.getMiddleY();
+		int X2 = obj2.getMiddleX();
+		int Y2 = obj2.getMiddleY();
 		
-		return (getAbsolute(X1 - X2) <= ((obj1.size.width + obj2.size.width) / 2) && getAbsolute(Y1 - Y2) <= ((obj1.size.height + obj2.size.height) / 2)) ;
+		return (InsUtil.Absolute(X1 - X2) <= ((obj1.size.width + obj2.size.width) / 2) && InsUtil.Absolute(Y1 - Y2) <= ((obj1.size.height + obj2.size.height) / 2)) ;
 	}
 	
 	protected boolean isCollideSphere(InsBasic obj1, InsBasic obj2){
-		int X1 = this.getMiddleX(obj1);
-		int Y1 = this.getMiddleY(obj1);
-		int X2 = this.getMiddleX(obj2);
-		int Y2 = this.getMiddleY(obj2);
+		int X1 = obj1.getMiddleX();
+		int Y1 = obj1.getMiddleY();
+		int X2 = obj2.getMiddleX();
+		int Y2 = obj2.getMiddleY();
 		
-		return (getDistance(X1, Y1, X2, Y2) <= ((getMax(obj1.size.width, obj1.size.height) + getMax(obj2.size.width, obj2.size.height)) / 2));
-	}
-	
-	protected int getMiddleX(InsBasic obj){
-		return obj.position.x - (((obj.align.horizontal.getValue()-1) * obj.size.width) / 2); 
-	}
-	
-	protected int getMiddleY(InsBasic obj){
-		return obj.position.y - (((obj.align.vertical.getValue()-1) * obj.size.height) / 2); 
-	}
-	
-	protected int getAbsolute(int X){
-		return (X >= 0 ? X : -X);
-	}
-	
-	protected int getMax(int X, int Y){
-		return (X >= Y ? X : Y);
-	}
-	
-	protected double getDistance(int X1, int Y1, int X2, int Y2){
-		return Math.sqrt(((X1-X2)*(X1-X2)) + ((Y1-Y2)*(Y1-Y2)));
-	}
+		return (InsUtil.Distance(X1, Y1, X2, Y2) <= ((InsUtil.Max(obj1.size.width, obj1.size.height) + InsUtil.Max(obj2.size.width, obj2.size.height)) / 2));
+	}	
 }

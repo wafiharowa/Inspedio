@@ -2,7 +2,7 @@ package com.inspedio.actions;
 
 import com.inspedio.entity.InsAction;
 import com.inspedio.entity.InsBasic;
-import com.inspedio.entity.basic.shape.InsShape;
+import com.inspedio.entity.basic.InsShape;
 import com.inspedio.entity.primitive.InsCallback;
 
 public class ScaleTo extends InsAction{

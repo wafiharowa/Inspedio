@@ -17,27 +17,15 @@ public class InsAnimatedSprite extends InsSprite{
 	/**
 	 * List of animation stored in this object
 	 */
-	public Vector animations;
+	protected Vector animations;
 	/**
 	 * Which animation currently played
 	 */
 	public InsAnim currentAnimation;	
 	
-	public InsAnimatedSprite()
+	public InsAnimatedSprite(String spritePath, int X, int Y, int Width, int Height)
 	{
-		super();
-		this.initAnimation();
-	}
-	
-	public InsAnimatedSprite(int X, int Y)
-	{
-		super(X, Y, 0, 0);
-		this.initAnimation();
-	}
-	
-	public InsAnimatedSprite(int X, int Y, int Width, int Height)
-	{
-		super(X, Y, Width, Height);
+		super(spritePath, X, Y, Width, Height);
 		this.initAnimation();
 	}
 	
@@ -65,6 +53,16 @@ public class InsAnimatedSprite extends InsSprite{
 		}
 	}
 	
+	public boolean addAnimation(String Name, int[] FrameSequence)
+	{
+		return this.addAnimation(Name, FrameSequence, 0, null);
+	}
+	
+	public boolean addAnimation(String Name, int[] FrameSequence, int FrameDelay)
+	{
+		return this.addAnimation(Name, FrameSequence, FrameDelay, null);
+	}
+	
 	/**
 	 * Add animation to animation list. 
 	 * If there is already animation with that name, it become failed
@@ -75,12 +73,12 @@ public class InsAnimatedSprite extends InsSprite{
 	 * 
 	 * @return true if success, false otherwise
 	 */
-	public boolean addAnimation(String Name, int[] frameSequence, InsCallback Callback)
+	public boolean addAnimation(String Name, int[] FrameSequence, int FrameDelay, InsCallback Callback)
 	{
 		int idx = this.checkAnimation(Name);
 		if(idx == -1)
 		{
-			this.animations.addElement(new InsAnim(Name, frameSequence, Callback));
+			this.animations.addElement(new InsAnim(Name, FrameSequence, FrameDelay, Callback));
 			return true;
 		}
 		else

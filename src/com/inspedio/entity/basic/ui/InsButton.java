@@ -2,11 +2,13 @@ package com.inspedio.entity.basic.ui;
 
 import javax.microedition.lcdui.Graphics;
 
+import com.inspedio.entity.basic.InsShape;
 import com.inspedio.entity.basic.InsText;
-import com.inspedio.entity.basic.shape.InsRect;
 import com.inspedio.entity.primitive.InsCallback;
+import com.inspedio.enums.FontSize;
+import com.inspedio.enums.FontStyle;
 
-public class InsButton extends InsRect{
+public class InsButton extends InsShape{
 	
 	/**
 	 * Callback event when Button Clicked
@@ -36,7 +38,7 @@ public class InsButton extends InsRect{
 	/**
 	 * Button Caption
 	 */
-	public InsText caption;
+	protected InsText caption;
 	
 	/**
 	 * Instantiate a new Button
@@ -97,13 +99,20 @@ public class InsButton extends InsRect{
 		this.caption.draw(g);
 	}
 	
-	public void setText(String Text){
-		this.caption.text = Text;
+	public void setPosition(int X, int Y){
+		this.position.setPoint(X, Y);
+		this.caption.setPosition(this.getMiddleX(), this.getMiddleY());
 	}
 	
-	public void setTextColor(int Color){
-		this.caption.color = Color;
+	public void setCaption(String Text, int Color, FontSize Size, FontStyle Style){
+		this.caption.setText(Text);
+		this.caption.setFont(Color, Size, Style);
 	}
+	
+	public void setText(String Text){
+		this.caption.setText(Text);
+	}
+	
 	
 	
 }

@@ -27,6 +27,12 @@ public class InsAnim {
 	 */
 	public int[] frames;
 	/**
+	 * How much delay between frames
+	 */
+	public int frameDelay;
+
+	protected int currentDelay;
+	/**
 	 * Callback method to execute when animation sequence end.
 	 */
 	public InsCallback callback;
@@ -35,28 +41,19 @@ public class InsAnim {
 	 * Construct a new InsAnim with given name and sequence
 	 * 
 	 * @param	Name			Animation name
-	 * @param	frameSequence	Array of integer which represents frame sequence
-	 */
-	public InsAnim(String Name, int[] frameSequence)
-	{
-		this.name = Name;
-		this.frames = frameSequence;
-		this.currentFrame = 0;
-		this.frameCount = this.frames.length;
-	}
-	
-	/**
-	 * Construct a new InsAnim with given name and sequence
+	 * @param	FrameSequence	Array of integer which represents frame sequence
+	 * @param	FrameDelay		Delay between frames, default is 0
+	 * @param	Callback		Callback method that called after animation finished
 	 * 
-	 * @param	Name			Animation name
-	 * @param	frameSequence	Array of integer which represents frame sequence
 	 */
-	public InsAnim(String Name, int[] frameSequence, InsCallback Callback)
+	public InsAnim(String Name, int[] FrameSequence, int FrameDelay, InsCallback Callback)
 	{
 		this.name = Name;
-		this.frames = frameSequence;
+		this.frames = FrameSequence;
+		this.frameDelay = FrameDelay;
 		this.currentFrame = 0;
 		this.frameCount = this.frames.length;
+		this.currentDelay = 0;
 		this.callback = Callback;
 	}
 	
@@ -72,7 +69,11 @@ public class InsAnim {
 				this.callback.call();
 			}
 		}
-		this.currentFrame = (this.currentFrame + 1) % this.frameCount;
+		if(this.currentDelay < this.frameDelay){
+			this.currentDelay++;
+		} else {
+			this.currentFrame = (this.currentFrame + 1) % this.frameCount;
+		}
 		return this.frames[this.currentFrame];
 	}
 	
