@@ -171,7 +171,7 @@ public class InsGame implements Runnable {
 		this.canvas = InsCanvas.init(this, Mode);
 		InsGlobal.game = this;
 		InsGlobal.canvas = this.canvas;
-		InsGlobal.graphic = this.canvas.graphic;
+		InsGlobal.graphic = this.canvas.bufferGraphics;
 		InsGlobal.keys = new InsKeys();
 		InsGlobal.pointer = new InsPointer();	
 		InsGlobal.camera = new InsCamera();
@@ -204,12 +204,10 @@ public class InsGame implements Runnable {
 	 * Note : You can set <code>running</code> to false to force close the game anytime
 	 */
 	public void run() {
-		long sleepTime = 0;
 		long elapsedTime = 0;
 		int surplusTime = 0;				// Positive if process on time or have surplus time. Negative when late
 		int frameLate = 0;					// How much Frame Cycle is currently being late
-		this.beginTime = System.currentTimeMillis();	
-		int frameSkipped = 0;
+		this.beginTime = System.currentTimeMillis();
 		
 		while(!this.stop){
 			try

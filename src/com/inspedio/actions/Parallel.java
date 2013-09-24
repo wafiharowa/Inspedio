@@ -15,8 +15,8 @@ public class Parallel extends InsAction{
 
 	protected InsAction[] actions;
 	
-	protected Parallel(InsBasic Target, InsAction[] ActionList, InsCallback Callback){
-		super(Target, Callback, -1);
+	protected Parallel(InsAction[] ActionList, InsCallback Callback){
+		super(-1, Callback);
 		this.actions = ActionList;
 		for(int i = 0; i < this.actions.length; i++){
 			this.frameCount = Math.max(this.frameCount, this.actions[i].getFrameCount());
@@ -34,8 +34,15 @@ public class Parallel extends InsAction{
 		return frameCount;
 	}
 	
+	public void setTarget(InsBasic Target){
+		this.target = Target;
+		for(int i = 0; i < this.actions.length; i++){
+			this.actions[i].setTarget(Target);
+		}
+	}
+	
 	public static Parallel create(InsBasic Target, InsAction[] ActionList, InsCallback Callback){
-		return new Parallel(Target, ActionList, Callback);
+		return new Parallel(ActionList, Callback);
 	}
 
 }

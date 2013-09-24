@@ -3,9 +3,7 @@ package com.inspedio.entity;
 import javax.microedition.lcdui.Graphics;
 
 import com.inspedio.entity.basic.InsImage;
-import com.inspedio.enums.HAlignment;
 import com.inspedio.enums.TransformType;
-import com.inspedio.enums.VAlignment;
 import com.inspedio.system.core.InsGlobal;
 
 /**
@@ -41,13 +39,13 @@ public abstract class InsBitmapFont extends InsBasic{
 	
 	public InsBitmapFont(String imagePath, int fontWidth, int fontHeight, int maxSize)
 	{
-		super(0, 0, 0, 0);
+		super(0, 0, fontWidth, fontHeight);
 		this.fontsheet = InsGlobal.cache.getImage(imagePath, fontWidth, fontHeight);
 		this.currentText = "";
 		this.length = 0;
 		this.maxSize = maxSize;
 		this.frameChar = new int[this.maxSize];
-		this.align.setAlignment(HAlignment.LEFT, VAlignment.BOTTOM);
+		//this.align.setAlignment(HAlignment.LEFT, VAlignment.BOTTOM);
 	}
 	
 	

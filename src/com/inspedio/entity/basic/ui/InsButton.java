@@ -2,7 +2,7 @@ package com.inspedio.entity.basic.ui;
 
 import javax.microedition.lcdui.Graphics;
 
-import com.inspedio.entity.basic.InsShape;
+import com.inspedio.entity.InsShape;
 import com.inspedio.entity.basic.InsText;
 import com.inspedio.entity.primitive.InsCallback;
 import com.inspedio.enums.FontSize;
@@ -100,8 +100,14 @@ public class InsButton extends InsShape{
 	}
 	
 	public void setPosition(int X, int Y){
-		this.position.setPoint(X, Y);
+		super.setPosition(X, Y);
 		this.caption.setPosition(this.getMiddleX(), this.getMiddleY());
+	}
+	
+	public void addPosition(int X, int Y)
+	{
+		super.addPosition(X, Y);
+		this.caption.addPosition(X, Y);
 	}
 	
 	public void setCaption(String Text, int Color, FontSize Size, FontStyle Style){

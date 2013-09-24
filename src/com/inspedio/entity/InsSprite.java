@@ -105,7 +105,7 @@ public class InsSprite extends InsBasic{
 				
 				if(this.isOnScreen())
 				{
-					this.image.drawFrame(g, this.frame, this.position.x - this.camera.position.x, this.position.y - this.camera.position.y, this.align, this.transform);
+					this.image.drawFrame(g, this.frame, this.position.x - this.camera.getLeft(), this.position.y - this.camera.getTop(), this.align, this.transform);
 				}
 			}	
 		}
@@ -118,7 +118,7 @@ public class InsSprite extends InsBasic{
 	 */
 	public boolean isOnScreen()
 	{
-		return this.camera.isOverlap(this.position.x, this.position.y);
+		return InsUtil.isCollideBox(this, this.camera);
 	}
 	
 	

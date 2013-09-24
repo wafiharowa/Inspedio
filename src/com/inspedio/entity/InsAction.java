@@ -16,10 +16,13 @@ public abstract class InsAction {
 	protected InsCallback callback;
 	protected InsBasic target;
 
-	protected InsAction(InsBasic Target, InsCallback Callback, int FrameCount){
-		this.target = Target;
+	protected InsAction(int FrameCount, InsCallback Callback){
 		this.callback = Callback;
 		this.frameCount = FrameCount;
+	}
+	
+	public void setTarget(InsBasic Target){
+		this.target = Target;
 	}
 	
 	/**
@@ -38,6 +41,6 @@ public abstract class InsAction {
 			this.callback.call();
 		}
 		frameCount = -1;
-		this.target.unsetAction();
+		this.target.unsetAction(this);
 	}
 }

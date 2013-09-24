@@ -1,6 +1,6 @@
 package com.inspedio.entity.basic.ui;
 
-import com.inspedio.entity.basic.InsShape;
+import com.inspedio.entity.InsShape;
 import com.inspedio.entity.primitive.InsCallback;
 import com.inspedio.entity.primitive.InsPoint;
 

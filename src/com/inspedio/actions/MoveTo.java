@@ -14,12 +14,12 @@ import com.inspedio.entity.primitive.InsCallback;
  */
 public class MoveTo extends InsAction{
 	
-	protected MoveTo(InsBasic Target, InsCallback Callback, int FrameCount) {
-		super(Target, Callback, FrameCount);
+	protected MoveTo(InsCallback Callback, int FrameCount) {
+		super(FrameCount, Callback);
 	}
 
-	public static MoveBy create(InsBasic Target, int DestinationX, int DestinationY, int FrameCount, InsCallback Callback){
-		return new MoveBy(Target, DestinationX - Target.position.x, DestinationY - Target.position.y, FrameCount, Callback);
+	public static MoveBy create(InsBasic Target, int FrameCount, int DestinationX, int DestinationY, InsCallback Callback){
+		return new MoveBy(FrameCount, DestinationX - Target.position.x, DestinationY - Target.position.y, Callback);
 	}
 
 	public int act() {

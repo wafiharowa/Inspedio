@@ -23,6 +23,30 @@ public class InsCanvas extends GameCanvas{
 
 	private static InsCanvas instance = null;
 	
+	public static final int COLOR_BLACK = 0x000000;
+	public static final int COLOR_RED = 0xFF0000;
+	public static final int COLOR_GREEN = 0x00FF00;
+	public static final int COLOR_BLUE = 0x0000FF;
+	public static final int COLOR_WHITE = 0xFFFFFF;
+	public static final int COLOR_YELLOW = 0xCCCC33;
+	
+	public static int FPS_COLOR = COLOR_WHITE;
+	
+	private Image bufferImage;
+	public Graphics bufferGraphics;
+	
+	private ScreenOrientation displayMode;
+	private boolean rotateCanvas;
+	private boolean fixedOrientation = false;
+	
+	public static final Font defaultFont = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL);
+	
+	public InsGame game;
+	protected Graphics graphic;
+	public int deviceWidth;
+	public int deviceHeight;
+	public ScreenOrientation deviceOrientation;
+	
 	public static InsCanvas getInstance(){
 		try
 		{
@@ -92,9 +116,8 @@ public class InsCanvas extends GameCanvas{
 			InsGlobal.screenOrientation = this.deviceOrientation = this.displayMode;
 			
 			this.bufferImage = Image.createImage(this.deviceWidth, this.deviceHeight);
-			this.graphic = this.bufferImage.getGraphics();
-			this.bufferGraphics = getGraphics();
-			//this.graphic = getGraphics();
+			this.bufferGraphics = this.bufferImage.getGraphics();
+			this.graphic = getGraphics();
 			
 			fixedOrientation = true;
 			
@@ -136,8 +159,8 @@ public class InsCanvas extends GameCanvas{
 	 */
 	public void clearScreen()
 	{
-		this.graphic.setColor(COLOR_BLACK);
-		this.graphic.fillRect(0, 0, this.deviceWidth, this.deviceHeight);
+		this.bufferGraphics.setColor(COLOR_BLACK);
+		this.bufferGraphics.fillRect(0, 0, this.deviceWidth, this.deviceHeight);
 	}
 	
 	/**
@@ -146,12 +169,12 @@ public class InsCanvas extends GameCanvas{
 	public void drawFPS()
 	{
 		int offset = 15;
-		this.graphic.setColor(FPS_COLOR);
-		this.graphic.setFont(InsCanvas.defaultFont);
-		this.graphic.drawString("FPS : " + InsGlobal.stats.currentUPS + " / " + InsGlobal.stats.currentFPS + " / " + InsGlobal.stats.currentFrameSkip, 0, deviceHeight - (4 * offset), (Graphics.TOP|Graphics.LEFT));
-		this.graphic.drawString("Process : " + InsGlobal.stats.currentUpdateTime + " / " + InsGlobal.stats.currentRenderTime, 0, deviceHeight - (3 * offset), (Graphics.TOP|Graphics.LEFT));
-		this.graphic.drawString("Sleep : " + InsGlobal.stats.currentSleepTime, 0, deviceHeight - (2 * offset), (Graphics.TOP|Graphics.LEFT));
-		this.graphic.drawString("Time : " + InsGlobal.stats.currentGameTime, 0, deviceHeight - offset, (Graphics.TOP|Graphics.LEFT));
+		this.bufferGraphics.setColor(FPS_COLOR);
+		this.bufferGraphics.setFont(InsCanvas.defaultFont);
+		this.bufferGraphics.drawString("FPS : " + InsGlobal.stats.currentUPS + " / " + InsGlobal.stats.currentFPS + " / " + InsGlobal.stats.currentFrameSkip, 0, deviceHeight - (4 * offset), (Graphics.TOP|Graphics.LEFT));
+		this.bufferGraphics.drawString("Process : " + InsGlobal.stats.currentUpdateTime + " / " + InsGlobal.stats.currentRenderTime, 0, deviceHeight - (3 * offset), (Graphics.TOP|Graphics.LEFT));
+		this.bufferGraphics.drawString("Sleep : " + InsGlobal.stats.currentSleepTime, 0, deviceHeight - (2 * offset), (Graphics.TOP|Graphics.LEFT));
+		this.bufferGraphics.drawString("Time : " + InsGlobal.stats.currentGameTime, 0, deviceHeight - offset, (Graphics.TOP|Graphics.LEFT));
 	}
 	
 	protected void hideNotify()
@@ -180,35 +203,15 @@ public class InsCanvas extends GameCanvas{
 	
 	public void flushGraphics(){
 		if(rotateCanvas){
-			this.bufferGraphics.drawRegion(this.bufferImage, 0, 0, deviceWidth, deviceHeight, Sprite.TRANS_ROT90, 0, 0, Graphics.LEFT | Graphics.TOP);
+			this.graphic.drawRegion(this.bufferImage, 0, 0, deviceWidth, deviceHeight, Sprite.TRANS_ROT90, 0, 0, Graphics.LEFT | Graphics.TOP);
 		} else{
-			this.bufferGraphics.drawRegion(this.bufferImage, 0, 0, deviceWidth, deviceHeight, Sprite.TRANS_NONE, 0, 0, Graphics.LEFT | Graphics.TOP);
+			this.graphic.drawRegion(this.bufferImage, 0, 0, deviceWidth, deviceHeight, Sprite.TRANS_NONE, 0, 0, Graphics.LEFT | Graphics.TOP);
 			//this.bufferGraphics.drawImage(this.bufferImage, 0, 0, Graphics.LEFT | Graphics.TOP);
 		}
 		super.flushGraphics();
 	}
 	
-	public static final int COLOR_BLACK = 0x000000;
-	public static final int COLOR_RED = 0xFF0000;
-	public static final int COLOR_WHITE = 0xFFFFFF;
-	public static final int COLOR_YELLOW = 0xCCCC33;
 	
-	public static int FPS_COLOR = COLOR_WHITE;
-	
-	private Image bufferImage;
-	private Graphics bufferGraphics;
-	
-	private ScreenOrientation displayMode;
-	private boolean rotateCanvas;
-	private boolean fixedOrientation = false;
-	
-	public static final Font defaultFont = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL);
-	
-	public InsGame game;
-	public Graphics graphic;
-	public int deviceWidth;
-	public int deviceHeight;
-	public ScreenOrientation deviceOrientation;
 	
 
 }

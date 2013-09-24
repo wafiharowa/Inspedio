@@ -1,7 +1,6 @@
 package com.inspedio.actions;
 
 import com.inspedio.entity.InsAction;
-import com.inspedio.entity.InsBasic;
 import com.inspedio.entity.primitive.InsCallback;
 
 /**
@@ -21,17 +20,21 @@ public class Delay extends InsAction{
 	 */
 	protected boolean delayed;
 	
-	protected Delay(InsBasic Target, InsCallback Callback, InsAction Action, int FrameCount) {
-		super(Target, Callback, FrameCount);
+	protected Delay(int FrameCount, InsCallback Callback, InsAction Action) {
+		super(FrameCount, Callback);
 		this.delayed = true;
 	}
 	
-	public static Delay create(InsBasic Target, int DelayDuration, InsCallback Callback){
-		return new Delay(Target, Callback, null, DelayDuration);
+	public static Delay create(int DelayDuration, InsCallback Callback){
+		return new Delay(DelayDuration, Callback, null);
 	}
 	
-	public static Delay create(InsBasic Target, int DelayDuration, InsAction Action, InsCallback Callback){
-		return new Delay(Target, Callback, Action, DelayDuration);
+	public static Delay create(int DelayDuration, InsAction Action, InsCallback Callback){
+		return new Delay(DelayDuration, Callback, Action);
+	}
+	
+	public static Delay create(int DelayDuration){
+		return new Delay(DelayDuration, null, null);
 	}
 	
 

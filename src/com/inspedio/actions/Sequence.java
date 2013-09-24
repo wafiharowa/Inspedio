@@ -16,12 +16,11 @@ public class Sequence extends InsAction{
 	protected InsAction[] actions;
 	protected int currentAction;
 	
-	protected Sequence(InsBasic Target, InsAction[] ActionList, InsCallback Callback){
-		super(Target, Callback, -1);
+	protected Sequence(InsAction[] ActionList, InsCallback Callback){
+		super(0, Callback);
 		this.actions = ActionList;
-		this.currentAction = 0;
 		for(int i = 0; i < this.actions.length; i++){
-			this.frameCount = Math.max(this.frameCount, this.actions[i].getFrameCount());
+			this.frameCount += this.actions[i].getFrameCount();
 		}
 	}
 	
@@ -45,8 +44,17 @@ public class Sequence extends InsAction{
 		return frameCount;
 	}
 	
-	public static Sequence create(InsBasic Target, InsAction[] ActionList, InsCallback Callback){
-		return new Sequence(Target, ActionList, Callback);
+	public void setTarget(InsBasic Target){
+		this.target = Target;
+		for(int i = 0; i < this.actions.length; i++){
+			this.actions[i].setTarget(Target);
+		}
 	}
+	
+	public static Sequence create(InsAction[] ActionList, InsCallback Callback){
+		return new Sequence(ActionList, Callback);
+	}
+	
+	
 
 }

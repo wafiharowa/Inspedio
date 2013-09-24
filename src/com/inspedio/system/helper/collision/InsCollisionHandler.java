@@ -37,7 +37,7 @@ public class InsCollisionHandler {
 							obj2 = (InsBasic) this.group2.members.elementAt(j);
 							if((obj2 != null) && obj2.exists && obj2.alive)
 							{
-								if(this.isCollide(obj1, obj2)){
+								if(InsUtil.isCollide(obj1, obj2, this.type)){
 									this.callback.call(obj1, obj2);
 								}
 							}
@@ -52,30 +52,4 @@ public class InsCollisionHandler {
 		return ((this.group1 != null) && (this.group2 != null) && (this.callback != null));
 	}
 	
-	protected boolean isCollide(InsBasic obj1, InsBasic obj2){
-		if(this.type == CollisionType.BOX){
-			return this.isCollideBox(obj1, obj2);
-		} else if (this.type == CollisionType.SPHERE){
-			return this.isCollideSphere(obj1, obj2);
-		}
-		return false;
-	}
-	
-	protected boolean isCollideBox(InsBasic obj1, InsBasic obj2){
-		int X1 = obj1.getMiddleX();
-		int Y1 = obj1.getMiddleY();
-		int X2 = obj2.getMiddleX();
-		int Y2 = obj2.getMiddleY();
-		
-		return (InsUtil.Absolute(X1 - X2) <= ((obj1.size.width + obj2.size.width) / 2) && InsUtil.Absolute(Y1 - Y2) <= ((obj1.size.height + obj2.size.height) / 2)) ;
-	}
-	
-	protected boolean isCollideSphere(InsBasic obj1, InsBasic obj2){
-		int X1 = obj1.getMiddleX();
-		int Y1 = obj1.getMiddleY();
-		int X2 = obj2.getMiddleX();
-		int Y2 = obj2.getMiddleY();
-		
-		return (InsUtil.Distance(X1, Y1, X2, Y2) <= ((InsUtil.Max(obj1.size.width, obj1.size.height) + InsUtil.Max(obj2.size.width, obj2.size.height)) / 2));
-	}	
 }

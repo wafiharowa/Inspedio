@@ -3,35 +3,51 @@ package samples;
 import com.inspedio.entity.InsState;
 import com.inspedio.entity.basic.ui.InsButton;
 import com.inspedio.entity.primitive.InsCallback;
+import com.inspedio.enums.FontSize;
+import com.inspedio.enums.FontStyle;
 import com.inspedio.system.core.InsCanvas;
 import com.inspedio.system.core.InsGlobal;
 
 public class SampleButtonState extends InsState{
 
-	InsButton play;
-	InsButton options;
-	InsButton credits;
-	InsButton exit;
+	InsButton SPRITE;
+	InsButton FONT;
+	InsButton ACTION;
+	InsButton EXIT;
 	
 	public void create(){
 		int midX = InsGlobal.screenWidth / 2;
 		int midY = InsGlobal.screenHeight / 2;
 		
-		this.play = new InsButton(midX, midY - 90, 140, 40, "PLAY", InsCanvas.COLOR_RED);
-		this.options = new InsButton(midX, midY - 30, 140, 40, "OPTIONS", InsCanvas.COLOR_RED);
-		this.credits = new InsButton(midX, midY + 30, 140, 40, "CREDITS", InsCanvas.COLOR_RED);
-		this.exit = new InsButton(midX, midY + 90, 140, 40, "EXIT", InsCanvas.COLOR_RED);
+		this.SPRITE = new InsButton(midX, midY - 90, 140, 40, "SPRITE", InsCanvas.COLOR_RED);
+		this.FONT = new InsButton(midX, midY - 30, 140, 40, "FONT", InsCanvas.COLOR_GREEN);
+		this.ACTION = new InsButton(midX, midY + 30, 140, 40, "ACTION", InsCanvas.COLOR_BLUE);
+		this.EXIT = new InsButton(midX, midY + 90, 140, 40, "EXIT", InsCanvas.COLOR_YELLOW);
 		
-		this.play.setClickedCallback(new InsCallback() {
-			
+		SPRITE.setRoundedRect(140, 40, 40, 40);
+		SPRITE.setClickedCallback(new InsCallback() {
 			public void call() {
 				InsGlobal.switchState(new SampleSpriteState(), false);
 			}
 		});
 		
-		this.add(this.play);
-		this.add(this.options);
-		this.add(this.credits);
-		this.add(this.exit);
+		FONT.setCaption("FONT", InsCanvas.COLOR_BLACK, FontSize.MEDIUM, FontStyle.ITALIC);
+		FONT.setClickedCallback(new InsCallback() {
+			public void call() {
+				InsGlobal.switchState(new SampleFontState(), false);
+			}
+		});
+		
+		ACTION.setBorder(InsCanvas.COLOR_RED, 5);
+		ACTION.setClickedCallback(new InsCallback() {
+			public void call() {
+				InsGlobal.switchState(new SampleActionState(), false);
+			}
+		});
+		
+		this.add(this.SPRITE);
+		this.add(this.FONT);
+		this.add(this.ACTION);
+		this.add(this.EXIT);
 	}
 }

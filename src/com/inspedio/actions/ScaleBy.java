@@ -10,17 +10,10 @@ package com.inspedio.actions;
  * @version 1.0
  */
 import com.inspedio.entity.InsAction;
-import com.inspedio.entity.basic.InsShape;
+import com.inspedio.entity.InsShape;
 import com.inspedio.entity.primitive.InsCallback;
 
 public class ScaleBy extends InsAction{
-	
-	public static final int LEFT = 0;
-	public static final int CENTER = 1;
-	public static final int RIGHT = 2;
-	
-	public static final int TOP = 0;
-	public static final int BOTTOM = 2;
 	
 	protected InsShape target;
 	
@@ -28,18 +21,13 @@ public class ScaleBy extends InsAction{
 	protected int scaleY;	
 	protected int stepX;
 	protected int stepY;
-	
-	protected int anchorX;
-	protected int anchorY;
 
-	protected ScaleBy(InsShape Target, int ScaleX, int ScaleY, InsCallback Callback, int FrameCount, int AnchorX, int AnchorY) {
-		super(Target, Callback, FrameCount);
+	protected ScaleBy(int FrameCount, int ScaleX, int ScaleY, InsCallback Callback) {
+		super(FrameCount, Callback);
 		this.scaleX = ScaleX;
 		this.scaleY = ScaleY;
 		this.stepX = this.scaleX / this.frameCount;
 		this.stepY = this.scaleY / this.frameCount;
-		this.anchorX = AnchorX;
-		this.anchorY = AnchorY;
 	}
 
 	public int act() {
@@ -54,16 +42,12 @@ public class ScaleBy extends InsAction{
 	}
 
 	private void scale(int X, int Y){
-		this.target.size.width += X;
+		this.target.size.addSize(X, Y);
 		this.scaleX -= X;
-		this.target.position.x -= (X * anchorX) / 2;
-		
-		this.target.size.height += Y;
 		this.scaleY -= Y;
-		this.target.position.y -= (Y * anchorY) / 2;
 	}
 	
-	public static ScaleBy create(InsShape Target, int ScaleX, int ScaleY, InsCallback Callback, int FrameCount,  int AnchorX, int AnchorY){
-		return new ScaleBy(Target, ScaleX, ScaleY, Callback, FrameCount, AnchorX, AnchorY);
+	public static ScaleBy create(int FrameCount, int ScaleX, int ScaleY, InsCallback Callback){
+		return new ScaleBy(FrameCount, ScaleX, ScaleY, Callback);
 	}
 }

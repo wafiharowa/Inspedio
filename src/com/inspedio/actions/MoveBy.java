@@ -1,7 +1,6 @@
 package com.inspedio.actions;
 
 import com.inspedio.entity.InsAction;
-import com.inspedio.entity.InsBasic;
 import com.inspedio.entity.primitive.InsCallback;
 
 /**
@@ -19,16 +18,16 @@ public class MoveBy extends InsAction{
 	protected int stepX;
 	protected int stepY;
 	
-	protected MoveBy(InsBasic Target, int DistanceX, int DistanceY, int FrameCount, InsCallback Callback){
-		super(Target, Callback, FrameCount);
+	protected MoveBy(int FrameCount, int DistanceX, int DistanceY, InsCallback Callback){
+		super(FrameCount, Callback);
 		this.distanceX = DistanceX;
 		this.distanceY = DistanceY;
 		this.stepX = this.distanceX / this.frameCount;
 		this.stepY = this.distanceY / this.frameCount;
 	}
 	
-	public static MoveBy create(InsBasic Target, int DistanceX, int DistanceY, int FrameCount, InsCallback Callback){
-		return new MoveBy(Target, DistanceX, DistanceY, FrameCount, Callback);
+	public static MoveBy create(int FrameCount, int DistanceX, int DistanceY, InsCallback Callback){
+		return new MoveBy(FrameCount, DistanceX, DistanceY, Callback);
 	}
 	
 	public int act(){
@@ -43,10 +42,8 @@ public class MoveBy extends InsAction{
 	}
 	
 	private void move(int X, int Y){
-		this.target.position.x += X;
+		this.target.addPosition(X, Y);
 		this.distanceX -= X;
-		
-		this.target.position.y += Y;
 		this.distanceY -= Y;
 	}
 }

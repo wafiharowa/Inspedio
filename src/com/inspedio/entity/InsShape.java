@@ -1,8 +1,7 @@
-package com.inspedio.entity.basic;
+package com.inspedio.entity;
 
 import javax.microedition.lcdui.Graphics;
 
-import com.inspedio.entity.InsBasic;
 import com.inspedio.entity.primitive.InsSize;
 import com.inspedio.enums.ShapeType;
 import com.inspedio.system.helper.InsUtil;
@@ -45,6 +44,7 @@ public class InsShape extends InsBasic{
 		this.setColor(0x000000, true);
 		this.setBorder(0xFFFFFF, 2);
 		this.setRectangle(Width, Height);
+		this.roundArc = new InsSize(10,10);
 	}
 	
 	public void setColor(int Color, boolean IsFill){

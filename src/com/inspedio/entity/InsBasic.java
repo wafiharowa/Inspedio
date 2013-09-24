@@ -63,11 +63,27 @@ public class InsBasic extends InsAtom{
 	}
 	
 	/**
+	 * Add Object Size
+	 */
+	public void addSize(int Width, int Height)
+	{
+		this.size.addSize(Width, Height);
+	}
+	
+	/**
 	 * Set Object Position
 	 */
 	public void setPosition(int X, int Y)
 	{
 		this.position.setPoint(X, Y);
+	}
+	
+	/**
+	 * Add Object Position
+	 */
+	public void addPosition(int X, int Y)
+	{
+		this.position.addPoint(X, Y);
 	}
 	
 	public void setAlignment(HAlignment horizontal, VAlignment vertical){
@@ -106,10 +122,14 @@ public class InsBasic extends InsAtom{
 	
 	public void setAction(InsAction Action){
 		this.action = Action;
+		this.action.setTarget(this);
 	}
 	
-	public void unsetAction(){
-		this.action = null;
+	public void unsetAction(InsAction Action){
+		if(this.action == Action){
+			this.action.setTarget(null);
+			this.action = null;
+		}
 	}
 	
 	/**

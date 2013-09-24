@@ -102,12 +102,12 @@ public class InsLoader extends InsState implements Runnable{
 		InsGlobal.game.requestedState.create();
 	}
 	
-	public void draw()
+	public void draw(Graphics g)
 	{
-		InsGlobal.graphic.setColor(0x000000);
-		InsGlobal.graphic.drawRect(0, 0, InsGlobal.screenWidth, InsGlobal.screenHeight);
-		InsGlobal.graphic.setColor(0xFFFFFF);
-		InsGlobal.graphic.drawString(currentProgress + " %", InsGlobal.screenWidth / 2, InsGlobal.screenHeight / 2, Graphics.BASELINE | Graphics.HCENTER);
+		g.setColor(0x000000);
+		g.drawRect(0, 0, InsGlobal.screenWidth, InsGlobal.screenHeight);
+		g.setColor(0xFFFFFF);
+		g.drawString(currentProgress + " %", InsGlobal.screenWidth / 2, InsGlobal.screenHeight / 2, Graphics.BASELINE | Graphics.HCENTER);
 	}
 
 	

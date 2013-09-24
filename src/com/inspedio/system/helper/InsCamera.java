@@ -2,6 +2,8 @@ package com.inspedio.system.helper;
 
 import com.inspedio.system.core.InsGlobal;
 import com.inspedio.entity.InsBasic;
+import com.inspedio.enums.HAlignment;
+import com.inspedio.enums.VAlignment;
 
 /**
  * This is the helper class for camera.<br>
@@ -34,6 +36,7 @@ public class InsCamera extends InsBasic{
 	
 	public InsCamera(int X, int Y, int Width, int Height) {
 		super(X, Y, Width, Height);
+		this.align.setAlignment(HAlignment.LEFT, VAlignment.TOP);
 	}
 
 }

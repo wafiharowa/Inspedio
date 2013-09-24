@@ -17,4 +17,9 @@ public class InsSize {
 		this.width = Width;
 		this.height = Height;
 	}
+	
+	public void addSize(int Width, int Height){
+		this.width += Width;
+		this.height += Height;
+	}
 }
