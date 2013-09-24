@@ -1,5 +1,7 @@
 package com.inspedio.system.defaults;
 
-public class DefaultSaveLoad {
+import com.inspedio.system.helper.InsSave;
+
+public class DefaultSaveLoad extends InsSave{
 
 }

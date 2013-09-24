@@ -1,5 +1,7 @@
 package com.inspedio.system.defaults;
 
-public class DefaultLoader {
+import com.inspedio.system.helper.InsLoader;
+
+public class DefaultLoader extends InsLoader{
 
 }

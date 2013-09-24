@@ -1,4 +1,4 @@
-package samples;
+package com.inspedio.samples;
 
 import com.inspedio.actions.MoveTo;
 import com.inspedio.entity.InsAnimatedSprite;

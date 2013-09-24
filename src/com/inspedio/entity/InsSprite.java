@@ -131,6 +131,10 @@ public class InsSprite extends InsBasic{
 		this.setSize(this.image.frameWidth, this.image.frameHeight);
 	}
 	
+	public void setTransform(TransformType Transform){
+		this.transform = Transform;
+	}
+	
 	/**
 	 * Set Image and automatically adjust Width and Height
 	 */

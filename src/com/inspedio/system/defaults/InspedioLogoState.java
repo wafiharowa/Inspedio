@@ -1,5 +1,7 @@
 package com.inspedio.system.defaults;
 
-public class InspedioLogoState {
+import com.inspedio.entity.InsState;
+
+public class InspedioLogoState extends InsState{
 
 }

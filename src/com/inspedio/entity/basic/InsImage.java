@@ -8,6 +8,7 @@ import javax.microedition.lcdui.Image;
 
 import com.inspedio.entity.primitive.InsSize;
 import com.inspedio.enums.TransformType;
+import com.inspedio.system.helper.InsUtil;
 import com.inspedio.system.helper.extension.InsAlignment;
 
 /**
@@ -93,10 +94,17 @@ public class InsImage{
 	}
 	
 	public void drawFrame(Graphics g, int Frame, int X, int Y, InsAlignment alignment, TransformType transform){
-		Frame = Frame % this.frameTotal;
-		int x_src = (Frame % this.frameCountX) * this.frameWidth;
-		int y_src = ((int) (Frame / this.frameCountX)) * this.frameHeight;
-		this.drawRegion(g, x_src, y_src, this.frameWidth, this.frameHeight, transform, X, Y, alignment);
+		if(Frame >= 0){
+			Frame = Frame % this.frameTotal;
+			int x_src = (Frame % this.frameCountX) * this.frameWidth;
+			int y_src = ((int) (Frame / this.frameCountX)) * this.frameHeight;
+			this.drawRegion(g, x_src, y_src, this.frameWidth, this.frameHeight, transform, X, Y, alignment);
+		} else {
+			Frame = InsUtil.Absolute(Frame) % this.frameTotal;
+			int x_src = (Frame % this.frameCountX) * this.frameWidth;
+			int y_src = ((int) (Frame / this.frameCountX)) * this.frameHeight;
+			this.drawRegion(g, x_src, y_src, this.frameWidth, this.frameHeight, TransformType.getMirror(transform), X, Y, alignment);
+		}
 	}
 	
 	public void destroy()
