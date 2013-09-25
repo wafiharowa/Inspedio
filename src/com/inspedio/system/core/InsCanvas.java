@@ -30,8 +30,6 @@ public class InsCanvas extends GameCanvas{
 	public static final int COLOR_WHITE = 0xFFFFFF;
 	public static final int COLOR_YELLOW = 0xCCCC33;
 	
-	public static int FPS_COLOR = COLOR_WHITE;
-	
 	private Image bufferImage;
 	public Graphics bufferGraphics;
 	
@@ -159,7 +157,7 @@ public class InsCanvas extends GameCanvas{
 	 */
 	public void clearScreen()
 	{
-		this.bufferGraphics.setColor(COLOR_BLACK);
+		this.bufferGraphics.setColor(InsGlobal.BG_COLOR);
 		this.bufferGraphics.fillRect(0, 0, this.deviceWidth, this.deviceHeight);
 	}
 	
@@ -169,7 +167,7 @@ public class InsCanvas extends GameCanvas{
 	public void drawFPS()
 	{
 		int offset = 15;
-		this.bufferGraphics.setColor(FPS_COLOR);
+		this.bufferGraphics.setColor(InsGlobal.FPS_COLOR);
 		this.bufferGraphics.setFont(InsCanvas.defaultFont);
 		this.bufferGraphics.drawString("FPS : " + InsGlobal.stats.currentUPS + " / " + InsGlobal.stats.currentFPS + " / " + InsGlobal.stats.currentFrameSkip, 0, deviceHeight - (4 * offset), (Graphics.TOP|Graphics.LEFT));
 		this.bufferGraphics.drawString("Process : " + InsGlobal.stats.currentUpdateTime + " / " + InsGlobal.stats.currentRenderTime, 0, deviceHeight - (3 * offset), (Graphics.TOP|Graphics.LEFT));

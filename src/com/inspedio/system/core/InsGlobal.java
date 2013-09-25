@@ -125,6 +125,14 @@ public class InsGlobal{
 	 * Set this to TRUE to display FPS
 	 */
 	public static boolean displayFPS = true;
+	/**
+	 * Set this to change FPS Display Color
+	 */
+	public static int FPS_COLOR = InsCanvas.COLOR_WHITE;
+	/**
+	 * Set this to change Background Color
+	 */
+	public static int BG_COLOR = InsCanvas.COLOR_BLACK;
 	
 	/**
 	 * Initiate Global Variables

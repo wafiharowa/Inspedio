@@ -58,6 +58,13 @@ public class InsSprite extends InsBasic{
 		this.setImage(spritePath, Width, Height);
 	}
 	
+	public InsSprite(String spritePath, int X, int Y)
+	{
+		super(X, Y, 0, 0);
+		this.init();
+		this.setImage(spritePath);
+	}
+	
 	private void init()
 	{
 		this.transform = TransformType.NONE;
@@ -131,10 +138,6 @@ public class InsSprite extends InsBasic{
 		this.setSize(this.image.frameWidth, this.image.frameHeight);
 	}
 	
-	public void setTransform(TransformType Transform){
-		this.transform = Transform;
-	}
-	
 	/**
 	 * Set Image and automatically adjust Width and Height
 	 */
@@ -142,6 +145,10 @@ public class InsSprite extends InsBasic{
 	{
 		this.image = InsGlobal.cache.getImage(imagePath);
 		this.setSize(this.image.frameWidth, this.image.frameHeight);
+	}
+	
+	public void setTransform(TransformType Transform){
+		this.transform = Transform;
 	}
 	
 	/**
