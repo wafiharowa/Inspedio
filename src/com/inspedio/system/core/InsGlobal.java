@@ -99,6 +99,14 @@ public class InsGlobal{
 	 */
 	public static int screenHeight;
 	/**
+	 * The middle X point of screen
+	 */
+	public static int middleX;
+	/**
+	 * The middle Y point of screen
+	 */
+	public static int middleY;
+	/**
 	 * The Orientation of SCreen, either LANDSCAPE or PORTRAIT
 	 */
 	public static ScreenOrientation screenOrientation;

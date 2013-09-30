@@ -28,7 +28,7 @@ public class InsAnimatedSprite extends InsSprite{
 		super(spritePath, X, Y, Width, Height);
 		this.initAnimation();
 	}
-	
+		
 	private void initAnimation()
 	{
 		this.animations = new Vector();

@@ -10,6 +10,11 @@ public class InsProgressSprite extends InsSprite{
 
 	InsPoint progress;
 	
+	public InsProgressSprite(String spritePath) {
+		super(spritePath);
+		this.progress = new InsPoint(100, 100);
+	}
+	
 	public InsProgressSprite(String spritePath, int X, int Y) {
 		super(spritePath, X, Y);
 		this.progress = new InsPoint(100, 100);
@@ -26,6 +31,10 @@ public class InsProgressSprite extends InsSprite{
 	public void setProgress(int progressX, int progressY){
 		this.progress.x = InsUtil.Max(InsUtil.Min(InsUtil.Absolute(progressX), 100), 0); 
 		this.progress.y = InsUtil.Max(InsUtil.Min(InsUtil.Absolute(progressY), 100), 0); 
+	}
+	
+	public void addProgress(int progressX, int progressY){
+		this.setProgress(this.progress.x + progressX, this.progress.y + progressY);
 	}
 	
 	public void draw(Graphics g)

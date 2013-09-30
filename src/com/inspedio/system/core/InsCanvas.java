@@ -119,6 +119,9 @@ public class InsCanvas extends GameCanvas{
 			
 			fixedOrientation = true;
 			
+			InsGlobal.middleX = InsGlobal.screenWidth / 2;
+			InsGlobal.middleY = InsGlobal.screenHeight / 2;
+			
 			System.out.println("Screen Width : " + InsGlobal.screenWidth);
 			System.out.println("Screen Height : " + InsGlobal.screenHeight);
 		}

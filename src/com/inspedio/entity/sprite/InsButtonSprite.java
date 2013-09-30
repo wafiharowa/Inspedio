@@ -39,6 +39,10 @@ public class InsButtonSprite extends InsSprite{
 		super(spritePath, X, Y);
 	}
 	
+	public InsButtonSprite(String spritePath){
+		super(spritePath);
+	}
+	
 	public boolean onTouchPressed(){
 		if(onPressedCallback != null){
 			this.onPressedCallback.call();

@@ -1,7 +1,6 @@
 package com.inspedio.samples;
 
 import com.inspedio.actions.MoveBy;
-import com.inspedio.actions.ScaleBy;
 import com.inspedio.actions.Sequence;
 import com.inspedio.entity.InsAction;
 import com.inspedio.entity.InsShape;
