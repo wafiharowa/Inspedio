@@ -107,6 +107,19 @@ public class InsImage{
 		}
 	}
 	
+	public void drawFrameRegion(Graphics g, int Frame, int PercentageX, int PercentageY, int X, int Y, InsAlignment alignment, TransformType transform){
+		if(Frame >= 0){
+			Frame = Frame % this.frameTotal;
+			int x_src = (Frame % this.frameCountX) * this.frameWidth;
+			int y_src = ((int) (Frame / this.frameCountX)) * this.frameHeight;
+			this.drawRegion(g, x_src, y_src, (this.frameWidth * PercentageX) / 100, (this.frameHeight * PercentageY) / 100, transform, X, Y, alignment);
+		} else {
+			Frame = InsUtil.Absolute(Frame) % this.frameTotal;
+			int x_src = (Frame % this.frameCountX) * this.frameWidth;
+			int y_src = ((int) (Frame / this.frameCountX)) * this.frameHeight;
+			this.drawRegion(g, x_src, y_src, (this.frameWidth * PercentageX) / 100, (this.frameHeight * PercentageY) / 100, TransformType.getMirror(transform), X, Y, alignment);
+		}
+	}
 	public void destroy()
 	{
 		this.source = null;

@@ -15,7 +15,7 @@ import com.inspedio.system.helper.InsPointer;
  * @author Hyude
  * @version 1.0
  */
-public class InsState extends InsGroup{
+public abstract class InsState extends InsGroup{
 
 	
 	
@@ -42,10 +42,7 @@ public class InsState extends InsGroup{
 	 * Override this function, NOT the constructor, to initialize or set up your game state.
 	 * We do NOT recommend overriding the constructor, unless you want some crazy unpredictable things to happen!
 	 */
-	public void create()
-	{
-		
-	}
+	public abstract void create();
 	
 	/**
 	 * Things to do after create, and after set to Current GameState

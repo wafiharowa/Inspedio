@@ -1,4 +1,4 @@
-package com.inspedio.entity.basic.ui;
+package com.inspedio.entity.ui;
 
 import com.inspedio.entity.InsShape;
 import com.inspedio.entity.primitive.InsCallback;

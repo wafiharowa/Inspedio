@@ -41,7 +41,7 @@ public class Parallel extends InsAction{
 		}
 	}
 	
-	public static Parallel create(InsBasic Target, InsAction[] ActionList, InsCallback Callback){
+	public static Parallel create(InsAction[] ActionList, InsCallback Callback){
 		return new Parallel(ActionList, Callback);
 	}
 

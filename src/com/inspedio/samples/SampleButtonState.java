@@ -1,7 +1,7 @@
 package com.inspedio.samples;
 
 import com.inspedio.entity.InsState;
-import com.inspedio.entity.basic.ui.InsButton;
+import com.inspedio.entity.ui.InsButton;
 import com.inspedio.entity.primitive.InsCallback;
 import com.inspedio.enums.FontSize;
 import com.inspedio.enums.FontStyle;

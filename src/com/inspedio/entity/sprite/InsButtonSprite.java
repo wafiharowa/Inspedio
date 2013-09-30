@@ -1,15 +1,10 @@
-package com.inspedio.entity.basic.ui;
+package com.inspedio.entity.sprite;
 
-import javax.microedition.lcdui.Graphics;
-
-import com.inspedio.entity.InsShape;
-import com.inspedio.entity.basic.InsText;
+import com.inspedio.entity.InsSprite;
 import com.inspedio.entity.primitive.InsCallback;
-import com.inspedio.enums.FontSize;
-import com.inspedio.enums.FontStyle;
 
-public class InsButton extends InsShape{
-	
+public class InsButtonSprite extends InsSprite{
+
 	/**
 	 * Callback event when Button Clicked
 	 */
@@ -35,18 +30,13 @@ public class InsButton extends InsShape{
 	 */
 	public boolean onHoldReturn = true;
 	
-	/**
-	 * Button Caption
-	 */
-	protected InsText caption;
+	public InsButtonSprite(String spritePath, int X, int Y, int Width, int Height) {
+		super(spritePath, X, Y, Width, Height);
+		
+	}
 	
-	/**
-	 * Instantiate a new Button
-	 */
-	public InsButton(int X, int Y, int Width, int Height, String Caption, int Color) {
-		super(X, Y, Width, Height);
-		this.fillColor = Color;
-		this.caption = new InsText(Caption, X, Y);
+	public InsButtonSprite(String spritePath, int X, int Y){
+		super(spritePath, X, Y);
 	}
 	
 	public boolean onTouchPressed(){
@@ -94,31 +84,6 @@ public class InsButton extends InsShape{
 		this.onHoldCallback = c;
 	}
 	
-	public void draw(Graphics g){
-		super.draw(g);
-		this.caption.draw(g);
-	}
 	
-	public void setPosition(int X, int Y){
-		super.setPosition(X, Y);
-		this.caption.setPosition(this.getMiddleX(), this.getMiddleY());
-	}
-	
-	public void addPosition(int X, int Y)
-	{
-		super.addPosition(X, Y);
-		this.caption.addPosition(X, Y);
-	}
-	
-	public void setCaption(String Text, int Color, FontSize Size, FontStyle Style){
-		this.caption.setText(Text);
-		this.caption.setFont(Color, Size, Style);
-	}
-	
-	public void setText(String Text){
-		this.caption.setText(Text);
-	}
-	
-	
-	
+
 }

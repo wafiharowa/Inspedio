@@ -2,10 +2,10 @@ package com.inspedio.system.defaults;
 
 import com.inspedio.entity.InsBitmapFont;
 
-public class DefaultBitmapFont extends InsBitmapFont{
+public class DefaultBitmapFontSmall extends InsBitmapFont{
 
-	public DefaultBitmapFont(String Text, int X, int Y) {
-		super("/com/inspedio/defaults/bitmap_font.png", 12, 14, 20);
+	public DefaultBitmapFontSmall(String Text, int X, int Y) {
+		super("/com/inspedio/defaults/font_small.png", 10, 12, 20);
 		this.setText(Text);
 		this.setPosition(X, Y);
 	}
@@ -30,37 +30,22 @@ public class DefaultBitmapFont extends InsBitmapFont{
 		{
 			// 0
 			return 39;
-		} if(c == '%')
-		{
-			return 26;
-		}
-		else if(c == '/')
-		{
-			return 27;
 		}
 		else if(c == '.')
 		{
-			return 28;
+			return 27;
 		}
 		else if(c == ',')
 		{
-			return 29;
-		}
-		else if(c == '-')
-		{
-			return 41;
+			return 28;
 		}
 		else if(c == '!')
 		{
-			return 42;
-		}
-		else if(c == '?')
-		{
-			return 43;
+			return 29;
 		}
 		else
 		{
-			return 40;
+			return 26;
 		}
 	}
 

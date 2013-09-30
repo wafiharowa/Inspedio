@@ -4,4 +4,8 @@ import com.inspedio.entity.InsState;
 
 public class InspedioLogoState extends InsState{
 
+	public void create() {
+		
+	}
+
 }

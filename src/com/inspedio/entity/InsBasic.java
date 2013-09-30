@@ -2,6 +2,8 @@ package com.inspedio.entity;
 
 import javax.microedition.lcdui.Graphics;
 
+import com.inspedio.actions.Parallel;
+import com.inspedio.actions.Sequence;
 import com.inspedio.entity.primitive.InsPoint;
 import com.inspedio.entity.primitive.InsSize;
 import com.inspedio.enums.HAlignment;
@@ -123,6 +125,14 @@ public class InsBasic extends InsAtom{
 	public void setAction(InsAction Action){
 		this.action = Action;
 		this.action.setTarget(this);
+	}
+	
+	public void appendAction(InsAction Action){
+		this.setAction(Sequence.create(new InsAction[] {this.action, Action}, null));
+	}
+	
+	public void combineAction(InsAction Action){
+		this.setAction(Parallel.create(new InsAction[] {this.action, Action}, null));
 	}
 	
 	public void unsetAction(InsAction Action){

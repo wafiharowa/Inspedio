@@ -42,7 +42,7 @@ public class ScaleBy extends InsAction{
 	}
 
 	private void scale(int X, int Y){
-		this.target.size.addSize(X, Y);
+		this.target.addSize(X, Y);
 		this.scaleX -= X;
 		this.scaleY -= Y;
 	}
