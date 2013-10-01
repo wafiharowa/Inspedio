@@ -10,7 +10,6 @@ import com.inspedio.enums.ScreenOrientation;
 import com.inspedio.system.helper.InsCache;
 import com.inspedio.system.helper.InsCamera;
 import com.inspedio.system.helper.InsKeys;
-import com.inspedio.system.helper.InsLoader;
 import com.inspedio.system.helper.InsPointer;
 import com.inspedio.system.helper.InsSave;
 import com.inspedio.system.helper.InsStats;

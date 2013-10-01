@@ -1,8 +1,8 @@
 package com.inspedio.samples;
 
 import com.inspedio.actions.MoveTo;
-import com.inspedio.entity.InsAnimatedSprite;
 import com.inspedio.entity.InsState;
+import com.inspedio.entity.sprite.InsAnimatedSprite;
 import com.inspedio.system.core.InsGlobal;
 
 public class SampleSpriteState extends InsState{

@@ -1,7 +1,8 @@
-package com.inspedio.entity;
+package com.inspedio.entity.sprite;
 
 import java.util.Vector;
 
+import com.inspedio.entity.InsSprite;
 import com.inspedio.entity.primitive.InsCallback;
 import com.inspedio.system.core.InsGlobal;
 import com.inspedio.system.helper.extension.InsAnim;

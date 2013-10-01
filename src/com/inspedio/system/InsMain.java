@@ -1,4 +1,4 @@
-package com.inspedio.system.core;
+package com.inspedio.system;
 
 import javax.microedition.lcdui.Display;
 import javax.microedition.midlet.MIDlet;
@@ -6,7 +6,9 @@ import javax.microedition.midlet.MIDletStateChangeException;
 
 import com.inspedio.entity.InsState;
 import com.inspedio.enums.ScreenOrientation;
-import com.inspedio.system.helper.InsLoader;
+import com.inspedio.system.core.InsGame;
+import com.inspedio.system.core.InsGlobal;
+import com.inspedio.system.core.InsLoader;
 import com.inspedio.system.helper.InsSave;
 
 

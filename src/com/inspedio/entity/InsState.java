@@ -49,7 +49,7 @@ public abstract class InsState extends InsGroup{
 	 */
 	public void finishCreate()
 	{
-		
+		InsGlobal.loadProgress = 100;
 	}
 	
 	/**

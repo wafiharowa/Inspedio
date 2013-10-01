@@ -15,4 +15,7 @@ public class HAlignment extends InsEnum{
 		this.anchor = AnchorPoint;
 	}
 
+	public static int getTextAnchor(VAlignment Align){
+		return Align.anchor;
+	}
 }

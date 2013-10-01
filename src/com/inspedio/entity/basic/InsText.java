@@ -6,6 +6,7 @@ import javax.microedition.lcdui.Graphics;
 import com.inspedio.entity.InsBasic;
 import com.inspedio.enums.FontSize;
 import com.inspedio.enums.FontStyle;
+import com.inspedio.enums.VAlignment;
 import com.inspedio.system.core.InsCanvas;
 
 /**
@@ -48,7 +49,7 @@ public class InsText extends InsBasic{
 		{
 			g.setFont(this.font);
 			g.setColor(this.color);
-			g.drawString(this.text, this.position.x, this.position.y, this.align.horizontal.getValue() | Graphics.BASELINE);
+			g.drawString(this.text, this.position.x, this.position.y, VAlignment.getTextAnchor(this.align.vertical) | this.align.horizontal.anchor);
 		}
 	}
 }

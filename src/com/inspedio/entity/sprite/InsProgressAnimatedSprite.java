@@ -2,36 +2,22 @@ package com.inspedio.entity.sprite;
 
 import javax.microedition.lcdui.Graphics;
 
-import com.inspedio.entity.InsSprite;
 import com.inspedio.entity.primitive.InsPoint;
 import com.inspedio.enums.HAlignment;
 import com.inspedio.enums.VAlignment;
 import com.inspedio.system.helper.InsUtil;
 import com.inspedio.system.helper.extension.InsAlignment;
 
-public class InsProgressSprite extends InsSprite{
+public class InsProgressAnimatedSprite extends InsAnimatedSprite{
 
 	InsPoint progress;
 	public InsAlignment stretch;
 	
-	/**
-	 * @param	Stretch		Direction the stretch are started
-	 */
-	public InsProgressSprite(String spritePath) {
-		super(spritePath);
-		this.initProgress();
-	}
-	
-	public InsProgressSprite(String spritePath, int X, int Y) {
-		super(spritePath, X, Y);
-		this.initProgress();
-	}
-	
-	public InsProgressSprite(String spritePath, int X, int Y, int Width, int Height){
+	public InsProgressAnimatedSprite(String spritePath, int X, int Y, int Width, int Height) {
 		super(spritePath, X, Y, Width, Height);
 		this.initProgress();
 	}
-	
+
 	protected void initProgress(){
 		this.progress = new InsPoint(100, 100);
 		this.stretch = new InsAlignment(HAlignment.LEFT, VAlignment.TOP);
@@ -74,5 +60,4 @@ public class InsProgressSprite extends InsSprite{
 			}	
 		}
 	}
-
 }

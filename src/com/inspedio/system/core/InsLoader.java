@@ -1,10 +1,9 @@
-package com.inspedio.system.helper;
+package com.inspedio.system.core;
 
 
 import javax.microedition.lcdui.Graphics;
 
 import com.inspedio.entity.InsState;
-import com.inspedio.system.core.InsGlobal;
 
 /**
  * InsLoader handles Loading State progressively.<br>
@@ -100,6 +99,7 @@ public class InsLoader extends InsState implements Runnable{
 		}
 		
 		InsGlobal.game.requestedState.create();
+		InsGlobal.game.requestedState.finishCreate();
 	}
 	
 	public void draw(Graphics g)

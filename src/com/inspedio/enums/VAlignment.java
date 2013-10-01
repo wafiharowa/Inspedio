@@ -14,4 +14,12 @@ public class VAlignment extends InsEnum{
 		super(Name, Value);
 		this.anchor = AnchorPoint;
 	}
+	
+	public static int getTextAnchor(VAlignment Align){
+		if(Align == VAlignment.MIDDLE){
+			return Graphics.BASELINE;
+		}
+		
+		return Align.anchor;
+	}
 }
