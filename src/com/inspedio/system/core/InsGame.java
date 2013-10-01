@@ -145,6 +145,7 @@ public class InsGame implements Runnable {
 		InsGlobal.save = SaveLoad;
 		this.requestedState = InitialState;
 		this.loader = Loader;
+		this.loader.create();
 		this.loader.init();
 		
 		this.idealFPS = FPS;
