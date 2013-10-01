@@ -1,8 +1,6 @@
 package com.inspedio.system.core;
 
 
-import javax.microedition.lcdui.Graphics;
-
 import com.inspedio.entity.InsState;
 
 /**
@@ -11,7 +9,7 @@ import com.inspedio.entity.InsState;
  * @author Hyude
  * @version 1.0
  */
-public class InsLoader extends InsState implements Runnable{
+public abstract class InsLoader extends InsState implements Runnable{
 
 	/**
 	 * Pointer to Thread
@@ -32,15 +30,14 @@ public class InsLoader extends InsState implements Runnable{
 		super();
 	}
 	
-	public void create()
-	{
+	public void init(){
 		this.currentProgress = 0;
 		this.maxIncrement = 5;
 		InsGlobal.loadProgress = 0;
-		this.showProgress();
+		this.progressChanged(this.currentProgress);
 	}
 	
-	public void init()
+	public void start()
 	{
 		this.currentProgress = 0;
 		InsGlobal.loadProgress = 0;
@@ -59,7 +56,7 @@ public class InsLoader extends InsState implements Runnable{
 		super.update();
 		if(this.currentProgress == 100)
 		{
-			this.showProgress();
+			this.progressChanged(this.currentProgress);
 			this.finishLoad();
 			InsGlobal.loadProgress = 0;
 		}
@@ -70,14 +67,14 @@ public class InsLoader extends InsState implements Runnable{
 			{
 				this.currentProgress += Math.min(this.maxIncrement, incr);
 			}
-			this.showProgress();
+			this.progressChanged(this.currentProgress);
 		}
 	}
 	
-	public void showProgress()
-	{
-		
-	}
+	/**
+	 * Changes loading depend on current progress
+	 */
+	public abstract void progressChanged(int CurrentProgress);
 	
 	public void finishLoad()
 	{
@@ -101,14 +98,5 @@ public class InsLoader extends InsState implements Runnable{
 		InsGlobal.game.requestedState.create();
 		InsGlobal.game.requestedState.finishCreate();
 	}
-	
-	public void draw(Graphics g)
-	{
-		g.setColor(0x000000);
-		g.drawRect(0, 0, InsGlobal.screenWidth, InsGlobal.screenHeight);
-		g.setColor(0xFFFFFF);
-		g.drawString(currentProgress + " %", InsGlobal.screenWidth / 2, InsGlobal.screenHeight / 2, Graphics.BASELINE | Graphics.HCENTER);
-	}
-
 	
 }
