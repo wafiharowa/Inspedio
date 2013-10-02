@@ -25,6 +25,7 @@ public class SampleActionState extends InsState{
 		
 		this.obj = new InsShape(midX, midY - 50, 50, 50);
 		this.obj.setColor(InsCanvas.COLOR_RED, true);
+		this.obj.setCircle(25, 0, 360);
 		
 		this.sequence = new InsButton(midX - 60, midY + 50, 100, 60, "SEQUENCE", InsCanvas.COLOR_GREEN);
 		this.sequence.setCaption("SEQUENCE", InsCanvas.COLOR_BLACK, FontSize.SMALL, FontStyle.PLAIN);
