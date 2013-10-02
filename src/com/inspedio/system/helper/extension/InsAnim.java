@@ -69,10 +69,12 @@ public class InsAnim {
 				this.callback.call();
 			}
 		}
+		
 		if(this.currentDelay < this.frameDelay){
 			this.currentDelay++;
 		} else {
 			this.currentFrame = (this.currentFrame + 1) % this.frameCount;
+			this.currentDelay = 0;
 		}
 		return this.frames[this.currentFrame];
 	}
