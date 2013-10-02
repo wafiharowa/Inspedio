@@ -78,8 +78,8 @@ public class InsImage{
 		this.frameWidth = frameWidth;
 		this.frameHeight = frameHeight;
 		this.filepath = imagePath;
-		this.frameCountX = this.size.width / this.frameWidth;
-		this.frameCountY = this.size.height / this.frameWidth;
+		this.frameCountX = (int) (this.size.width / this.frameWidth);
+		this.frameCountY = (int) (this.size.height / this.frameHeight);
 		this.frameTotal = this.frameCountX * this.frameCountY;
 	}
 	
