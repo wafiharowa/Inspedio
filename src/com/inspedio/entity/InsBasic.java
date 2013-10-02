@@ -128,11 +128,20 @@ public class InsBasic extends InsAtom{
 	}
 	
 	public void appendAction(InsAction Action){
-		this.setAction(Sequence.create(new InsAction[] {this.action, Action}, null));
+		if(this.action != null){
+			this.setAction(Sequence.create(new InsAction[] {this.action, Action}, null));
+		} else {
+			this.setAction(Action);
+		}
 	}
 	
 	public void combineAction(InsAction Action){
-		this.setAction(Parallel.create(new InsAction[] {this.action, Action}, null));
+		if(this.action != null){
+			this.setAction(Parallel.create(new InsAction[] {this.action, Action}, null));
+		} else {
+			this.setAction(Action);
+		}
+		
 	}
 	
 	public void unsetAction(InsAction Action){
