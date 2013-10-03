@@ -2,15 +2,15 @@ package com.inspedio.enums;
 
 public class SaveDataType extends InsEnum{
 
-	public static SaveDataType BOOLEAN = new SaveDataType("BOOLEAN", 0);
-	public static SaveDataType INTEGER = new SaveDataType("INTEGER", 1);
-	public static SaveDataType FLOAT = new SaveDataType("FLOAT", 2);
-	public static SaveDataType STRING = new SaveDataType("STRING", 3);
+	public static final SaveDataType BOOLEAN = new SaveDataType("BOOLEAN", 0);
+	public static final SaveDataType INTEGER = new SaveDataType("INTEGER", 1);
+	public static final SaveDataType FLOAT = new SaveDataType("FLOAT", 2);
+	public static final SaveDataType STRING = new SaveDataType("STRING", 3);
 	
-	public static SaveDataType BOOLEAN_ARRAY = new SaveDataType("BOOLEAN_ARRAY", 4);
-	public static SaveDataType INTEGER_ARRAY = new SaveDataType("INTEGER_ARRAY", 5);
-	public static SaveDataType FLOAT_ARRAY = new SaveDataType("FLOAT_ARRAY", 6);
-	public static SaveDataType STRING_ARRAY = new SaveDataType("STRING_ARRAY", 7);
+	public static final SaveDataType BOOLEAN_ARRAY = new SaveDataType("BOOLEAN_ARRAY", 4);
+	public static final SaveDataType INTEGER_ARRAY = new SaveDataType("INTEGER_ARRAY", 5);
+	public static final SaveDataType FLOAT_ARRAY = new SaveDataType("FLOAT_ARRAY", 6);
+	public static final SaveDataType STRING_ARRAY = new SaveDataType("STRING_ARRAY", 7);
 	
 	protected SaveDataType(String Name, int Value) {
 		super(Name, Value);

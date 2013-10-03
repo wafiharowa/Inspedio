@@ -18,7 +18,7 @@ public abstract class InsAction {
 
 	protected InsAction(int FrameCount, InsCallback Callback){
 		this.callback = Callback;
-		this.frameCount = FrameCount;
+		this.frameCount = FrameCount - 1;
 	}
 	
 	public void setTarget(InsBasic Target){
