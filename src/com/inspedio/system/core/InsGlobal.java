@@ -111,6 +111,8 @@ public class InsGlobal{
 	 */
 	public static ScreenOrientation screenOrientation;
 	
+	public static boolean isScreenRotated;
+	
 	
 	public static int level;
 	public static int stage;
