@@ -160,8 +160,9 @@ public class InsGroup extends InsAtom{
 
 	public boolean onPointerPressed(int X, int Y) {
 		for(int i = this.members.size()-1; i >= 0; i--){
-			if(((InsAtom)this.members.elementAt(i)).onPointerPressed(X, Y)){
-				break;
+			InsAtom atom = (InsAtom) this.members.elementAt(i);
+			if(atom.exists && atom.active){
+				if(atom.onPointerPressed(X, Y))break;
 			}
 		}
 		return false;
@@ -169,8 +170,9 @@ public class InsGroup extends InsAtom{
 
 	public boolean onPointerReleased(int X, int Y) {
 		for(int i = this.members.size()-1; i >= 0; i--){
-			if(((InsAtom)this.members.elementAt(i)).onPointerReleased(X, Y)){
-				break;
+			InsAtom atom = (InsAtom) this.members.elementAt(i);
+			if(atom.exists && atom.active){
+				if(atom.onPointerReleased(X, Y))break;
 			}
 		}
 		return false;
@@ -178,8 +180,9 @@ public class InsGroup extends InsAtom{
 
 	public boolean onPointerDragged(int X, int Y) {
 		for(int i = this.members.size()-1; i >= 0; i--){
-			if(((InsAtom)this.members.elementAt(i)).onPointerDragged(X, Y)){
-				break;
+			InsAtom atom = (InsAtom) this.members.elementAt(i);
+			if(atom.exists && atom.active){
+				if(atom.onPointerDragged(X, Y))break;
 			}
 		}
 		return false;
