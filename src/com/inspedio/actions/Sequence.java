@@ -19,9 +19,7 @@ public class Sequence extends InsAction{
 	protected Sequence(InsAction[] ActionList, InsCallback Callback){
 		super(0, Callback);
 		this.actions = ActionList;
-		for(int i = 0; i < this.actions.length; i++){
-			this.frameCount += this.actions[i].getFrameCount();
-		}
+		this.currentAction = 0;
 	}
 	
 	public int act() {
@@ -30,10 +28,9 @@ public class Sequence extends InsAction{
 				this.frameCount = this.actions[this.currentAction].act();
 				if(frameCount == -1){
 					this.currentAction++;
-					this.frameCount = this.actions[this.currentAction].getFrameCount();
 				}
-			} else if(this.currentAction == this.actions.length - 1){
-				this.actions[this.currentAction].act();
+			} else if(this.currentAction == (this.actions.length - 1)){
+				this.frameCount = this.actions[this.currentAction].act();
 				if(frameCount == -1){
 					this.finishAction();
 				}

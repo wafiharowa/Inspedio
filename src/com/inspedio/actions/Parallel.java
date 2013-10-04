@@ -25,11 +25,19 @@ public class Parallel extends InsAction{
 	
 	public int act() {
 		for(int i = 0; i < this.actions.length; i++){
-			this.frameCount = Math.max(this.frameCount, this.actions[i].act());
+			this.actions[i].act();
 		}
 		
-		if(frameCount == -1){
-			this.finishAction();
+		if(frameCount > 0){
+			for(int i = 0; i < this.actions.length; i++){
+				this.actions[i].act();
+			}
+			frameCount--;
+		} else if(frameCount == 0){
+			for(int i = 0; i < this.actions.length; i++){
+				this.actions[i].act();
+			}
+			finishAction();
 		}
 		return frameCount;
 	}
