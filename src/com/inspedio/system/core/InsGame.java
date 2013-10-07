@@ -279,27 +279,33 @@ public class InsGame implements Runnable {
 			long curtime = System.currentTimeMillis();
 			this.updateKeyState();
 			this.updatePointerState();
-			if(!this.state.deleted)
-			{
-				if(this.switchStateRequested)
+			if(!InsGlobal.paused){
+				if(!this.state.deleted)
 				{
-					this.switchState(this.switchStateUseLoader);
-					this.switchStateRequested = false;
-					this.switchStateUseLoader = false;
+					if(this.switchStateRequested)
+					{
+						this.switchState(this.switchStateUseLoader);
+						this.switchStateRequested = false;
+						this.switchStateUseLoader = false;
+					}
+					if(this.leftSoftKeyPressed)
+					{
+						this.state.onLeftSoftKey();
+						this.leftSoftKeyPressed = false;
+					}
+					if(this.rightSoftKeyPressed)
+					{
+						this.state.onRightSoftKey();
+						this.rightSoftKeyPressed = false;
+					}
+					this.state.preUpdate();
+					this.state.update();
+					this.state.postUpdate();
 				}
-				if(this.leftSoftKeyPressed)
-				{
-					this.state.onLeftSoftKey();
-					this.leftSoftKeyPressed = false;
+			} else {
+				if(InsGlobal.keys.isAnythingPressed() || InsGlobal.pointer.isAnythingPressed()){
+					InsGlobal.resumeGame();
 				}
-				if(this.rightSoftKeyPressed)
-				{
-					this.state.onRightSoftKey();
-					this.rightSoftKeyPressed = false;
-				}
-				this.state.preUpdate();
-				this.state.update();
-				this.state.postUpdate();
 			}
 			InsGlobal.stats.updateCount++;
 			InsGlobal.stats.updateTime += (System.currentTimeMillis() - curtime);
@@ -342,6 +348,9 @@ public class InsGame implements Runnable {
 			if(InsGlobal.displayFPS)
 			{
 				this.canvas.drawFPS();
+			}
+			if(InsGlobal.paused){
+				this.canvas.drawPauseText();
 			}
 			this.canvas.flushGraphics();
 			InsGlobal.stats.renderCount++;

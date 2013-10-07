@@ -64,7 +64,7 @@ public abstract class InsState extends InsGroup{
 	}
 	
 	/**
-	 * Pause State.
+	 * Pause State. Override this to implement your Pause Behavior
 	 */
 	public void pause()
 	{
@@ -72,7 +72,7 @@ public abstract class InsState extends InsGroup{
 	}
 	
 	/**
-	 * Resume State
+	 * Resume State. Override this to implement your Resume Behavior
 	 */
 	public void resume()
 	{

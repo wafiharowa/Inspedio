@@ -38,6 +38,7 @@ public class InsCanvas extends GameCanvas{
 	private boolean fixedOrientation = false;
 	
 	public static final Font defaultFont = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL);
+	public static final Font infoFont = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE);
 	
 	public InsGame game;
 	protected Graphics graphic;
@@ -169,13 +170,31 @@ public class InsCanvas extends GameCanvas{
 	 */
 	public void drawFPS()
 	{
-		int offset = 15;
+		int offset = InsCanvas.defaultFont.getHeight();
 		this.bufferGraphics.setColor(InsGlobal.FPS_COLOR);
 		this.bufferGraphics.setFont(InsCanvas.defaultFont);
-		this.bufferGraphics.drawString("FPS : " + InsGlobal.stats.currentUPS + " / " + InsGlobal.stats.currentFPS + " / " + InsGlobal.stats.currentFrameSkip, 0, deviceHeight - (4 * offset), (Graphics.TOP|Graphics.LEFT));
-		this.bufferGraphics.drawString("Process : " + InsGlobal.stats.currentUpdateTime + " / " + InsGlobal.stats.currentRenderTime, 0, deviceHeight - (3 * offset), (Graphics.TOP|Graphics.LEFT));
-		this.bufferGraphics.drawString("Sleep : " + InsGlobal.stats.currentSleepTime, 0, deviceHeight - (2 * offset), (Graphics.TOP|Graphics.LEFT));
-		this.bufferGraphics.drawString("Time : " + InsGlobal.stats.currentGameTime, 0, deviceHeight - offset, (Graphics.TOP|Graphics.LEFT));
+		this.bufferGraphics.drawString("FPS : " + InsGlobal.stats.currentUPS + " / " + InsGlobal.stats.currentFPS + " / " + InsGlobal.stats.currentFrameSkip, 5, deviceHeight - (4 * offset), (Graphics.TOP|Graphics.LEFT));
+		this.bufferGraphics.drawString("Process : " + InsGlobal.stats.currentUpdateTime + " / " + InsGlobal.stats.currentRenderTime, 5, deviceHeight - (3 * offset), (Graphics.TOP|Graphics.LEFT));
+		this.bufferGraphics.drawString("Sleep : " + InsGlobal.stats.currentSleepTime, 5, deviceHeight - (2 * offset), (Graphics.TOP|Graphics.LEFT));
+		this.bufferGraphics.drawString("Time : " + InsGlobal.stats.currentGameTime, 5, deviceHeight - offset, (Graphics.TOP|Graphics.LEFT));
+	}
+	
+	public void drawPauseText(){
+		this.bufferGraphics.setColor(0x555555);
+		this.bufferGraphics.fillRoundRect((InsGlobal.screenWidth - 200) / 2, (InsGlobal.screenHeight - 140) / 2, 200, 140, 40, 40);
+		this.bufferGraphics.setColor(COLOR_WHITE);
+		this.bufferGraphics.fillRoundRect(((InsGlobal.screenWidth - 200) / 2) + 5, ((InsGlobal.screenHeight - 140) / 2) + 5, 190, 130, 40, 40);
+		this.bufferGraphics.setColor(COLOR_BLACK);
+		this.bufferGraphics.setFont(InsCanvas.infoFont);
+		this.bufferGraphics.drawString("GAME IS PAUSED", InsGlobal.screenWidth / 2, (InsGlobal.screenHeight / 2) - 20, Graphics.BOTTOM | Graphics.HCENTER);
+		this.bufferGraphics.setFont(InsCanvas.defaultFont);
+		if(InsGlobal.hasTouchScreen){
+			this.bufferGraphics.drawString("Touch anywhere", InsGlobal.screenWidth / 2, (InsGlobal.screenHeight / 2), Graphics.TOP | Graphics.HCENTER);
+			this.bufferGraphics.drawString("to continue", InsGlobal.screenWidth / 2, (InsGlobal.screenHeight / 2) + 20, Graphics.TOP | Graphics.HCENTER);
+		} else {
+			this.bufferGraphics.drawString("Press anything", InsGlobal.screenWidth / 2, (InsGlobal.screenHeight / 2), Graphics.TOP | Graphics.HCENTER);
+			this.bufferGraphics.drawString("to continue", InsGlobal.screenWidth / 2, (InsGlobal.screenHeight / 2) + 20, Graphics.TOP | Graphics.HCENTER);
+		}
 	}
 	
 	protected void hideNotify()

@@ -103,4 +103,17 @@ public class InsKeys {
 	{
 		return (!this.currentKeyState[code.getValue()] && this.lastKeyState[code.getValue()]);
 	}
+	
+	public boolean isAnythingPressed(){
+		boolean pressed = false;
+		for(int i = 0; i < KEY_COUNT; i++)
+		{
+			if(this.currentKeyState[i]){
+				pressed = true;
+				break;
+			}
+		}
+		
+		return pressed;
+	}
 }

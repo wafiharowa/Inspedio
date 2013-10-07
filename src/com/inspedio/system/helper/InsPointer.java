@@ -68,4 +68,8 @@ public class InsPointer {
 		resetEvent();
 	}
 	
+	public boolean isAnythingPressed(){
+		return (pressed.length > 0);
+	}
+	
 }
