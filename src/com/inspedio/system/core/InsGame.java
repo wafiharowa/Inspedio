@@ -7,6 +7,7 @@ import javax.microedition.midlet.MIDlet;
 
 import com.inspedio.entity.InsState;
 import com.inspedio.enums.ScreenOrientation;
+import com.inspedio.system.defaults.InspedioLogoState;
 import com.inspedio.system.helper.InsCache;
 import com.inspedio.system.helper.InsCamera;
 import com.inspedio.system.helper.InsKeys;
@@ -143,7 +144,7 @@ public class InsGame implements Runnable {
 		initGame(Mode);
 		InsGlobal.midlet = Midlet;
 		InsGlobal.save = SaveLoad;
-		this.requestedState = InitialState;
+		this.requestedState = new InspedioLogoState();
 		this.loader = Loader;
 		this.loader.create();
 		this.loader.init();
@@ -161,6 +162,7 @@ public class InsGame implements Runnable {
 		this.stop = false;
 		
 		this.switchState(false);
+		this.requestedState = InitialState;
 	}
 	
 	/**
