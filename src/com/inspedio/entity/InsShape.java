@@ -85,7 +85,7 @@ public class InsShape extends InsBasic{
 			} else if(this.shapeType == ShapeType.ROUNDED_RECT){
 				g.fillRoundRect(this.getLeft(), this.getTop(), this.size.width, this.size.height, this.roundArc.width, this.roundArc.height);
 			} else if(shapeType == ShapeType.CIRCLE){
-				g.fillArc(this.getLeft(), this.getTop(), this.size.width / 2, this.size.height / 2, this.startAngle, this.arcAngle);
+				g.fillArc(this.getLeft(), this.getTop(), this.size.width, this.size.height, this.startAngle, this.arcAngle);
 			}
 			
 			g.setColor(this.fillColor);
@@ -94,7 +94,7 @@ public class InsShape extends InsBasic{
 			} else if(this.shapeType == ShapeType.ROUNDED_RECT){
 				g.fillRoundRect(this.getLeft() + this.borderWidth, this.getTop() + this.borderWidth, this.size.width - (this.borderWidth * 2), this.size.height - (this.borderWidth * 2), this.roundArc.width, this.roundArc.height);
 			} else if(this.shapeType == ShapeType.CIRCLE){
-				g.fillArc(this.getLeft() + this.borderWidth, this.getTop() + this.borderWidth, (this.size.width / 2) - (this.borderWidth * 2), (this.size.height / 2) - (this.borderWidth * 2), this.startAngle, this.arcAngle);
+				g.fillArc(this.getLeft() + this.borderWidth, this.getTop() + this.borderWidth, this.size.width - (this.borderWidth * 2), this.size.height - (this.borderWidth * 2), this.startAngle, this.arcAngle);
 			}
 			
 		}
@@ -111,7 +111,7 @@ public class InsShape extends InsBasic{
 				}
 			} if(this.shapeType == ShapeType.CIRCLE){
 				for(int i = 0; i < this.borderWidth; i ++){
-					g.drawArc(this.getLeft() + i, this.getTop() + i, (this.size.width / 2) - (i * 2), (this.size.height / 2) - (i * 2), this.startAngle, this.arcAngle);
+					g.drawArc(this.getLeft() + i, this.getTop() + i, this.size.width - (i * 2), this.size.height - (i * 2), this.startAngle, this.arcAngle);
 				}
 			}
 		}

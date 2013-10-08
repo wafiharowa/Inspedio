@@ -46,11 +46,6 @@ public abstract class InsLoader extends InsState implements Runnable{
 		this.thread.start();
 	}
 	
-	public void preUpdate()
-	{
-		super.preUpdate();
-	}
-	
 	public void update()
 	{
 		super.update();
@@ -87,7 +82,7 @@ public abstract class InsLoader extends InsState implements Runnable{
 	public void run()
 	{
 		InsGlobal.loadProgress = 20;
-		//InsGlobal.cache.clearCache();
+		InsGlobal.cache.clearCache();
 		System.gc();
 		try {
 			Thread.sleep(200);

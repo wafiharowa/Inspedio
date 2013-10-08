@@ -10,7 +10,7 @@ import com.inspedio.system.core.InsGlobal;
 public class InspedioLogoState extends InsState{
 
 	int progress = 1;
-	int delay = 15*4*progress;
+	int delay = 15*2*progress;
 	int bgColor = 0x000000;
 	InsShape bg;
 	InsSprite logo;
@@ -31,7 +31,7 @@ public class InspedioLogoState extends InsState{
 		if(delay > 0){
 			if(delay % progress == 0){
 				if(this.bgColor < 0xFFFFFF){
-					this.bgColor += 0x040404;
+					this.bgColor += 0x080808;
 					this.bg.setColor(this.bgColor, true);
 				}
 			}
