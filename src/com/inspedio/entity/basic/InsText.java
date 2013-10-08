@@ -31,6 +31,7 @@ public class InsText extends InsBasic{
 		this.visible = true;
 		this.setPosition(X, Y);
 		this.setText(Text);
+		this.size.height = this.font.getHeight();
 	}
 	
 	public void setText(String Text)
@@ -41,6 +42,7 @@ public class InsText extends InsBasic{
 	public void setFont(int Color, FontSize Size, FontStyle Style){
 		this.font = Font.getFont(Font.FACE_SYSTEM, Style.getValue(), Size.getValue());
 		this.color = Color;
+		this.size.height = this.font.getHeight();
 	}
 		
 	public void draw(Graphics g)
@@ -49,7 +51,7 @@ public class InsText extends InsBasic{
 		{
 			g.setFont(this.font);
 			g.setColor(this.color);
-			g.drawString(this.text, this.position.x, this.position.y, VAlignment.getTextAnchor(this.align.vertical) | this.align.horizontal.anchor);
+			g.drawString(this.text, this.position.x, this.getTop(), VAlignment.TOP.anchor | this.align.horizontal.anchor);
 		}
 	}
 }
