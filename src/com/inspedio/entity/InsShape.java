@@ -4,6 +4,7 @@ import javax.microedition.lcdui.Graphics;
 
 import com.inspedio.entity.primitive.InsSize;
 import com.inspedio.enums.ShapeType;
+import com.inspedio.system.core.InsCanvas;
 import com.inspedio.system.helper.InsUtil;
 
 /**
@@ -41,8 +42,8 @@ public class InsShape extends InsBasic{
 	
 	public InsShape(int X, int Y, int Width, int Height){
 		super(X, Y, Width, Height);
-		this.setColor(0x000000, true);
-		this.setBorder(0xFFFFFF, 2);
+		this.setColor(InsCanvas.COLOR_WHITE, true);
+		this.setBorder(InsCanvas.COLOR_BLACK, 2);
 		this.setRectangle(Width, Height);
 		this.roundArc = new InsSize(10,10);
 	}

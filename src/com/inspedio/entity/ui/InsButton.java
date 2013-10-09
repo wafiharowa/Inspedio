@@ -115,7 +115,7 @@ public class InsButton extends InsShape{
 		this.caption.setFont(Color, Size, Style);
 	}
 	
-	public void setText(String Text){
+	public void setCaption(String Text){
 		this.caption.setText(Text);
 	}
 	

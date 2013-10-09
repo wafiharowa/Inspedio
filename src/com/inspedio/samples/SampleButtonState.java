@@ -27,21 +27,21 @@ public class SampleButtonState extends InsState{
 		SPRITE.setRoundedRect(140, 40, 40, 40);
 		SPRITE.setClickedCallback(new InsCallback() {
 			public void call() {
-				InsGlobal.switchState(new SampleSpriteState(), false);
+				InsGlobal.switchState(new SampleSpriteState(), true);
 			}
 		});
 		
 		FONT.setCaption("FONT", InsCanvas.COLOR_BLACK, FontSize.MEDIUM, FontStyle.ITALIC);
 		FONT.setClickedCallback(new InsCallback() {
 			public void call() {
-				InsGlobal.switchState(new SampleFontState(), false);
+				InsGlobal.switchState(new SampleFontState(), true);
 			}
 		});
 		
 		ACTION.setBorder(InsCanvas.COLOR_RED, 5);
 		ACTION.setClickedCallback(new InsCallback() {
 			public void call() {
-				InsGlobal.switchState(new SampleActionState(), false);
+				InsGlobal.switchState(new SampleActionState(), true);
 			}
 		});
 		

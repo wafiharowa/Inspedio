@@ -27,7 +27,7 @@ public class InsText extends InsBasic{
 	{
 		super();
 		this.font = InsCanvas.defaultFont;
-		this.color = InsCanvas.COLOR_WHITE;
+		this.color = InsCanvas.COLOR_BLACK;
 		this.visible = true;
 		this.setPosition(X, Y);
 		this.setText(Text);
