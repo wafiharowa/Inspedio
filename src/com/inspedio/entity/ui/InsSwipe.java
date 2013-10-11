@@ -81,6 +81,9 @@ public class InsSwipe extends InsShape{
 		return false;
 	}
 	
+	/**
+	 * Set Tolerance Value (minimum distance swiped to consider valid)
+	 */
 	public void setTolerance(int Val){
 		this.tolerance = Val;
 	}
