@@ -22,13 +22,21 @@ import com.inspedio.system.helper.extension.InsAlignment;
 public class InsBasic extends InsAtom{
 
 	// ATTRIBUTE
-	
+	/**
+	 * X and Y coordinate of this object
+	 */
 	public InsPoint position;
-	
+	/**
+	 * Width and Height coordinate of this object
+	 */
 	public InsSize size;
-	
+	/**
+	 * Vertical and Horizontal alignment of this object
+	 */
 	public InsAlignment align;
-	
+	/**
+	 * Action currently assigned to this object
+	 */
 	protected InsAction action;
 	
 	/**

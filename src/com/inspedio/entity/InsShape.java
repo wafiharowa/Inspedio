@@ -3,6 +3,7 @@ package com.inspedio.entity;
 import javax.microedition.lcdui.Graphics;
 
 import com.inspedio.entity.primitive.InsSize;
+import com.inspedio.enums.BorderLayout;
 import com.inspedio.enums.ShapeType;
 import com.inspedio.system.core.InsCanvas;
 import com.inspedio.system.helper.InsUtil;
@@ -35,15 +36,21 @@ public class InsShape extends InsBasic{
 	 * The width of Border
 	 */
 	protected int borderWidth;
+	/**
+	 * Border Layout for this shape, either Inside, Center, or Outside
+	 */
+	protected BorderLayout borderLayout;
 	
 	protected InsSize roundArc;
 	protected int startAngle;
 	protected int arcAngle;
 	
+	private int borderGap;
+	
 	public InsShape(int X, int Y, int Width, int Height){
 		super(X, Y, Width, Height);
 		this.setColor(InsCanvas.COLOR_WHITE, true);
-		this.setBorder(InsCanvas.COLOR_BLACK, 2);
+		this.setBorder(InsCanvas.COLOR_BLACK, 2, BorderLayout.INSIDE);
 		this.setRectangle(Width, Height);
 		this.roundArc = new InsSize(10,10);
 	}
@@ -53,9 +60,15 @@ public class InsShape extends InsBasic{
 		this.isFill = IsFill;
 	}
 	
-	public void setBorder(int Color, int Width){
+	public void setBorder(int Color, int Width, BorderLayout layout){
 		this.borderColor = Color;
 		this.borderWidth = Width;
+		this.borderLayout = layout;
+		this.borderGap = this.borderLayout.getValue() * (this.borderWidth / 2);
+	}
+	
+	public void setBorder(int Color, int Width){
+		this.setBorder(Color, Width, this.borderLayout);
 	}
 	
 	public void setRoundedRect(int Width, int Height, int ArcWidth, int ArcHeight){
@@ -82,20 +95,20 @@ public class InsShape extends InsBasic{
 		{
 			g.setColor(this.borderColor);
 			if(this.shapeType == ShapeType.RECTANGLE){
-				g.fillRect(this.getLeft(), this.getTop(), this.size.width, this.size.height);
+				g.fillRect(this.getLeft() - this.borderGap, this.getTop() - this.borderGap, this.size.width + (2 * this.borderGap), this.size.height  + (2 * this.borderGap));
 			} else if(this.shapeType == ShapeType.ROUNDED_RECT){
-				g.fillRoundRect(this.getLeft(), this.getTop(), this.size.width, this.size.height, this.roundArc.width, this.roundArc.height);
+				g.fillRoundRect(this.getLeft() - this.borderGap, this.getTop() - this.borderGap, this.size.width  + (2 * this.borderGap), this.size.height  + (2 * this.borderGap), this.roundArc.width, this.roundArc.height );
 			} else if(shapeType == ShapeType.CIRCLE){
-				g.fillArc(this.getLeft(), this.getTop(), this.size.width, this.size.height, this.startAngle, this.arcAngle);
+				g.fillArc(this.getLeft() - this.borderGap, this.getTop() - this.borderGap, this.size.width  + (2 * this.borderGap), this.size.height  + (2 * this.borderGap), this.startAngle, this.arcAngle);
 			}
 			
 			g.setColor(this.fillColor);
 			if(this.shapeType == ShapeType.RECTANGLE){
-				g.fillRect(this.getLeft() + this.borderWidth, this.getTop() + this.borderWidth, this.size.width - (this.borderWidth * 2), this.size.height - (this.borderWidth * 2));
+				g.fillRect(this.getLeft() + this.borderWidth - this.borderGap, this.getTop() + this.borderWidth - this.borderGap, this.size.width - (this.borderWidth * 2) + (2 * this.borderGap), this.size.height - (this.borderWidth * 2) + (2 * this.borderGap));
 			} else if(this.shapeType == ShapeType.ROUNDED_RECT){
-				g.fillRoundRect(this.getLeft() + this.borderWidth, this.getTop() + this.borderWidth, this.size.width - (this.borderWidth * 2), this.size.height - (this.borderWidth * 2), this.roundArc.width, this.roundArc.height);
+				g.fillRoundRect(this.getLeft() + this.borderWidth - this.borderGap, this.getTop() + this.borderWidth - this.borderGap, this.size.width - (this.borderWidth * 2) + (2 * this.borderGap), this.size.height - (this.borderWidth * 2) + (2 * this.borderGap), this.roundArc.width, this.roundArc.height);
 			} else if(this.shapeType == ShapeType.CIRCLE){
-				g.fillArc(this.getLeft() + this.borderWidth, this.getTop() + this.borderWidth, this.size.width - (this.borderWidth * 2), this.size.height - (this.borderWidth * 2), this.startAngle, this.arcAngle);
+				g.fillArc(this.getLeft() + this.borderWidth - this.borderGap, this.getTop() + this.borderWidth - this.borderGap, this.size.width - (this.borderWidth * 2) + (2 * this.borderGap), this.size.height - (this.borderWidth * 2) + (2 * this.borderGap), this.startAngle, this.arcAngle);
 			}
 			
 		}
@@ -104,15 +117,15 @@ public class InsShape extends InsBasic{
 			g.setColor(this.borderColor);
 			if(this.shapeType == ShapeType.RECTANGLE){
 				for(int i = 0; i < this.borderWidth; i ++){
-					g.drawRect(this.getLeft() + i, this.getTop() + i, this.size.width - (i * 2), this.size.height - (i * 2));
+					g.drawRect(this.getLeft() + i - this.borderGap, this.getTop() + i - this.borderGap, this.size.width - (i * 2) + (2 * this.borderGap), this.size.height - (i * 2) + (2 * this.borderGap));
 				}
 			} if(this.shapeType == ShapeType.ROUNDED_RECT){
 				for(int i = 0; i < this.borderWidth; i ++){
-					g.drawRoundRect(this.getLeft() + i, this.getTop() + i, this.size.width - (i * 2), this.size.height - (i * 2), this.roundArc.width, this.roundArc.height);
+					g.drawRoundRect(this.getLeft() + i - this.borderGap, this.getTop() + i - this.borderGap, this.size.width - (i * 2) + (2 * this.borderGap), this.size.height - (i * 2) + (2 * this.borderGap), this.roundArc.width - (i*2), this.roundArc.height - (i*2));
 				}
 			} if(this.shapeType == ShapeType.CIRCLE){
 				for(int i = 0; i < this.borderWidth; i ++){
-					g.drawArc(this.getLeft() + i, this.getTop() + i, this.size.width - (i * 2), this.size.height - (i * 2), this.startAngle, this.arcAngle);
+					g.drawArc(this.getLeft() + i - this.borderGap, this.getTop() + i - this.borderGap, this.size.width - (i * 2) + (2 * this.borderGap), this.size.height - (i * 2) + (2 * this.borderGap), this.startAngle, this.arcAngle);
 				}
 			}
 		}
