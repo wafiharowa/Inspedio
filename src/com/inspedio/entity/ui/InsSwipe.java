@@ -22,6 +22,8 @@ public class InsSwipe extends InsShape{
 	 */
 	public boolean onSwipedReturn = false;
 	
+	public int  tolerance = 40;
+	
 	public InsSwipe(){
 		this(0, 0, 0, 0);
 	}
@@ -68,14 +70,18 @@ public class InsSwipe extends InsShape{
 	
 	public boolean evaluate(){
 		int dX = endPoint.x - startPoint.x;
-		if(dX > 0){
+		if(dX >= tolerance){
 			this.onSwipeRight.call();
 			return onSwipedReturn;
-		} else if(dX < 0){
+		} else if(dX <= -tolerance){
 			this.onSwipeLeft.call();
 			return onSwipedReturn;
 		}
 		
 		return false;
+	}
+	
+	public void setTolerance(int Val){
+		this.tolerance = Val;
 	}
 }
