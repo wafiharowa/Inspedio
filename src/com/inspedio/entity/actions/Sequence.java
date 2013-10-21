@@ -1,4 +1,4 @@
-package com.inspedio.actions;
+package com.inspedio.entity.actions;
 
 import com.inspedio.entity.InsAction;
 import com.inspedio.entity.InsBasic;
@@ -22,12 +22,17 @@ public class Sequence extends InsAction{
 		this.currentAction = 0;
 	}
 	
+	public static Sequence create(InsAction[] ActionList, InsCallback Callback){
+		return new Sequence(ActionList, Callback);
+	}
+	
 	public int act() {
 		if(this.actions.length > 0){
 			if(this.currentAction < this.actions.length - 1){
 				this.remainingCount = this.actions[this.currentAction].act();
 				if(remainingCount == -1){
 					this.currentAction++;
+					this.remainingCount = 1;
 				}
 			} else if(this.currentAction == (this.actions.length - 1)){
 				this.remainingCount = this.actions[this.currentAction].act();
@@ -48,10 +53,11 @@ public class Sequence extends InsAction{
 		}
 	}
 	
-	public static Sequence create(InsAction[] ActionList, InsCallback Callback){
-		return new Sequence(ActionList, Callback);
+	public void reset(){
+		super.reset();
+		for(int i = 0; i < this.actions.length; i++){
+			this.actions[i].reset();
+		}
 	}
-	
-	
 
 }

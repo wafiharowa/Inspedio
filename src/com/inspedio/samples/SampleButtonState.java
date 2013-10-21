@@ -53,6 +53,11 @@ public class SampleButtonState extends InsState{
 		});
 		
 		EXIT.setBorder(InsCanvas.COLOR_BLACK, 6, BorderLayout.CENTER);
+		EXIT.setClickedCallback(new InsCallback() {
+			public void call() {
+				InsGlobal.exitGame();
+			}
+		});
 		
 		this.add(this.SPRITE);
 		this.add(this.FONT);

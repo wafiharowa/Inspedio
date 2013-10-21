@@ -1,4 +1,4 @@
-package com.inspedio.actions;
+package com.inspedio.entity.actions;
 
 import com.inspedio.entity.InsAction;
 import com.inspedio.entity.primitive.InsCallback;
@@ -31,8 +31,8 @@ public class MoveBy extends InsAction{
 		super(FrameCount, Callback);
 		this.distanceX = DistanceX;
 		this.distanceY = DistanceY;
-		this.stepX = (double) this.distanceX / (double) this.remainingCount;
-		this.stepY = (double) this.distanceY / (double) this.remainingCount;
+		this.stepX = (double) this.distanceX / (double) FrameCount;
+		this.stepY = (double) this.distanceY / (double) FrameCount;
 		this.reset();
 	}
 	
@@ -45,7 +45,7 @@ public class MoveBy extends InsAction{
 			this.move(stepX, stepY);
 			remainingCount--;
 		} else if(remainingCount == 0){
-			this.move(distanceX, distanceY);
+			this.move(stepX, stepY);
 			finishAction();
 		}
 		return remainingCount;
@@ -67,7 +67,7 @@ public class MoveBy extends InsAction{
 		}
 	}
 	
-	protected void reset(){
+	public void reset(){
 		super.reset();
 		this.remainingX = this.distanceX;
 		this.remainingY = this.distanceY;

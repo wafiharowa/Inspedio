@@ -1,8 +1,9 @@
-package com.inspedio.actions;
+package com.inspedio.entity.actions;
 
 import com.inspedio.entity.InsAction;
 import com.inspedio.entity.InsBasic;
 import com.inspedio.entity.primitive.InsCallback;
+import com.inspedio.system.helper.InsUtil;
 
 /**
  * Execute Several Action in the same Time.<br>
@@ -16,28 +17,23 @@ public class Parallel extends InsAction{
 	protected InsAction[] actions;
 	
 	protected Parallel(InsAction[] ActionList, InsCallback Callback){
-		super(-1, Callback);
+		super(0, Callback);
 		this.actions = ActionList;
-		for(int i = 0; i < this.actions.length; i++){
-			this.remainingCount = Math.max(this.remainingCount, this.actions[i].getRemainingCount());
-		}
+	}
+	
+	public static Parallel create(InsAction[] ActionList, InsCallback Callback){
+		return new Parallel(ActionList, Callback);
 	}
 	
 	public int act() {
+		remainingCount = -1;
 		for(int i = 0; i < this.actions.length; i++){
-			this.actions[i].act();
+			if(this.actions[i].active){
+				remainingCount = InsUtil.Max(this.actions[i].act(), remainingCount);
+			}
 		}
-		
-		if(remainingCount > 0){
-			for(int i = 0; i < this.actions.length; i++){
-				this.actions[i].act();
-			}
-			remainingCount--;
-		} else if(remainingCount == 0){
-			for(int i = 0; i < this.actions.length; i++){
-				this.actions[i].act();
-			}
-			finishAction();
+		if(remainingCount == -1){
+			this.finishAction();
 		}
 		return remainingCount;
 	}
@@ -49,8 +45,11 @@ public class Parallel extends InsAction{
 		}
 	}
 	
-	public static Parallel create(InsAction[] ActionList, InsCallback Callback){
-		return new Parallel(ActionList, Callback);
+	public void reset(){
+		super.reset();
+		for(int i = 0; i < this.actions.length; i++){
+			this.actions[i].reset();
+		}
 	}
-
+	
 }

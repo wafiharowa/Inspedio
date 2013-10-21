@@ -168,5 +168,5 @@ public class InsSprite extends InsBasic{
 			return ((InsUtil.Absolute((X - this.camera.position.x) - this.getMiddleX()) <= (this.size.width / 2)) && (InsUtil.Absolute((Y - this.camera.position.y) - this.getMiddleY()) <= (this.size.height / 2)));
 		}
 	}
-
+	
 }

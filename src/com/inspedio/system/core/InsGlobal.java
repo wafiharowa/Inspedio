@@ -316,6 +316,10 @@ public class InsGlobal{
 		InsGlobal.game.state.resume();
 	}
 	
+	public static void exitGame(){
+		InsGlobal.midlet.notifyDestroyed();
+	}
+	
 	/**
 	 * Action executed when LeftSoftKey Pressed
 	 */

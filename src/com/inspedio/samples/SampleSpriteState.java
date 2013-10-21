@@ -1,10 +1,13 @@
 package com.inspedio.samples;
 
-import com.inspedio.actions.Delay;
-import com.inspedio.actions.MoveBy;
-import com.inspedio.actions.MoveTo;
 import com.inspedio.entity.InsState;
+import com.inspedio.entity.actions.MoveBy;
+import com.inspedio.entity.actions.MoveTo;
+import com.inspedio.entity.primitive.InsCallback;
 import com.inspedio.entity.sprite.InsAnimatedSprite;
+import com.inspedio.entity.ui.InsButton;
+import com.inspedio.enums.FontSize;
+import com.inspedio.enums.FontStyle;
 import com.inspedio.enums.KeyCode;
 import com.inspedio.system.core.InsGlobal;
 import com.inspedio.system.helper.InsKeys;
@@ -21,15 +24,31 @@ public class SampleSpriteState extends InsState{
 		
 		sprite.addAnimation("DOWN", new int[]{0, 1, 2, 3}, frameDelay);
 		sprite.addAnimation("LEFT", new int[]{4, 5, 6, 7}, frameDelay);
-		sprite.addAnimation("RIGHT", new int[]{8, 9, 10, 11, frameDelay});
+		sprite.addAnimation("RIGHT", new int[]{8, 9, 10, 11}, frameDelay);
 		sprite.addAnimation("UP", new int[]{12, 13, 14, 15}, frameDelay);
 		sprite.addAnimation("IDLE", new int[]{0});
 		
 		this.add(sprite);
+		
+		InsButton back = new InsButton(30, InsGlobal.screenHeight - 20, 60, 40, "BACK", 0xFFFFFF);
+		back.setBorder(0, 3);
+		back.setCaption("BACK", 0, FontSize.LARGE, FontStyle.BOLD);
+		back.setClickedCallback(new InsCallback() {
+			public void call() {
+				InsGlobal.switchState(new SampleButtonState(), false);
+			}
+		});
+		
+		this.add(back);
+	}
+	
+	public void onLeftSoftKey()
+	{
+		InsGlobal.switchState(new SampleButtonState(), false);
 	}
 	
 	public boolean onPointerPressed(int X, int Y) {
-		this.sprite.setAction(MoveTo.create(this.sprite, 25, X, Y, null), true);
+		this.sprite.setAction(MoveTo.create(this.sprite, 25, X, Y, null));
 		
 		int deltaX = X - sprite.position.x;
 		int deltaY = Y - sprite.position.y;
@@ -49,25 +68,25 @@ public class SampleSpriteState extends InsState{
 		
 		if(key.keyPressed(KeyCode.UP)){
 			sprite.playAnimation("UP");
-			sprite.setAction(MoveBy.create(25, 0, -100, null));
+			sprite.setAction(MoveBy.create(10, 0, -100, null));
 		}
 		
 		if(key.keyPressed(KeyCode.DOWN)){
 			sprite.playAnimation("DOWN");
-			sprite.setAction(MoveBy.create(25, 0, 100, null));
+			sprite.setAction(MoveBy.create(10, 0, 100, null));
 		}
 		
 		if(key.keyPressed(KeyCode.LEFT)){
 			sprite.playAnimation("LEFT");
-			sprite.combineAction(MoveBy.create(25, -100, 0, null));
+			sprite.setAction(MoveBy.create(10, -100, 0, null));
 		}
 		
 		if(key.keyPressed(KeyCode.RIGHT)){
 			sprite.playAnimation("RIGHT");
-			sprite.combineAction(MoveBy.create(25, 100, 0, null));
+			sprite.setAction(MoveBy.create(10, 100, 0, null));
 		}
 		
-		if(sprite.setAction(Delay.create(0))){
+		if(sprite.action == null){
 			sprite.playAnimation("IDLE");
 		}
 	}

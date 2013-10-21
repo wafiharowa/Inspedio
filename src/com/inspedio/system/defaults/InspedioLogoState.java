@@ -1,9 +1,9 @@
 package com.inspedio.system.defaults;
 
-import com.inspedio.actions.Delay;
 import com.inspedio.entity.InsShape;
 import com.inspedio.entity.InsSprite;
 import com.inspedio.entity.InsState;
+import com.inspedio.entity.actions.Delay;
 import com.inspedio.entity.primitive.InsCallback;
 import com.inspedio.system.core.InsGlobal;
 

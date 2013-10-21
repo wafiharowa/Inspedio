@@ -1,6 +1,7 @@
 package com.inspedio.entity;
 
 import com.inspedio.entity.primitive.InsCallback;
+import com.inspedio.system.helper.InsUtil;
 
 /**
  * <code>InsAction</code> is an action that can be applied to <code>InsBasic</code> object.<br>
@@ -12,6 +13,7 @@ import com.inspedio.entity.primitive.InsCallback;
  * @version 1.0
  */
 public abstract class InsAction {
+	public boolean active;
 	protected int frameCount;
 	protected int remainingCount;
 	protected InsCallback callback;
@@ -19,7 +21,8 @@ public abstract class InsAction {
 
 	protected InsAction(int FrameCount, InsCallback Callback){
 		this.callback = Callback;
-		this.remainingCount = this.frameCount = FrameCount - 1;
+		this.remainingCount = this.frameCount = InsUtil.Max(0, FrameCount - 1);
+		this.active = true;
 	}
 	
 	public void setTarget(InsBasic Target){
@@ -33,8 +36,9 @@ public abstract class InsAction {
 	 */
 	public abstract int act();
 	
-	protected void reset(){
+	public void reset(){
 		this.remainingCount = this.frameCount;
+		this.active = true;
 	}
 	
 	public int getRemainingCount(){
@@ -46,6 +50,7 @@ public abstract class InsAction {
 			this.callback.call();
 		}
 		remainingCount = -1;
+		active = false;
 		this.target.unsetAction(this);
 	}
 	

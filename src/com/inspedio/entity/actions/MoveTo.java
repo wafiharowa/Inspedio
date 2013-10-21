@@ -1,4 +1,4 @@
-package com.inspedio.actions;
+package com.inspedio.entity.actions;
 
 import com.inspedio.entity.InsAction;
 import com.inspedio.entity.InsBasic;

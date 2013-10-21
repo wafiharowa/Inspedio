@@ -2,14 +2,16 @@ package com.inspedio.entity;
 
 import javax.microedition.lcdui.Graphics;
 
-import com.inspedio.actions.Parallel;
-import com.inspedio.actions.Sequence;
+import com.inspedio.entity.actions.Parallel;
+import com.inspedio.entity.actions.Sequence;
 import com.inspedio.entity.primitive.InsPoint;
 import com.inspedio.entity.primitive.InsSize;
 import com.inspedio.enums.HAlignment;
+import com.inspedio.enums.LogLevel;
 import com.inspedio.enums.VAlignment;
 import com.inspedio.system.core.InsGlobal;
 import com.inspedio.system.helper.InsKeys;
+import com.inspedio.system.helper.InsLogger;
 import com.inspedio.system.helper.InsUtil;
 import com.inspedio.system.helper.extension.InsAlignment;
 
@@ -37,7 +39,7 @@ public class InsBasic extends InsAtom{
 	/**
 	 * Action currently assigned to this object
 	 */
-	protected InsAction action;
+	public InsAction action;
 	
 	/**
 	 * Instantiates a default <code>InsBasic</code> object.
@@ -143,7 +145,7 @@ public class InsBasic extends InsAtom{
 	 * @param	forceSet		TRUE if you want to override any currently active action.
 	 */
 	public boolean setAction(InsAction Action, boolean forceSet){
-		if((this.action == null) || forceSet){
+		if((this.action == null) ||forceSet){
 			this.action = Action;
 			this.action.setTarget(this);
 			return true;
@@ -154,17 +156,17 @@ public class InsBasic extends InsAtom{
 	
 	public void appendAction(InsAction Action){
 		if(this.action != null){
-			this.setAction(Sequence.create(new InsAction[] {this.action, Action}, null));
+			this.setAction(Sequence.create(new InsAction[] {this.action, Action}, null), true);
 		} else {
-			this.setAction(Action);
+			this.setAction(Action, true);
 		}
 	}
 	
 	public void combineAction(InsAction Action){
 		if(this.action != null){
-			this.setAction(Parallel.create(new InsAction[] {this.action, Action}, null));
+			this.setAction(Parallel.create(new InsAction[] {this.action, Action}, null), true);
 		} else {
-			this.setAction(Action);
+			this.setAction(Action, true);
 		}
 		
 	}
@@ -173,6 +175,7 @@ public class InsBasic extends InsAtom{
 		if(this.action == Action){
 			this.action.setTarget(null);
 			this.action = null;
+			InsLogger.writeLog("Action Unset", LogLevel.EXTRA);
 		}
 	}
 	
