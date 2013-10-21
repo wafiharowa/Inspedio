@@ -21,4 +21,9 @@ public abstract class InsSave extends SaveManager{
 	 */
 	public abstract void initData();
 	
+	public void save(){
+		this.initData();
+		super.save();
+	}
+	
 }
