@@ -133,16 +133,16 @@ public class InsBasic extends InsAtom{
 	}
 	
 	/**
-	 * Set Action of this object. Fails if there is currently active action
+	 * Forcefully Set Action of this object.
 	 */
 	public boolean setAction(InsAction Action){
-		return this.setAction(Action, false);
+		return this.setAction(Action, true);
 	}
 	
 	/**
 	 * Set Action of this object.
 	 * 
-	 * @param	forceSet		TRUE if you want to override any currently active action.
+	 * @param	forceSet	Set this to FALSE to set action only there is no current active action
 	 */
 	public boolean setAction(InsAction Action, boolean forceSet){
 		if((this.action == null) ||forceSet){
