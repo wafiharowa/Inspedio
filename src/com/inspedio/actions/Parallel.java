@@ -19,7 +19,7 @@ public class Parallel extends InsAction{
 		super(-1, Callback);
 		this.actions = ActionList;
 		for(int i = 0; i < this.actions.length; i++){
-			this.frameCount = Math.max(this.frameCount, this.actions[i].getFrameCount());
+			this.remainingCount = Math.max(this.remainingCount, this.actions[i].getRemainingCount());
 		}
 	}
 	
@@ -28,18 +28,18 @@ public class Parallel extends InsAction{
 			this.actions[i].act();
 		}
 		
-		if(frameCount > 0){
+		if(remainingCount > 0){
 			for(int i = 0; i < this.actions.length; i++){
 				this.actions[i].act();
 			}
-			frameCount--;
-		} else if(frameCount == 0){
+			remainingCount--;
+		} else if(remainingCount == 0){
 			for(int i = 0; i < this.actions.length; i++){
 				this.actions[i].act();
 			}
 			finishAction();
 		}
-		return frameCount;
+		return remainingCount;
 	}
 	
 	public void setTarget(InsBasic Target){

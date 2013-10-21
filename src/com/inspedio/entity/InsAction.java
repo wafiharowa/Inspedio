@@ -13,12 +13,13 @@ import com.inspedio.entity.primitive.InsCallback;
  */
 public abstract class InsAction {
 	protected int frameCount;
+	protected int remainingCount;
 	protected InsCallback callback;
 	protected InsBasic target;
 
 	protected InsAction(int FrameCount, InsCallback Callback){
 		this.callback = Callback;
-		this.frameCount = FrameCount - 1;
+		this.remainingCount = this.frameCount = FrameCount - 1;
 	}
 	
 	public void setTarget(InsBasic Target){
@@ -32,15 +33,21 @@ public abstract class InsAction {
 	 */
 	public abstract int act();
 	
-	public int getFrameCount(){
-		return this.frameCount;
+	protected void reset(){
+		this.remainingCount = this.frameCount;
+	}
+	
+	public int getRemainingCount(){
+		return this.remainingCount;
 	}
 	
 	protected void finishAction(){
 		if(this.callback != null){
 			this.callback.call();
 		}
-		frameCount = -1;
+		remainingCount = -1;
 		this.target.unsetAction(this);
 	}
+	
+	
 }

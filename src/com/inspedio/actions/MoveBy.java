@@ -2,6 +2,7 @@ package com.inspedio.actions;
 
 import com.inspedio.entity.InsAction;
 import com.inspedio.entity.primitive.InsCallback;
+import com.inspedio.system.helper.InsUtil;
 
 /**
  * Move Target by given distance during given Frame Duration (Higher Frame Duration means slower animation).<br>
@@ -14,16 +15,25 @@ import com.inspedio.entity.primitive.InsCallback;
 public class MoveBy extends InsAction{
 
 	protected int distanceX;
-	protected int distanceY;	
-	protected int stepX;
-	protected int stepY;
+	protected int distanceY;
+	
+	protected int remainingX;
+	protected int remainingY;
+	
+	protected double stepX;
+	protected double stepY;
+	
+	protected double offsetX;
+	protected double offsetY;
+	
 	
 	protected MoveBy(int FrameCount, int DistanceX, int DistanceY, InsCallback Callback){
 		super(FrameCount, Callback);
 		this.distanceX = DistanceX;
 		this.distanceY = DistanceY;
-		this.stepX = this.distanceX / this.frameCount;
-		this.stepY = this.distanceY / this.frameCount;
+		this.stepX = (double) this.distanceX / (double) this.remainingCount;
+		this.stepY = (double) this.distanceY / (double) this.remainingCount;
+		this.reset();
 	}
 	
 	public static MoveBy create(int FrameCount, int DistanceX, int DistanceY, InsCallback Callback){
@@ -31,19 +41,37 @@ public class MoveBy extends InsAction{
 	}
 	
 	public int act(){
-		if(frameCount > 0){
+		if(remainingCount > 0){
 			this.move(stepX, stepY);
-			frameCount--;
-		} else if(frameCount == 0){
+			remainingCount--;
+		} else if(remainingCount == 0){
 			this.move(distanceX, distanceY);
 			finishAction();
 		}
-		return frameCount;
+		return remainingCount;
 	}
 	
-	private void move(int X, int Y){
-		this.target.addPosition(X, Y);
-		this.distanceX -= X;
-		this.distanceY -= Y;
+	private void move(double X, double Y){
+		this.target.addPosition((int) X, (int)Y);
+		this.offsetX += X - (int) X;
+		this.offsetY += Y - (int) Y;
+		this.remainingX -= X;
+		this.remainingY -= Y;
+		if(InsUtil.Absolute((int) offsetX) >= 1){
+			this.target.addPosition((int) this.offsetX, 0);
+			this.offsetX -= (int) this.offsetX;
+		}
+		if(InsUtil.Absolute((int) offsetY) >= 1){
+			this.target.addPosition(0, (int) this.offsetY);
+			this.offsetY -= (int) this.offsetY;
+		}
+	}
+	
+	protected void reset(){
+		super.reset();
+		this.remainingX = this.distanceX;
+		this.remainingY = this.distanceY;
+		this.offsetX = 0;
+		this.offsetY = 0;
 	}
 }

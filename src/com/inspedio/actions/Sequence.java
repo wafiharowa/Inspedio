@@ -25,20 +25,20 @@ public class Sequence extends InsAction{
 	public int act() {
 		if(this.actions.length > 0){
 			if(this.currentAction < this.actions.length - 1){
-				this.frameCount = this.actions[this.currentAction].act();
-				if(frameCount == -1){
+				this.remainingCount = this.actions[this.currentAction].act();
+				if(remainingCount == -1){
 					this.currentAction++;
 				}
 			} else if(this.currentAction == (this.actions.length - 1)){
-				this.frameCount = this.actions[this.currentAction].act();
-				if(frameCount == -1){
+				this.remainingCount = this.actions[this.currentAction].act();
+				if(remainingCount == -1){
 					this.finishAction();
 				}
 			}
 		} else {
 			this.finishAction();
 		}
-		return frameCount;
+		return remainingCount;
 	}
 	
 	public void setTarget(InsBasic Target){

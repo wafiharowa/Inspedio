@@ -1,5 +1,7 @@
 package com.inspedio.enums;
 
+import com.inspedio.system.core.InsGlobal;
+
 public class KeyCode extends InsEnum{
 
 	public static final KeyCode LEFT = new KeyCode("LEFT", 0);
@@ -15,5 +17,24 @@ public class KeyCode extends InsEnum{
 	protected KeyCode(String Name, int Value) {
 		super(Name, Value);
 	}
+	
+	/**
+	 * Return keycode considering rotated screen
+	 */
+	public static KeyCode GetDynamicCode(KeyCode K){
+		if(InsGlobal.isScreenRotated){
+			if(K == UP){
+				return LEFT;
+			} else if(K == RIGHT){
+				return UP;
+			} else if(K == DOWN){
+				return RIGHT;
+			} else if(K == LEFT){
+				return DOWN;
+			}
+		}
+		return K;
+	}
+	
 
 }

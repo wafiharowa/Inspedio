@@ -26,6 +26,26 @@ public class InsUtil {
 		return (a * a);
 	}
 	
+	public static int Floor(double a){
+		return (int) Math.floor(a);
+	}
+	
+	public static int Ceil(double a){
+		return (int) Math.ceil(a);
+	}
+	
+	/**
+	 * Floor if Value < 0.5, Ceil if Value >= 0.5
+	 */
+	public static int Round(double a){
+		int tmp = ((int) (a * 100)) % 100;
+		if(tmp < 50){
+			return Floor(a);
+		} else {
+			return Ceil(a);
+		}
+	}
+	
 	public static double Distance(int X1, int X2, int Y1, int Y2){
 		return Math.sqrt(Exp2(X1-X2) + Exp2(Y1-Y2));
 	}

@@ -57,10 +57,10 @@ public class InsKeys {
 		}
 		
 		// Assign currentKey based on keyState
-		this.setCurrentKeyState(KeyCode.UP, ((keystate & InsCanvas.UP_PRESSED) != 0));
-		this.setCurrentKeyState(KeyCode.DOWN, ((keystate & InsCanvas.DOWN_PRESSED) != 0));
-		this.setCurrentKeyState(KeyCode.LEFT, ((keystate & InsCanvas.LEFT_PRESSED) != 0));
-		this.setCurrentKeyState(KeyCode.RIGHT, ((keystate & InsCanvas.RIGHT_PRESSED) != 0));
+		this.setCurrentKeyState(KeyCode.GetDynamicCode(KeyCode.UP), ((keystate & InsCanvas.UP_PRESSED) != 0));
+		this.setCurrentKeyState(KeyCode.GetDynamicCode(KeyCode.DOWN), ((keystate & InsCanvas.DOWN_PRESSED) != 0));
+		this.setCurrentKeyState(KeyCode.GetDynamicCode(KeyCode.LEFT), ((keystate & InsCanvas.LEFT_PRESSED) != 0));
+		this.setCurrentKeyState(KeyCode.GetDynamicCode(KeyCode.RIGHT), ((keystate & InsCanvas.RIGHT_PRESSED) != 0));
 		this.setCurrentKeyState(KeyCode.FIRE, ((keystate & InsCanvas.FIRE_PRESSED) != 0));
 		this.setCurrentKeyState(KeyCode.GAME_A, ((keystate & InsCanvas.GAME_A_PRESSED) != 0));
 		this.setCurrentKeyState(KeyCode.GAME_B, ((keystate & InsCanvas.GAME_B_PRESSED) != 0));

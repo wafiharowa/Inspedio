@@ -40,27 +40,27 @@ public class Delay extends InsAction{
 
 	public int act() {
 		if(this.delayed){
-			if(frameCount > 0){
-				frameCount--;
-			} else if(frameCount == 0) {
+			if(remainingCount > 0){
+				remainingCount--;
+			} else if(remainingCount == 0) {
 				if(this.action != null){
 					this.delayed = false;
-					this.frameCount = this.action.getFrameCount();
+					this.remainingCount = this.action.getRemainingCount();
 				} else {
 					this.finishAction();
 				}
 			}
 		} else {
-			if(frameCount > 0) {
+			if(remainingCount > 0) {
 				if(this.action != null){
-					this.frameCount = this.action.act();
+					this.remainingCount = this.action.act();
 				}
-			} else if(frameCount == 0){
+			} else if(remainingCount == 0){
 				this.finishAction();
 			}
 		}
 
-		return frameCount;
+		return remainingCount;
 	}
 
 }

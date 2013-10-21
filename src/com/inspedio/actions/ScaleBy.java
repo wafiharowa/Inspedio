@@ -26,19 +26,19 @@ public class ScaleBy extends InsAction{
 		super(FrameCount, Callback);
 		this.scaleX = ScaleX;
 		this.scaleY = ScaleY;
-		this.stepX = this.scaleX / this.frameCount;
-		this.stepY = this.scaleY / this.frameCount;
+		this.stepX = this.scaleX / this.remainingCount;
+		this.stepY = this.scaleY / this.remainingCount;
 	}
 
 	public int act() {
-		if(frameCount > 0){
+		if(remainingCount > 0){
 			this.scale(stepX, stepY);
-			frameCount--;
-		} else if(frameCount == 0){
+			remainingCount--;
+		} else if(remainingCount == 0){
 			this.scale(scaleX, scaleY);
 			finishAction();
 		}
-		return frameCount;
+		return remainingCount;
 	}
 
 	private void scale(int X, int Y){
