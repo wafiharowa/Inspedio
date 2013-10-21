@@ -15,18 +15,59 @@ public class SaveDataObject {
 	
 	private boolean boolData;
 	private int intData;
-	private float floatData;
+	private double doubleData;
 	private String stringData;
 	
 	private boolean[] boolArrData = null;
 	private int[] intArrData = null;
-	private float[] floatArrData = null;
+	private double[] doubleArrData = null;
 	private String[] stringArrData = null;
 	
 	public SaveDataObject(String Name){
 		this.name = Name;
 		this.nameLength = Name.length();
 	}
+	
+	public SaveDataObject(String Name, boolean Data){
+		this(Name);
+		this.setData(Data);
+	}
+	
+	public SaveDataObject(String Name, int Data){
+		this(Name);
+		this.setData(Data);
+	}
+	
+	public SaveDataObject(String Name, double Data){
+		this(Name);
+		this.setData(Data);
+	}
+	
+	public SaveDataObject(String Name, String Data){
+		this(Name);
+		this.setData(Data);
+	}
+	
+	public SaveDataObject(String Name, boolean[] Data){
+		this(Name);
+		this.setData(Data);
+	}
+	
+	public SaveDataObject(String Name, int[] Data){
+		this(Name);
+		this.setData(Data);
+	}
+	
+	public SaveDataObject(String Name, double[] Data){
+		this(Name);
+		this.setData(Data);
+	}
+	
+	public SaveDataObject(String Name, String[] Data){
+		this(Name);
+		this.setData(Data);
+	}
+	
 		
 	public SaveDataObject(DataInputStream stream){
 		this.read(stream);
@@ -45,7 +86,7 @@ public class SaveDataObject {
 				case 1:
 					this.intData = stream.readInt();
 				case 2:
-					this.floatData = stream.readFloat();
+					this.doubleData = stream.readDouble();
 				case 3:
 					this.stringData = stream.readUTF();
 				case 4:
@@ -59,9 +100,9 @@ public class SaveDataObject {
 						this.intArrData[i] = stream.readInt();
 					}
 				case 6:
-					this.floatArrData = new float[this.dataLength];
+					this.doubleArrData = new double[this.dataLength];
 					for(int i = 0; i < this.dataLength; i++){
-						this.floatArrData[i] = stream.readFloat();
+						this.doubleArrData[i] = stream.readDouble();
 					}
 				case 7:
 					this.stringArrData = new String[this.dataLength];
@@ -88,7 +129,7 @@ public class SaveDataObject {
 				case 1:
 					stream.writeInt(this.intData);
 				case 2:
-					stream.writeFloat(this.floatData);
+					stream.writeDouble(this.doubleData);
 				case 3:
 					stream.writeUTF(this.stringData);
 				case 4:
@@ -101,7 +142,7 @@ public class SaveDataObject {
 					}
 				case 6:
 					for(int i = 0; i < this.dataLength; i++){
-						stream.writeFloat(this.floatArrData[i]);
+						stream.writeDouble(this.doubleArrData[i]);
 					}
 				case 7:
 					for(int i = 0; i < this.dataLength; i++){
@@ -111,6 +152,26 @@ public class SaveDataObject {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public void setData(SaveDataObject obj){
+		if(obj.type == SaveDataType.BOOLEAN){
+			this.setData(obj.boolData);
+		} else if(obj.type == SaveDataType.INTEGER){
+			this.setData(obj.intData);
+		} else if(obj.type == SaveDataType.DOUBLE){
+			this.setData(obj.doubleData);
+		} else if(obj.type == SaveDataType.STRING){
+			this.setData(obj.stringData);
+		} else if(obj.type == SaveDataType.BOOLEAN_ARRAY){
+			this.setData(obj.boolArrData);
+		} else if(obj.type == SaveDataType.INTEGER_ARRAY){
+			this.setData(obj.intArrData);
+		} else if(obj.type == SaveDataType.DOUBLE_ARRAY){
+			this.setData(obj.doubleArrData);
+		} else if(obj.type == SaveDataType.STRING_ARRAY){
+			this.setData(obj.stringArrData);
 		}
 	}
 	
@@ -126,9 +187,9 @@ public class SaveDataObject {
 		this.dataLength = 1;
 	}
 	
-	public void setData(float data){
-		this.floatData = data;
-		this.type = SaveDataType.FLOAT;
+	public void setData(double data){
+		this.doubleData = data;
+		this.type = SaveDataType.DOUBLE;
 		this.dataLength = 1;
 	}
 	
@@ -150,9 +211,9 @@ public class SaveDataObject {
 		this.dataLength = data.length;
 	}
 	
-	public void setData(float[] data){
-		this.floatArrData = data;
-		this.type = SaveDataType.FLOAT_ARRAY;
+	public void setData(double[] data){
+		this.doubleArrData = data;
+		this.type = SaveDataType.DOUBLE_ARRAY;
 		this.dataLength = data.length;
 	}
 	
@@ -160,6 +221,104 @@ public class SaveDataObject {
 		this.stringArrData = data;
 		this.type = SaveDataType.STRING_ARRAY;
 		this.dataLength = data.length;
+	}
+	
+	public boolean GetDataBoolean(){
+		try{
+			if(this.type == SaveDataType.BOOLEAN){
+				return this.boolData;
+			} else {
+				throw new Exception("Record Data is in different format");
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public int GetDataInteger(){
+		try{
+			if(this.type == SaveDataType.INTEGER){
+				return this.intData;
+			} else {
+				throw new Exception("Record Data is in different format");
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public double GetDataDouble(){
+		try{
+			if(this.type == SaveDataType.DOUBLE){
+				return this.doubleData;
+			} else {
+				throw new Exception("Record Data is in different format");
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public String GetDataString(){
+		try{
+			if(this.type == SaveDataType.STRING){
+				return this.stringData;
+			} else {
+				throw new Exception("Record Data is in different format");
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+	
+	public boolean[] GetDataBooleanArray(){
+		try{
+			if(this.type == SaveDataType.BOOLEAN_ARRAY){
+				return this.boolArrData;
+			} else {
+				throw new Exception("Record Data is in different format");
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public int[] GetDataIntegerArray(){
+		try{
+			if(this.type == SaveDataType.INTEGER_ARRAY){
+				return this.intArrData;
+			} else {
+				throw new Exception("Record Data is in different format");
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public double[] GetDataDoubleArray(){
+		try{
+			if(this.type == SaveDataType.DOUBLE_ARRAY){
+				return this.doubleArrData;
+			} else {
+				throw new Exception("Record Data is in different format");
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 }

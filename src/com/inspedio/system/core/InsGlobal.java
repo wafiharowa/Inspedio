@@ -154,7 +154,6 @@ public class InsGlobal{
 		level = 0;
 		stage = 0;
 		score = 0;
-		save = new InsSave();
 		muteBGM = false;
 		muteSFX = false;
 		cycleCount = 0;
