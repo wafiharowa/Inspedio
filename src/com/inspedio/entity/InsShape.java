@@ -77,6 +77,11 @@ public class InsShape extends InsBasic{
 		this.shapeType = ShapeType.ROUNDED_RECT;
 	}
 	
+	public void setRoundedRect(int ArcWidth, int ArcHeight){
+		this.roundArc.setSize(ArcWidth, ArcHeight);
+		this.shapeType = ShapeType.ROUNDED_RECT;
+	}
+	
 	public void setCircle(int Radius, int StartAngle, int ArcAngle){
 		this.setSize(Radius * 2, Radius * 2);
 		this.startAngle = StartAngle;

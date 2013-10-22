@@ -5,8 +5,7 @@ import com.inspedio.entity.InsBitmapFont;
 public class DefaultBitmapFontBig extends InsBitmapFont{
 
 	public DefaultBitmapFontBig(String Text, int X, int Y) {
-		super("/com/inspedio/defaults/font_big.png", 12, 14, 20);
-		this.setText(Text);
+		super("/com/inspedio/defaults/font_big.png", 12, 14, 20, Text);
 		this.setPosition(X, Y);
 	}
 
