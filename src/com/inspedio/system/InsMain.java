@@ -5,12 +5,14 @@ import javax.microedition.midlet.MIDlet;
 import javax.microedition.midlet.MIDletStateChangeException;
 
 import com.inspedio.entity.InsState;
+import com.inspedio.enums.LogLevel;
 import com.inspedio.enums.ScreenOrientation;
 import com.inspedio.system.core.InsGame;
 import com.inspedio.system.core.InsGlobal;
 import com.inspedio.system.core.InsLoader;
 import com.inspedio.system.defaults.DefaultLoader;
 import com.inspedio.system.defaults.DefaultSaveLoad;
+import com.inspedio.system.helper.InsLogger;
 import com.inspedio.system.helper.InsSave;
 
 
@@ -51,7 +53,8 @@ public abstract class InsMain extends MIDlet{
 		game.start();
 		Display display = Display.getDisplay(this);
 		display.setCurrent(game.canvas);
-		System.out.println("Application Started");
+		InsLogger.writeLog("Canvas Ready", LogLevel.PROCESS);
+		InsLogger.writeLog("Application Started", LogLevel.SYSTEM);
 	}
 	
 	protected void destroyApp(boolean arg0) throws MIDletStateChangeException {
@@ -59,5 +62,6 @@ public abstract class InsMain extends MIDlet{
 
 	protected void pauseApp() {
 		InsGlobal.pauseGame();
+		InsLogger.writeLog("Game Paused", LogLevel.PROCESS);
 	}
 }

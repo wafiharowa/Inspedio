@@ -7,9 +7,11 @@ import com.inspedio.system.helper.record.SaveManager;
  */
 public abstract class InsSave extends SaveManager{
 	
-	public InsSave(String Name, String Version, boolean autoLoad){
+	public boolean autoLoad;
+	
+	public InsSave(String Name, String Version, boolean AutoLoad){
 		super(Name, Version);
-		if(autoLoad)load();
+		this.autoLoad = AutoLoad;
 	}
 	
 	public InsSave(String RecordName){
