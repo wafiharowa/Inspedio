@@ -17,13 +17,27 @@ public abstract class InsSave extends SaveManager{
 	}
 		
 	/**
-	 * This is where you put your Game Data before calling save() method.
+	 * Implement this method by Putting your Data into SaveObject.<br>
+	 * This method will automatically called before calling save().
 	 */
-	public abstract void initData();
+	public abstract void assignData();
+	
+	/**
+	 * Implement this method by Retrieving SaveObject into your Data.<br>
+	 * This method will automatically called after calling load().
+	 */
+	public abstract void retrieveData();
+	
 	
 	public void save(){
-		this.initData();
+		this.assignData();
 		super.save();
+	}
+	
+	public boolean load(){
+		boolean success = super.load();
+		this.retrieveData();
+		return success;
 	}
 	
 }

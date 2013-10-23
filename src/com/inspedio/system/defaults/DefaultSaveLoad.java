@@ -12,7 +12,10 @@ public class DefaultSaveLoad extends InsSave{
 		super(RecordName);
 	}
 
-	public void initData() {
+	public void assignData() {
+	}
+
+	public void retrieveData() {
 	}
 
 }
