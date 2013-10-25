@@ -8,14 +8,23 @@ import com.inspedio.system.helper.record.SaveManager;
 public abstract class InsSave extends SaveManager{
 	
 	public boolean autoLoad;
+	public boolean autoClear;
 	
-	public InsSave(String Name, String Version, boolean AutoLoad){
+	/**
+	 * @param	AutoLoad	Whether this will be automatically loaded when starting game
+	 * @param	AutoClear	Whether data will be destroyed after save and load (to preserve memory)	
+	 */
+	public InsSave(String Name, String Version, boolean AutoLoad, boolean AutoClear){
 		super(Name, Version);
 		this.autoLoad = AutoLoad;
+		this.autoClear = AutoClear;
 	}
 	
+	/**
+	 * Equivalent to InsSave(RecordName, "1.0", true, true)
+	 */
 	public InsSave(String RecordName){
-		this(RecordName, "1.0", true);
+		this(RecordName, "1.0", true, true);
 	}
 		
 	/**
@@ -34,11 +43,15 @@ public abstract class InsSave extends SaveManager{
 	public void save(){
 		this.assignData();
 		super.save();
+		if(this.autoClear){this.clear();}
 	}
 	
 	public boolean load(){
 		boolean success = super.load();
-		this.retrieveData();
+		if(success){
+			this.retrieveData();
+			if(this.autoClear){this.clear();}
+		}
 		return success;
 	}
 	

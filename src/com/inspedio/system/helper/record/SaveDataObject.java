@@ -321,4 +321,18 @@ public class SaveDataObject {
 		return null;
 	}
 	
+	public String[] GetDataStringArray(){
+		try{
+			if(this.type == SaveDataType.STRING_ARRAY){
+				return this.stringArrData;
+			} else {
+				throw new Exception("Record Data is in different format");
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }
