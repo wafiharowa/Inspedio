@@ -14,6 +14,10 @@ public class InsButtonSprite extends InsSprite{
 	 */
 	protected InsCallback onReleasedCallback;
 	/**
+	 * Callback event when Button Dragged
+	 */
+	protected InsCallback onDraggedCallback;
+	/**
 	 * Callback event when Button Hold
 	 */
 	protected InsCallback onHoldCallback;
@@ -25,6 +29,10 @@ public class InsButtonSprite extends InsSprite{
 	 * Set this to FALSE to let object behind it to get Event. Defaulted to true
 	 */
 	public boolean onReleasedReturn = true;
+	/**
+	 * Set this to FALSE to let object behind it to get Event. Defaulted to true
+	 */
+	public boolean onDraggedReturn = true;
 	/**
 	 * Set this to FALSE to let object behind it to get Event. Defaulted to true
 	 */
@@ -60,6 +68,14 @@ public class InsButtonSprite extends InsSprite{
 	}
 	
 	public boolean onTouchDragged(){
+		if(onDraggedCallback != null){
+			this.onDraggedCallback.call();
+			return onDraggedReturn;
+		}
+		return false;
+	}
+	
+	public boolean onTouchHold(){
 		if(onHoldCallback != null){
 			this.onHoldCallback.call();
 			return onHoldReturn;
@@ -79,6 +95,13 @@ public class InsButtonSprite extends InsSprite{
 	 */
 	public void setReleasedCallback(InsCallback c){
 		this.onReleasedCallback = c;
+	}
+	
+	/**
+	 * Set Callback to handle Dragged Event
+	 */
+	public void setDraggedCallback(InsCallback c){
+		this.onDraggedCallback = c;
 	}
 	
 	/**

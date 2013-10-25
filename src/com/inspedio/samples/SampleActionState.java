@@ -10,6 +10,7 @@ import com.inspedio.entity.actions.ScaleBy;
 import com.inspedio.entity.actions.Sequence;
 import com.inspedio.entity.primitive.InsCallback;
 import com.inspedio.entity.ui.InsButton;
+import com.inspedio.entity.ui.InsHoldButton;
 import com.inspedio.enums.BorderLayout;
 import com.inspedio.enums.FontSize;
 import com.inspedio.enums.FontStyle;
@@ -34,7 +35,7 @@ public class SampleActionState extends InsState{
 		this.obj.setCircle(25, 0, 360);
 		this.obj.setBorder(0, 2, BorderLayout.OUTSIDE);
 		
-		this.sequence = new InsButton(midX - 60, midY, 100, 60, "SEQUENCE", InsCanvas.COLOR_GREEN);
+		this.sequence = new InsHoldButton(midX - 60, midY, 100, 60, "SEQUENCE", InsCanvas.COLOR_GREEN);
 		this.sequence.setCaption("SEQUENCE", InsCanvas.COLOR_BLACK, FontSize.SMALL, FontStyle.PLAIN);
 		this.sequence.setClickedCallback(new InsCallback() {
 			public void call() {
@@ -43,7 +44,7 @@ public class SampleActionState extends InsState{
 			}
 		});
 		
-		this.parallel = new InsButton(midX + 60, midY, 100, 60, "PARALLEL", InsCanvas.COLOR_GREEN);
+		this.parallel = new InsHoldButton(midX + 60, midY, 100, 60, "PARALLEL", InsCanvas.COLOR_GREEN);
 		this.parallel.setCaption("PARALLEL", InsCanvas.COLOR_BLACK, FontSize.SMALL, FontStyle.PLAIN);
 		this.parallel.setClickedCallback(new InsCallback() {
 			public void call() {
@@ -52,7 +53,7 @@ public class SampleActionState extends InsState{
 			}
 		});
 		
-		this.forever = new InsButton(midX, midY + 70, 100, 60, "FOREVER", InsCanvas.COLOR_GREEN);
+		this.forever = new InsHoldButton(midX, midY + 70, 100, 60, "FOREVER", InsCanvas.COLOR_GREEN);
 		this.forever.setCaption("FOREVER", InsCanvas.COLOR_BLACK, FontSize.SMALL, FontStyle.PLAIN);
 		this.forever.setClickedCallback(new InsCallback() {
 			public void call() {

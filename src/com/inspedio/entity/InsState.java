@@ -103,6 +103,10 @@ public abstract class InsState extends InsGroup{
 		for(int i = 0; i < pointer.dragged.length; i++){
 			this.onPointerDragged(pointer.dragged[i].x, pointer.dragged[i].y);
 		}
+		
+		for(int i = 0; i < pointer.hold.length; i++){
+			this.onPointerHold(pointer.hold[i].x, pointer.hold[i].y);
+		}
 	}
 	
 	/**

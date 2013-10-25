@@ -116,4 +116,10 @@ public abstract class InsAtom {
 	 * Method for handling pointerDragged
 	 */
 	public abstract boolean onPointerDragged(int X, int Y);
+	
+	/**
+	 * Method for handling pointerHold
+	 */
+	public abstract boolean onPointerHold(int X, int Y);
+	
 }

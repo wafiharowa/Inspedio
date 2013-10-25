@@ -214,6 +214,15 @@ public class InsBasic extends InsAtom{
 	}
 	
 	/**
+	 * Override this to implement touchHold behavior
+	 * 
+	 * @return	TRUE if you want touchEvent to not passed to next Object
+	 */
+	protected boolean onTouchHold(){
+		return false;
+	}
+	
+	/**
 	 * Do not override this unless you want to specifically access coordinate touched
 	 */
 	public boolean onPointerPressed(int X, int Y) {
@@ -237,11 +246,22 @@ public class InsBasic extends InsAtom{
 		return false;
 	}
 	
+	public boolean onPointerHold(int X, int Y) {
+		if(this.isOverlap(X, Y)){
+			return onTouchHold();
+		}
+		return false;
+	}
+	
 	/**
 	 * Whether X and Y pointer is inside object
 	 */
 	public boolean isOverlap(int X, int Y){
 		return ((InsUtil.Absolute(X - this.getMiddleX()) <= (this.size.width / 2)) && (InsUtil.Absolute(Y - this.getMiddleY()) <= (this.size.height / 2)));
+	}
+	
+	public boolean isOverlap(InsPoint P){
+		return ((InsUtil.Absolute(P.x - this.getMiddleX()) <= (this.size.width / 2)) && (InsUtil.Absolute(P.y - this.getMiddleY()) <= (this.size.height / 2)));
 	}
 	
 	public int getMiddleX(){
@@ -259,5 +279,5 @@ public class InsBasic extends InsAtom{
 	public int getTop(){
 		return this.position.y - ((this.align.vertical.getValue() * this.size.height) / 2); 
 	}
-	
+
 }

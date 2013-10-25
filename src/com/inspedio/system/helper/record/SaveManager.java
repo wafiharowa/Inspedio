@@ -114,13 +114,13 @@ public class SaveManager {
 				}
 				
 				dataStream.close();
-				recordStore.closeRecordStore();
-				
+		
 				InsLogger.writeLog("Loading GameData Success", LogLevel.SYSTEM);
 				success = true;
 			} else {
 				InsLogger.writeLog("GameData is not Found", LogLevel.PROCESS);
 			}
+			recordStore.closeRecordStore();
 		}
 		catch (Exception e)
 		{

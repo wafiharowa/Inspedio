@@ -19,6 +19,10 @@ public class InsButton extends InsShape{
 	 */
 	protected InsCallback onReleasedCallback;
 	/**
+	 * Callback event when Button Dragged
+	 */
+	protected InsCallback onDraggedCallback;
+	/**
 	 * Callback event when Button Hold
 	 */
 	protected InsCallback onHoldCallback;
@@ -30,6 +34,10 @@ public class InsButton extends InsShape{
 	 * Set this to FALSE to let object behind it to get Event. Defaulted to true
 	 */
 	public boolean onReleasedReturn = true;
+	/**
+	 * Set this to FALSE to let object behind it to get Event. Defaulted to true
+	 */
+	public boolean onDraggedReturn = true;
 	/**
 	 * Set this to FALSE to let object behind it to get Event. Defaulted to true
 	 */
@@ -66,6 +74,14 @@ public class InsButton extends InsShape{
 	}
 	
 	public boolean onTouchDragged(){
+		if(onDraggedCallback != null){
+			this.onDraggedCallback.call();
+			return onDraggedReturn;
+		}
+		return false;
+	}
+	
+	public boolean onTouchHold(){
 		if(onHoldCallback != null){
 			this.onHoldCallback.call();
 			return onHoldReturn;
@@ -85,6 +101,13 @@ public class InsButton extends InsShape{
 	 */
 	public void setReleasedCallback(InsCallback c){
 		this.onReleasedCallback = c;
+	}
+	
+	/**
+	 * Set Callback to handle Dragged Event
+	 */
+	public void setDraggedCallback(InsCallback c){
+		this.onDraggedCallback = c;
 	}
 	
 	/**

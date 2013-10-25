@@ -187,5 +187,15 @@ public class InsGroup extends InsAtom{
 		}
 		return false;
 	}
+
+	public boolean onPointerHold(int X, int Y) {
+		for(int i = this.members.size()-1; i >= 0; i--){
+			InsAtom atom = (InsAtom) this.members.elementAt(i);
+			if(atom.exists && atom.active){
+				if(atom.onPointerHold(X, Y))break;
+			}
+		}
+		return false;
+	}
 	
 }
