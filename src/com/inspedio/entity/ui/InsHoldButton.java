@@ -48,19 +48,28 @@ public class InsHoldButton extends InsButton{
 	public void setFocus(boolean focus){
 		if(!this.focused){
 			if(focus){
-				this.addSize(10, 10);
-				this.borderWidth += 2;
+				this.focus();
 				this.focused = true;
 			}
 		} else {
 			if(!focus){
-				this.addSize(-10, -10);
-				this.borderWidth -= 2;
+				this.unfocus();
 				this.focused = false;
 			}
 		}
 		this.checked = true;
 	}
+	
+	public void focus(){
+		this.addSize(10, 10);
+		this.borderWidth += 2;
+	}
+	
+	public void unfocus(){
+		this.addSize(-10, -10);
+		this.borderWidth -= 2;
+	}
+	
 
 	public void checkHold(){
 		if(this.focused && !this.checked){
