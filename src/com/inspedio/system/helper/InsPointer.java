@@ -3,7 +3,6 @@ package com.inspedio.system.helper;
 import java.util.Vector;
 
 import com.inspedio.entity.primitive.InsPoint;
-import com.inspedio.enums.LogLevel;
 import com.inspedio.system.helper.extension.InsPointerEvent;
 
 /**
@@ -83,16 +82,13 @@ public class InsPointer {
 	
 	protected void addTouchPoint(InsPointerEvent e){
 		this.holdList.addElement(new InsPoint(e.x, e.y));
-		this.holdCount++;
-		InsLogger.writeLog("Pointer Added", LogLevel.EXTRA);
-		
+		this.holdCount++;	
 	}
 	
 	protected void removeTouchPoint(InsPointerEvent e){
 		int idx = this.searchNearestPoint(e.x, e.y);
 		if(idx != -1){
 			this.holdList.removeElementAt(idx);
-			InsLogger.writeLog("Pointer Removed", LogLevel.EXTRA);
 		}
 		this.holdCount--;
 	}
@@ -101,7 +97,6 @@ public class InsPointer {
 		int idx = this.searchNearestPoint(e.x, e.y);
 		if(idx != -1){
 			((InsPoint) this.holdList.elementAt(idx)).setPoint(e.x, e.y);
-			InsLogger.writeLog("Pointer Moved", LogLevel.EXTRA);
 		}
 	}
 	

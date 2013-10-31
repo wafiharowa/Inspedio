@@ -4,7 +4,7 @@ import com.inspedio.enums.LogLevel;
 
 public class InsLogger {
 	
-	protected static int logLevel = 4;
+	protected static int logLevel = 1;
 
 	public static void writeLog(String Message, LogLevel level){
 		if(level.getValue() <= logLevel){
