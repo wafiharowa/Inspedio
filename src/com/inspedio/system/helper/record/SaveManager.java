@@ -134,6 +134,7 @@ public class SaveManager {
 	 */
 	public void clear(){
 		this.dataList.removeAllElements();
+		this.dataCount = 0;
 	}
 	
 	/**
@@ -145,6 +146,7 @@ public class SaveManager {
 			this.getData(obj.name).setData(obj);
 		} else {
 			this.dataList.addElement(obj);
+			this.dataCount++;
 		}
 	}
 	
