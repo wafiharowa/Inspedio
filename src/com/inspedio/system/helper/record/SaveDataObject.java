@@ -9,9 +9,9 @@ import com.inspedio.enums.SaveDataType;
 public class SaveDataObject {
 	
 	public SaveDataType type = null;
-	public int nameLength;
-	public int dataLength;
-	public String name = null;
+	public int nameLength = 0;
+	public int dataLength = 0;
+	public String name = "";
 	
 	private boolean boolData;
 	private int intData;
@@ -22,6 +22,10 @@ public class SaveDataObject {
 	private int[] intArrData = null;
 	private double[] doubleArrData = null;
 	private String[] stringArrData = null;
+	
+	public SaveDataObject(){
+		
+	}
 	
 	public SaveDataObject(String Name){
 		this.name = Name;
@@ -67,8 +71,7 @@ public class SaveDataObject {
 		this(Name);
 		this.setData(Data);
 	}
-	
-		
+			
 	public SaveDataObject(DataInputStream stream){
 		this.read(stream);
 	}
@@ -83,32 +86,40 @@ public class SaveDataObject {
 			switch(this.type.getValue()){
 				case 0:
 					this.boolData = stream.readBoolean();
+					break;
 				case 1:
 					this.intData = stream.readInt();
+					break;
 				case 2:
 					this.doubleData = stream.readDouble();
+					break;
 				case 3:
 					this.stringData = stream.readUTF();
+					break;
 				case 4:
 					this.boolArrData = new boolean[this.dataLength];
 					for(int i = 0; i < this.dataLength; i++){
 						this.boolArrData[i] = stream.readBoolean();
 					}
+					break;
 				case 5:
 					this.intArrData = new int[this.dataLength];
 					for(int i = 0; i < this.dataLength; i++){
 						this.intArrData[i] = stream.readInt();
 					}
+					break;
 				case 6:
 					this.doubleArrData = new double[this.dataLength];
 					for(int i = 0; i < this.dataLength; i++){
 						this.doubleArrData[i] = stream.readDouble();
 					}
+					break;
 				case 7:
 					this.stringArrData = new String[this.dataLength];
 					for(int i = 0; i < this.dataLength; i++){
 						this.stringArrData[i] = stream.readUTF();
 					}
+					break;
 			}
 			
 		} catch (IOException e) {
@@ -118,6 +129,7 @@ public class SaveDataObject {
 	
 	public void write(DataOutputStream stream){
 		try {
+			
 			stream.writeShort(this.type.getValue());
 			stream.writeInt(this.nameLength);
 			stream.writeInt(this.dataLength);
@@ -126,29 +138,36 @@ public class SaveDataObject {
 			switch(this.type.getValue()){
 				case 0:
 					stream.writeBoolean(this.boolData);
+					break;
 				case 1:
 					stream.writeInt(this.intData);
+					break;
 				case 2:
 					stream.writeDouble(this.doubleData);
+					break;
 				case 3:
 					stream.writeUTF(this.stringData);
+					break;
 				case 4:
 					for(int i = 0; i < this.dataLength; i++){
 						stream.writeBoolean(this.boolArrData[i]);
 					}
+					break;
 				case 5:
 					for(int i = 0; i < this.dataLength; i++){
 						stream.writeInt(this.intArrData[i]);
 					}
+					break;
 				case 6:
 					for(int i = 0; i < this.dataLength; i++){
 						stream.writeDouble(this.doubleArrData[i]);
 					}
+					break;
 				case 7:
 					for(int i = 0; i < this.dataLength; i++){
 						stream.writeUTF(this.stringArrData[i]);
 					}
-			
+					break;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

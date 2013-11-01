@@ -47,7 +47,6 @@ public class SaveManager {
 			ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
 			DataOutputStream dataStream = new DataOutputStream(byteStream);
 			
-			SaveDataObject obj;
 			this.dataCount = dataList.size();
 			
 			dataStream.writeUTF(this.recordName);
@@ -55,12 +54,14 @@ public class SaveManager {
 			dataStream.writeInt(this.dataCount);
 			
 			InsLogger.writeLog("Writing SaveData Header Sucess", LogLevel.PROCESS);
+			InsLogger.writeLog("Record Name : " + this.recordName, LogLevel.PROCESS);
+			InsLogger.writeLog("Record Version : " + this.recordVersion, LogLevel.PROCESS);
+			InsLogger.writeLog("Item Count : " + this.dataCount, LogLevel.PROCESS);
 			
-			for(int i = 0; i < dataCount; i++)
+			for(int i = 0; i < dataList.size(); i++)
 			{
-				obj = (SaveDataObject) dataList.elementAt(i);
-				if((obj != null))
-				{
+				SaveDataObject obj = (SaveDataObject) dataList.elementAt(i);
+				if(obj != null){
 					obj.write(dataStream);
 				}
 			}
@@ -103,10 +104,10 @@ public class SaveManager {
 				String dataVersion = dataStream.readUTF();
 				this.dataCount = dataStream.readInt();
 				InsLogger.writeLog("Reading SaveData Header Sucess", LogLevel.PROCESS);
-				InsLogger.writeLog("Record Name : " + dataName, LogLevel.INFO);
-				InsLogger.writeLog("Previous Version : " + dataVersion, LogLevel.INFO);
-				InsLogger.writeLog("Current Version : " + this.recordVersion, LogLevel.INFO);
-				InsLogger.writeLog("Item Count : " + this.dataCount, LogLevel.INFO);
+				InsLogger.writeLog("Record Name : " + dataName, LogLevel.PROCESS);
+				InsLogger.writeLog("Previous Version : " + dataVersion, LogLevel.PROCESS);
+				InsLogger.writeLog("Current Version : " + this.recordVersion, LogLevel.PROCESS);
+				InsLogger.writeLog("Item Count : " + this.dataCount, LogLevel.PROCESS);
 				
 				for(int i = 0; i < dataCount; i++){
 					SaveDataObject obj = new SaveDataObject(dataStream);
@@ -142,12 +143,8 @@ public class SaveManager {
 	 * If there is already other data with same name, change its value instead.
 	 */
 	public void addData(SaveDataObject obj){
-		if(this.isDataExist(obj.name)){
-			this.getData(obj.name).setData(obj);
-		} else {
-			this.dataList.addElement(obj);
-			this.dataCount++;
-		}
+		this.dataList.addElement(obj);
+		this.dataCount++;
 	}
 	
 	public boolean isDataExist(String Name){
