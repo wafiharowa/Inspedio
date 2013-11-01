@@ -7,7 +7,6 @@ import com.inspedio.entity.actions.Sequence;
 import com.inspedio.entity.primitive.InsPoint;
 import com.inspedio.entity.primitive.InsSize;
 import com.inspedio.enums.HAlignment;
-import com.inspedio.enums.LogLevel;
 import com.inspedio.enums.VAlignment;
 import com.inspedio.system.core.InsGlobal;
 import com.inspedio.system.helper.InsKeys;
@@ -175,7 +174,7 @@ public class InsBasic extends InsAtom{
 		if(this.action == Action){
 			this.action.setTarget(null);
 			this.action = null;
-			InsLogger.writeLog("Action Unset", LogLevel.EXTRA);
+			InsLogger.writeLog("Action Unset");
 		}
 	}
 	

@@ -13,7 +13,7 @@ public class InsLogger {
 	}
 	
 	public static void writeLog(String Message){
-		writeLog(Message, LogLevel.INFO);
+		writeLog(Message, LogLevel.EXTRA);
 	}
 	
 	public static void setLogLevel(LogLevel level){

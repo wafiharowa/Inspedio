@@ -82,13 +82,15 @@ public class InsPointer {
 	
 	protected void addTouchPoint(InsPointerEvent e){
 		this.holdList.addElement(new InsPoint(e.x, e.y));
-		this.holdCount++;	
+		this.holdCount++;
+		InsLogger.writeLog("Pointer Added");
 	}
 	
 	protected void removeTouchPoint(InsPointerEvent e){
 		int idx = this.searchNearestPoint(e.x, e.y);
 		if(idx != -1){
 			this.holdList.removeElementAt(idx);
+			InsLogger.writeLog("Pointer Removed");
 		}
 		this.holdCount--;
 	}
@@ -97,6 +99,7 @@ public class InsPointer {
 		int idx = this.searchNearestPoint(e.x, e.y);
 		if(idx != -1){
 			((InsPoint) this.holdList.elementAt(idx)).setPoint(e.x, e.y);
+			InsLogger.writeLog("Pointer Moved");
 		}
 	}
 	

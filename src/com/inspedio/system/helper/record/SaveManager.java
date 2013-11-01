@@ -148,14 +148,6 @@ public class SaveManager {
 		}
 	}
 	
-	public SaveDataObject getData(String Name){
-		int idx = this.searchDataId(Name);
-		if(idx != -1){
-			return (SaveDataObject) this.dataList.elementAt(idx);
-		}
-		return null;
-	}
-	
 	public boolean isDataExist(String Name){
 		return (this.searchDataId(Name) != -1);
 	}
@@ -173,6 +165,12 @@ public class SaveManager {
 		return foundIdx;
 	}
 	
-	
-	
+	public SaveDataObject getData(String Name){
+		int idx = this.searchDataId(Name);
+		if(idx != -1){
+			return (SaveDataObject) this.dataList.elementAt(idx);
+		}
+		return null;
+	}
+		
 }
