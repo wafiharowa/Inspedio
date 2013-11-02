@@ -8,6 +8,7 @@ import com.inspedio.enums.FontSize;
 import com.inspedio.enums.FontStyle;
 import com.inspedio.enums.VAlignment;
 import com.inspedio.system.core.InsCanvas;
+import com.inspedio.system.core.InsGlobal;
 
 /**
  * InsText represent simple Text for Drawing
@@ -23,7 +24,13 @@ public class InsText extends InsBasic{
 	
 	public InsText()
 	{
-		this("", 0, 0);
+		this("");
+	}
+	
+	public InsText(String Text)
+	{
+		this(Text, InsGlobal.middleX, InsGlobal.middleY);
+		
 	}
 	
 	public InsText(String Text, int X, int Y)

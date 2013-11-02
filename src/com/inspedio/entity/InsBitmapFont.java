@@ -65,7 +65,7 @@ public abstract class InsBitmapFont extends InsBasic{
 	
 	public InsBitmapFont(String imagePath, int fontWidth, int fontHeight, int maxSize, String Text)
 	{
-		super(0, 0, fontWidth, fontHeight);
+		super(InsGlobal.middleX, InsGlobal.middleY, fontWidth, fontHeight);
 		this.fontsheet = InsGlobal.cache.getImage(imagePath, fontWidth, fontHeight);
 		this.currentText = "";
 		this.length = 0;

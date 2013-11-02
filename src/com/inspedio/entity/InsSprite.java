@@ -67,9 +67,7 @@ public class InsSprite extends InsBasic{
 	
 	public InsSprite(String spritePath)
 	{
-		super(InsGlobal.middleX, InsGlobal.middleY, 0, 0);
-		this.init();
-		this.setImage(spritePath);
+		this(spritePath, InsGlobal.middleX, InsGlobal.middleY);
 	}
 	
 	private void init()
