@@ -1,7 +1,7 @@
 package com.inspedio.system.defaults;
 
 import com.inspedio.entity.InsShape;
-import com.inspedio.entity.basic.InsText;
+import com.inspedio.entity.InsText;
 import com.inspedio.enums.HAlignment;
 import com.inspedio.enums.VAlignment;
 import com.inspedio.system.core.InsCanvas;

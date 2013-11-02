@@ -120,7 +120,7 @@ public class InsGame implements Runnable {
 	 * @param	MaxFrameSkip		Maximum frame skip allowed. Standard = 5
 	 * @param	Loader				<code>InsLoader</code> instance used for Assets loading when creating state
 	 * @param	SaveLoad			<code>InsSave</code> instance used for save load data into RecordStore	
-	 * @param	ScreenOrientation	Either PORTRAIT or LANDSCAPE
+	 * @param	Mode				Either PORTRAIT or LANDSCAPE
 	 * 
 	 * @return	Reference to <code>InsGame</code> instance
 	 */

@@ -3,7 +3,7 @@ package com.inspedio.entity.ui;
 import javax.microedition.lcdui.Graphics;
 
 import com.inspedio.entity.InsShape;
-import com.inspedio.entity.basic.InsText;
+import com.inspedio.entity.InsText;
 import com.inspedio.entity.primitive.InsCallback;
 import com.inspedio.enums.FontSize;
 import com.inspedio.enums.FontStyle;

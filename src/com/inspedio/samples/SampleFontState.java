@@ -3,7 +3,7 @@ package com.inspedio.samples;
 import com.inspedio.entity.InsBitmapFont;
 import com.inspedio.entity.InsShape;
 import com.inspedio.entity.InsState;
-import com.inspedio.entity.basic.InsText;
+import com.inspedio.entity.InsText;
 import com.inspedio.entity.primitive.InsCallback;
 import com.inspedio.entity.ui.InsButton;
 import com.inspedio.enums.FontSize;
@@ -30,14 +30,16 @@ public class SampleFontState extends InsState{
 		this.add(bg);
 		
 		fontBig = new DefaultBitmapFontBig("SAMPLE FONT BIG", InsGlobal.middleX, InsGlobal.middleY - 100);
-		fontBig.setText(new String[]{"SAMPLE FOR", "FONT BIG"});
+		//fontBig.setText(new String[]{"SAMPLE FOR", "FONT BIG"});
+		fontBig.wrapText("SAMPLE FOR FONT BIG", 120);
 		
 		fontSmall = new DefaultBitmapFontSmall("SAMPLE FONT SMALL", InsGlobal.middleX, InsGlobal.middleY + 100);
 		fontSmall.setText(new String[]{"SAMPLE FOR", "FONT SMALL"});
 		
 		text = new InsText("SAMPLE TEXT", InsGlobal.middleX, InsGlobal.middleY);
 		text.setAlignment(HAlignment.CENTER, VAlignment.TOP);
-		text.setText(new String[]{"Sample For", "Basic Text"});
+		//text.setText(new String[]{"Sample For", "Basic Text"});
+		text.wrapText("This is Sample for Basic Text", 100);
 		
 		this.add(fontBig);
 		this.add(fontSmall);

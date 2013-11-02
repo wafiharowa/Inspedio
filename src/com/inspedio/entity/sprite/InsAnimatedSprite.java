@@ -69,7 +69,7 @@ public class InsAnimatedSprite extends InsSprite{
 	 * If there is already animation with that name, it become failed
 	 * 
 	 * @param	Name			Name of Animation
-	 * @param	frameSequence	Array of Integer which represent Frame Sequence (Frame start with index 0)
+	 * @param	FrameSequence	Array of Integer which represent Frame Sequence (Frame start with index 0)
 	 * @param	Callback		Callback Method to be played everytime animation ends. You can use null if you don't need callback 
 	 * 
 	 * @return true if success, false otherwise

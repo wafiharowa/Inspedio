@@ -14,9 +14,6 @@ public class InsProgressSprite extends InsSprite{
 	InsPoint progress;
 	public InsAlignment stretch;
 	
-	/**
-	 * @param	Stretch		Direction the stretch are started
-	 */
 	public InsProgressSprite(String spritePath) {
 		super(spritePath);
 		this.initProgress();

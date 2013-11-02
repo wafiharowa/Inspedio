@@ -1,14 +1,16 @@
-package com.inspedio.entity.basic;
+package com.inspedio.entity;
+
+import java.util.Vector;
 
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
 
-import com.inspedio.entity.InsBasic;
 import com.inspedio.enums.FontSize;
 import com.inspedio.enums.FontStyle;
 import com.inspedio.enums.VAlignment;
 import com.inspedio.system.core.InsCanvas;
 import com.inspedio.system.core.InsGlobal;
+import com.inspedio.system.helper.InsUtil;
 
 /**
  * InsText represent simple Text for Drawing
@@ -65,6 +67,36 @@ public class InsText extends InsBasic{
 		this.texts = Texts;
 		this.singleLine = false;
 		this.size.height = this.fontHeight * this.texts.length;
+	}
+	
+	/**
+	 * Wrap Text with given Maximum Width (in pixel)
+	 */
+	public void wrapText(String Text, int maxWidth){
+		if(Text.length() > 0){
+			String[] split = InsUtil.splitString(InsUtil.formatString(Text), " ");
+			
+			Vector v = new Vector();
+			String tmp = new String();
+			int count = 0;
+			for(int i = 0; i < split.length; i++){
+				if(count < maxWidth){
+					tmp += split[i] + " "; 
+					count += this.font.stringWidth(split[i] + " ");
+				} else {
+					v.addElement(tmp);
+					tmp = split[i] + " "; 
+					count = this.font.stringWidth(split[i] + " ");
+				}
+			}
+			
+			v.addElement(tmp);
+
+			this.setText(InsUtil.vectorToStringArray(v));
+			
+		} else {
+			this.setText(Text);
+		}
 	}
 	
 	public void setFont(int Color, FontSize Size, FontStyle Style){

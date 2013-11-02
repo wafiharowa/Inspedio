@@ -1,5 +1,7 @@
 package com.inspedio.entity;
 
+import java.util.Vector;
+
 import javax.microedition.lcdui.Graphics;
 
 import com.inspedio.entity.basic.InsImage;
@@ -7,6 +9,7 @@ import com.inspedio.enums.HAlignment;
 import com.inspedio.enums.TransformType;
 import com.inspedio.enums.VAlignment;
 import com.inspedio.system.core.InsGlobal;
+import com.inspedio.system.helper.InsUtil;
 import com.inspedio.system.helper.extension.InsAlignment;
 
 /**
@@ -163,6 +166,41 @@ public abstract class InsBitmapFont extends InsBasic{
 	public void setText(String[] Texts, int LineSpace)
 	{
 		this.setText(Texts);
+		this.lineSpace = LineSpace;
+	}
+	
+	/**
+	 * Wrap Text with given Maximum Width (in pixel)
+	 */
+	public void wrapText(String Text, int maxWidth){
+		if(Text.length() > 0){
+			String[] split = InsUtil.splitString(InsUtil.formatString(Text), " ");
+			int maxChar = maxWidth / this.fontsheet.frameWidth;
+			
+			Vector v = new Vector();
+			String tmp = new String();
+			int count = 0;
+			for(int i = 0; i < split.length; i++){
+				if(count < maxChar){
+					tmp += split[i] + " "; 
+					count += split[i].length() + 1;
+				} else {
+					v.addElement(tmp);
+					tmp = split[i] + " ";
+					count = split[i].length() + 1;
+				}
+			}
+			v.addElement(tmp);
+
+			this.setText(InsUtil.vectorToStringArray(v));
+			
+		} else {
+			this.setText(Text);
+		}
+	}
+	
+	public void wrapText(String Text, int maxWidth, int LineSpace){
+		this.wrapText(Text, maxWidth);
 		this.lineSpace = LineSpace;
 	}
 	

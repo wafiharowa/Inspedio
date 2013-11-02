@@ -176,12 +176,12 @@ public class InsUtil {
 	 * 
 	 * @return	trimmed String
 	 */
-	public static String trimString(String mystr)
+	public static String trimString(String str)
 	{
-		String[] splitter = InsUtil.splitString(mystr, " ");
-		mystr = InsUtil.combineString(splitter, "");
+		String[] splitter = InsUtil.splitString(str, " ");
+		str = InsUtil.combineString(splitter, "");
 		
-		return mystr;
+		return str;
 	}
 	
 	/**
