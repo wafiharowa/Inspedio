@@ -11,8 +11,10 @@ import com.inspedio.system.core.InsGame;
 import com.inspedio.system.core.InsGlobal;
 import com.inspedio.system.core.InsLoader;
 import com.inspedio.system.defaults.DefaultLoader;
+import com.inspedio.system.defaults.DefaultPause;
 import com.inspedio.system.defaults.DefaultSaveLoad;
 import com.inspedio.system.helper.InsLogger;
+import com.inspedio.system.helper.InsPause;
 import com.inspedio.system.helper.InsSave;
 
 
@@ -46,7 +48,11 @@ public abstract class InsMain extends MIDlet{
 	}
 	
 	protected void init(InsState InitialState, InsLoader Loader, InsSave SaveLoad, ScreenOrientation Mode, int FPS, int MaxFrameSkip){
-		InsGame.init(this, InitialState, FPS, MaxFrameSkip, Loader, SaveLoad, Mode);
+		InsGame.init(this, InitialState, FPS, MaxFrameSkip, Loader, SaveLoad, new DefaultPause(), Mode);
+	}
+	
+	protected void init(InsState InitialState, InsLoader Loader, InsSave SaveLoad, InsPause Pause, ScreenOrientation Mode, int FPS, int MaxFrameSkip){
+		InsGame.init(this, InitialState, FPS, MaxFrameSkip, Loader, SaveLoad, Pause, Mode);
 	}
 	
 	protected void startApp() throws MIDletStateChangeException {

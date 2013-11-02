@@ -7,10 +7,12 @@ import javax.microedition.midlet.MIDlet;
 
 import com.inspedio.entity.InsState;
 import com.inspedio.entity.basic.InsSound;
+import com.inspedio.enums.InputType;
 import com.inspedio.enums.ScreenOrientation;
 import com.inspedio.system.helper.InsCache;
 import com.inspedio.system.helper.InsCamera;
 import com.inspedio.system.helper.InsKeys;
+import com.inspedio.system.helper.InsPause;
 import com.inspedio.system.helper.InsPointer;
 import com.inspedio.system.helper.InsSave;
 import com.inspedio.system.helper.InsStats;
@@ -67,6 +69,10 @@ public class InsGlobal{
 	 */
 	public static InsSave save;
 	/**
+	 * A reference to a <code>InsPause</code> instance
+	 */
+	public static InsPause pause;
+	/**
 	 * Randomizer for general random usage
 	 */
 	public static Random randomizer;
@@ -122,6 +128,10 @@ public class InsGlobal{
 	 * Whether device has touch Screen support
 	 */
 	public static boolean hasTouchScreen;
+	/**
+	 * Whether device use touch or keypad
+	 */
+	public static InputType inputType;
 	
 	/**
 	 * Whether BGM muted or not

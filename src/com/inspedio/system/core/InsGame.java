@@ -11,6 +11,7 @@ import com.inspedio.system.defaults.InspedioLogoState;
 import com.inspedio.system.helper.InsCache;
 import com.inspedio.system.helper.InsCamera;
 import com.inspedio.system.helper.InsKeys;
+import com.inspedio.system.helper.InsPause;
 import com.inspedio.system.helper.InsPointer;
 import com.inspedio.system.helper.InsSave;
 import com.inspedio.system.helper.InsStats;
@@ -123,11 +124,11 @@ public class InsGame implements Runnable {
 	 * 
 	 * @return	Reference to <code>InsGame</code> instance
 	 */
-	public static InsGame init(MIDlet Midlet, InsState InitialState, int FPS, int MaxFrameSkip, InsLoader Loader, InsSave SaveLoad, ScreenOrientation Mode){
+	public static InsGame init(MIDlet Midlet, InsState InitialState, int FPS, int MaxFrameSkip, InsLoader Loader, InsSave SaveLoad, InsPause Pause, ScreenOrientation Mode){
 		try
 		{
 			if(instance == null){
-				instance = new InsGame(Midlet, InitialState, FPS, MaxFrameSkip, Loader, SaveLoad, Mode);
+				instance = new InsGame(Midlet, InitialState, FPS, MaxFrameSkip, Loader, SaveLoad, Pause, Mode);
 			} else {
 				throw new Exception("InsGame instance already initialized");
 			}
@@ -139,11 +140,13 @@ public class InsGame implements Runnable {
 	}
 	
 	
-	private InsGame(MIDlet Midlet, InsState InitialState, int FPS, int MaxFrameSkip, InsLoader Loader, InsSave SaveLoad, ScreenOrientation Mode)
+	private InsGame(MIDlet Midlet, InsState InitialState, int FPS, int MaxFrameSkip, InsLoader Loader, InsSave SaveLoad, InsPause Pause, ScreenOrientation Mode)
 	{
 		initGame(Mode);
 		InsGlobal.midlet = Midlet;
 		InsGlobal.save = SaveLoad;
+		InsGlobal.pause = Pause;
+		InsGlobal.pause.showPause(InsGlobal.inputType);
 		this.requestedState = new InspedioLogoState();
 		this.loader = Loader;
 		this.loader.create();
@@ -345,12 +348,12 @@ public class InsGame implements Runnable {
 			{
 				this.state.draw(InsGlobal.graphic);
 			}
+			if(InsGlobal.paused){
+				InsGlobal.pause.draw(InsGlobal.graphic);
+			}
 			if(InsGlobal.displayFPS)
 			{
 				this.canvas.drawFPS();
-			}
-			if(InsGlobal.paused){
-				this.canvas.drawPauseText();
 			}
 			this.canvas.flushGraphics();
 			InsGlobal.stats.renderCount++;

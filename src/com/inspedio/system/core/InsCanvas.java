@@ -7,6 +7,7 @@ import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.GameCanvas;
 import javax.microedition.lcdui.game.Sprite;
 
+import com.inspedio.enums.InputType;
 import com.inspedio.enums.ScreenOrientation;
 import com.inspedio.system.helper.extension.InsPointerEvent;
 
@@ -81,6 +82,11 @@ public class InsCanvas extends GameCanvas{
 		this.game = Game;
 		this.displayMode = Mode;
 		InsGlobal.hasTouchScreen = this.hasPointerEvents();
+		if(InsGlobal.hasTouchScreen){
+			InsGlobal.inputType = InputType.TOUCH;
+		} else {
+			InsGlobal.inputType = InputType.KEYPAD;
+		}
 		this.setScreenSize(getWidth(), getHeight());
 	}
 	
@@ -177,24 +183,6 @@ public class InsCanvas extends GameCanvas{
 		this.bufferGraphics.drawString("Process : " + InsGlobal.stats.currentUpdateTime + " / " + InsGlobal.stats.currentRenderTime, 5, deviceHeight - (3 * offset), (Graphics.TOP|Graphics.LEFT));
 		this.bufferGraphics.drawString("Sleep : " + InsGlobal.stats.currentSleepTime, 5, deviceHeight - (2 * offset), (Graphics.TOP|Graphics.LEFT));
 		this.bufferGraphics.drawString("Time : " + InsGlobal.stats.currentGameTime, 5, deviceHeight - offset, (Graphics.TOP|Graphics.LEFT));
-	}
-	
-	public void drawPauseText(){
-		this.bufferGraphics.setColor(0x555555);
-		this.bufferGraphics.fillRoundRect((InsGlobal.screenWidth - 200) / 2, (InsGlobal.screenHeight - 140) / 2, 200, 140, 40, 40);
-		this.bufferGraphics.setColor(COLOR_WHITE);
-		this.bufferGraphics.fillRoundRect(((InsGlobal.screenWidth - 200) / 2) + 5, ((InsGlobal.screenHeight - 140) / 2) + 5, 190, 130, 40, 40);
-		this.bufferGraphics.setColor(COLOR_BLACK);
-		this.bufferGraphics.setFont(InsCanvas.infoFont);
-		this.bufferGraphics.drawString("GAME IS PAUSED", InsGlobal.screenWidth / 2, (InsGlobal.screenHeight / 2) - 20, Graphics.BOTTOM | Graphics.HCENTER);
-		this.bufferGraphics.setFont(InsCanvas.defaultFont);
-		if(InsGlobal.hasTouchScreen){
-			this.bufferGraphics.drawString("Touch anywhere", InsGlobal.screenWidth / 2, (InsGlobal.screenHeight / 2), Graphics.TOP | Graphics.HCENTER);
-			this.bufferGraphics.drawString("to continue", InsGlobal.screenWidth / 2, (InsGlobal.screenHeight / 2) + 20, Graphics.TOP | Graphics.HCENTER);
-		} else {
-			this.bufferGraphics.drawString("Press anything", InsGlobal.screenWidth / 2, (InsGlobal.screenHeight / 2), Graphics.TOP | Graphics.HCENTER);
-			this.bufferGraphics.drawString("to continue", InsGlobal.screenWidth / 2, (InsGlobal.screenHeight / 2) + 20, Graphics.TOP | Graphics.HCENTER);
-		}
 	}
 	
 	protected void hideNotify()
