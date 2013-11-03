@@ -133,7 +133,6 @@ public class InsSprite extends InsBasic{
 		return InsUtil.isCollideBox(this, this.camera);
 	}
 	
-	
 	/**
 	 * Set Image and automatically adjust Width and Height
 	 */
@@ -152,8 +151,18 @@ public class InsSprite extends InsBasic{
 		this.setSize(this.image.frameWidth, this.image.frameHeight);
 	}
 	
+	/**
+	 * Set Transformation State
+	 */
 	public void setTransform(TransformType Transform){
 		this.transform = Transform;
+	}
+	
+	/**
+	 * Set Frame
+	 */
+	public void setFrame(int Frame){
+		this.frame = Frame;
 	}
 	
 	/**
