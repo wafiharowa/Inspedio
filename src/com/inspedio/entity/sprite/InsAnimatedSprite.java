@@ -147,6 +147,19 @@ public class InsAnimatedSprite extends InsSprite{
 		}
 	}
 	
+	public boolean stopAnimation(String Name){
+		if(this.currentAnimation != null)	
+		{
+			if(this.currentAnimation.name.equals(Name))
+			{
+				this.currentAnimation = null;
+				return true;
+			}
+		}
+		return false;
+		
+	}
+	
 	/**
 	 * Set frame to next frame in animation sequence
 	 */
