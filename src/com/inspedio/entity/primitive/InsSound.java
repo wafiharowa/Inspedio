@@ -1,4 +1,4 @@
-package com.inspedio.entity.basic;
+package com.inspedio.entity.primitive;
 
 import java.io.InputStream;
 

@@ -6,7 +6,7 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.midlet.MIDlet;
 
 import com.inspedio.entity.InsState;
-import com.inspedio.entity.basic.InsSound;
+import com.inspedio.entity.primitive.InsSound;
 import com.inspedio.enums.InputType;
 import com.inspedio.enums.ScreenOrientation;
 import com.inspedio.system.helper.InsCache;

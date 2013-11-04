@@ -4,7 +4,7 @@ import java.util.Vector;
 
 import javax.microedition.lcdui.Graphics;
 
-import com.inspedio.entity.basic.InsImage;
+import com.inspedio.entity.primitive.InsImage;
 import com.inspedio.enums.HAlignment;
 import com.inspedio.enums.TransformType;
 import com.inspedio.enums.VAlignment;

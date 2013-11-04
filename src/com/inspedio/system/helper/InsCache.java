@@ -2,8 +2,8 @@ package com.inspedio.system.helper;
 
 import java.util.Vector;
 
-import com.inspedio.entity.basic.InsImage;
-import com.inspedio.entity.basic.InsSound;
+import com.inspedio.entity.primitive.InsImage;
+import com.inspedio.entity.primitive.InsSound;
 
 /**
  * This is helper class for caching assets

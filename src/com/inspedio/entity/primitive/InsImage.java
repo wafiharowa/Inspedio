@@ -1,12 +1,11 @@
 
-package com.inspedio.entity.basic;
+package com.inspedio.entity.primitive;
 
 import java.io.IOException;
 
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
-import com.inspedio.entity.primitive.InsSize;
 import com.inspedio.enums.TransformType;
 import com.inspedio.system.helper.InsUtil;
 import com.inspedio.system.helper.extension.InsAlignment;

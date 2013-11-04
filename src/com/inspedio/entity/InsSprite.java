@@ -2,7 +2,7 @@ package com.inspedio.entity;
 
 import javax.microedition.lcdui.Graphics;
 
-import com.inspedio.entity.basic.InsImage;
+import com.inspedio.entity.primitive.InsImage;
 import com.inspedio.enums.TransformType;
 import com.inspedio.system.core.InsGlobal;
 import com.inspedio.system.helper.InsCamera;
