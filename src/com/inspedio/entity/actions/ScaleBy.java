@@ -39,6 +39,10 @@ public class ScaleBy extends InsAction{
 	public static ScaleBy create(int FrameCount, int ScaleX, int ScaleY, InsCallback Callback){
 		return new ScaleBy(FrameCount, ScaleX, ScaleY, Callback);
 	}
+	
+	public static ScaleBy create(int FrameCount, int ScaleX, int ScaleY){
+		return create(FrameCount, ScaleX, ScaleY, null);
+	}
 
 	public int act() {
 		if(remainingCount > 0){

@@ -40,6 +40,10 @@ public class MoveBy extends InsAction{
 		return new MoveBy(FrameCount, DistanceX, DistanceY, Callback);
 	}
 	
+	public static MoveBy create(int FrameCount, int DistanceX, int DistanceY){
+		return create(FrameCount, DistanceX, DistanceY, null);
+	}
+	
 	public int act(){
 		if(remainingCount > 0){
 			this.move(stepX, stepY);

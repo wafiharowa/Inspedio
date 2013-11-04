@@ -17,4 +17,8 @@ public class ScaleTo extends InsAction{
 	public static ScaleBy create(InsShape Target, int FrameCount, int ScaleX, int ScaleY, InsCallback Callback){
 		return new ScaleBy(FrameCount, ScaleX - Target.size.width, ScaleY - Target.size.height, Callback);
 	}
+	
+	public static ScaleBy create(InsShape Target, int FrameCount, int ScaleX, int ScaleY){
+		return create(Target, FrameCount, ScaleX, ScaleY, null);
+	}
 }

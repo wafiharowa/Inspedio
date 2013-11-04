@@ -24,7 +24,7 @@ public class Delay extends InsAction{
 	}
 	
 	public static Delay create(int DelayDuration){
-		return new Delay(DelayDuration, null);
+		return create(DelayDuration, null);
 	}
 	
 

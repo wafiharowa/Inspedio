@@ -25,6 +25,10 @@ public class Parallel extends InsAction{
 		return new Parallel(ActionList, Callback);
 	}
 	
+	public static Parallel create(InsAction[] ActionList){
+		return create(ActionList, null);
+	}
+	
 	public int act() {
 		remainingCount = -1;
 		for(int i = 0; i < this.actions.length; i++){

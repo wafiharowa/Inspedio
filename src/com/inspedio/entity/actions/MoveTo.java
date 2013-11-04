@@ -21,6 +21,10 @@ public class MoveTo extends InsAction{
 	public static MoveBy create(InsBasic Target, int FrameCount, int DestinationX, int DestinationY, InsCallback Callback){
 		return new MoveBy(FrameCount, DestinationX - Target.position.x, DestinationY - Target.position.y, Callback);
 	}
+	
+	public static MoveBy create(InsBasic Target, int FrameCount, int DestinationX, int DestinationY){
+		return create(Target, FrameCount, DestinationX, DestinationY, null);
+	}
 
 	public int act() {
 		this.finishAction();

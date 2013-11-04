@@ -26,6 +26,10 @@ public class Sequence extends InsAction{
 		return new Sequence(ActionList, Callback);
 	}
 	
+	public static Sequence create(InsAction[] ActionList){
+		return create(ActionList, null);
+	}
+	
 	public int act() {
 		if(this.actions.length > 0){
 			if(this.currentAction < this.actions.length - 1){
