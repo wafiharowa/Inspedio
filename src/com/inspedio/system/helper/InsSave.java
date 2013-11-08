@@ -41,12 +41,14 @@ public abstract class InsSave extends SaveManager{
 	
 	
 	public void save(){
+		if(this.autoClear){this.clear();}
 		this.assignData();
 		super.save();
 		if(this.autoClear){this.clear();}
 	}
 	
 	public boolean load(){
+		if(this.autoClear){this.clear();}
 		boolean success = super.load();
 		if(success){
 			this.retrieveData();

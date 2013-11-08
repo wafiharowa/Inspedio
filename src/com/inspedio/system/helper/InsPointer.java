@@ -25,13 +25,14 @@ public class InsPointer {
 	protected Vector pressedEvents;
 	protected Vector releasedEvents;
 	protected Vector draggedEvents;
-	
+	protected Vector holdEvents;
 	
 	public InsPointer(){
 		super();
 		this.pressedEvents = new Vector();
 		this.releasedEvents = new Vector();
 		this.draggedEvents = new Vector();
+		this.holdEvents = new Vector();
 		this.holdList = new Vector();
 	}
 	
@@ -39,20 +40,21 @@ public class InsPointer {
 		this.pressedEvents.removeAllElements();
 		this.releasedEvents.removeAllElements();
 		this.draggedEvents.removeAllElements();
+		this.holdEvents.removeAllElements();
 	}
 	
 	public void addEvent(InsPointerEvent e){
 		if(e.type == InsPointerEvent.PRESSED){
 			this.pressedEvents.addElement(e);
-			this.addTouchPoint(e);
+			this.holdEvents.addElement(e);
 		}
 		else if(e.type == InsPointerEvent.RELEASED){
 			this.releasedEvents.addElement(e);
-			this.removeTouchPoint(e);
+			this.holdEvents.addElement(e);
 		}
 		else if(e.type == InsPointerEvent.DRAGGED){
 			this.draggedEvents.addElement(e);
-			this.moveTouchPoint(e);
+			this.holdEvents.addElement(e);
 		}
 	}
 	
@@ -70,6 +72,19 @@ public class InsPointer {
 		dragged = new InsPointerEvent[this.draggedEvents.size()];
 		for(int i = 0; i < dragged.length; i++){
 			dragged[i] = (InsPointerEvent) this.draggedEvents.elementAt(i);
+		}
+		
+		for(int i = 0; i < this.holdEvents.size(); i++){
+			InsPointerEvent e = (InsPointerEvent) this.draggedEvents.elementAt(i);
+			if(e.type == InsPointerEvent.PRESSED){
+				this.addTouchPoint(e);
+			}
+			else if(e.type == InsPointerEvent.RELEASED){
+				this.removeTouchPoint(e);
+			}
+			else if(e.type == InsPointerEvent.DRAGGED){
+				this.moveTouchPoint(e);
+			}
 		}
 		
 		hold = new InsPoint[this.holdList.size()];

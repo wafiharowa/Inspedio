@@ -54,9 +54,8 @@ public class SaveManager {
 			dataStream.writeInt(this.dataCount);
 			
 			InsLogger.writeLog("Writing SaveData Header Sucess", LogLevel.PROCESS);
-			InsLogger.writeLog("Record Name : " + this.recordName, LogLevel.PROCESS);
-			InsLogger.writeLog("Record Version : " + this.recordVersion, LogLevel.PROCESS);
-			InsLogger.writeLog("Item Count : " + this.dataCount, LogLevel.PROCESS);
+			InsLogger.writeLog("Record Name : " + this.recordName + ", Version : " + this.recordVersion, LogLevel.PROCESS);
+			InsLogger.writeLog("SaveData Item Count : " + this.dataCount, LogLevel.PROCESS);
 			
 			for(int i = 0; i < dataList.size(); i++)
 			{
@@ -104,10 +103,8 @@ public class SaveManager {
 				String dataVersion = dataStream.readUTF();
 				this.dataCount = dataStream.readInt();
 				InsLogger.writeLog("Reading SaveData Header Sucess", LogLevel.PROCESS);
-				InsLogger.writeLog("Record Name : " + dataName, LogLevel.PROCESS);
-				InsLogger.writeLog("Previous Version : " + dataVersion, LogLevel.PROCESS);
-				InsLogger.writeLog("Current Version : " + this.recordVersion, LogLevel.PROCESS);
-				InsLogger.writeLog("Item Count : " + this.dataCount, LogLevel.PROCESS);
+				InsLogger.writeLog("Record Name : " + dataName + ", Version : " + dataVersion, LogLevel.PROCESS);
+				InsLogger.writeLog("SaveData Item Count : " + this.dataCount, LogLevel.PROCESS);
 				
 				for(int i = 0; i < dataCount; i++){
 					SaveDataObject obj = new SaveDataObject(dataStream);

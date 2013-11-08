@@ -17,11 +17,13 @@ public class SaveDataObject {
 	private int intData;
 	private double doubleData;
 	private String stringData;
+	private long longData;
 	
 	private boolean[] boolArrData = null;
 	private int[] intArrData = null;
 	private double[] doubleArrData = null;
 	private String[] stringArrData = null;
+	private long[] longArrData = null;
 	
 	public SaveDataObject(){
 		
@@ -52,6 +54,11 @@ public class SaveDataObject {
 		this.setData(Data);
 	}
 	
+	public SaveDataObject(String Name, long Data){
+		this(Name);
+		this.setData(Data);
+	}
+	
 	public SaveDataObject(String Name, boolean[] Data){
 		this(Name);
 		this.setData(Data);
@@ -68,6 +75,11 @@ public class SaveDataObject {
 	}
 	
 	public SaveDataObject(String Name, String[] Data){
+		this(Name);
+		this.setData(Data);
+	}
+	
+	public SaveDataObject(String Name, long[] Data){
 		this(Name);
 		this.setData(Data);
 	}
@@ -97,27 +109,36 @@ public class SaveDataObject {
 					this.stringData = stream.readUTF();
 					break;
 				case 4:
+					this.longData = stream.readLong();
+					break;
+				case 5:
 					this.boolArrData = new boolean[this.dataLength];
 					for(int i = 0; i < this.dataLength; i++){
 						this.boolArrData[i] = stream.readBoolean();
 					}
 					break;
-				case 5:
+				case 6:
 					this.intArrData = new int[this.dataLength];
 					for(int i = 0; i < this.dataLength; i++){
 						this.intArrData[i] = stream.readInt();
 					}
 					break;
-				case 6:
+				case 7:
 					this.doubleArrData = new double[this.dataLength];
 					for(int i = 0; i < this.dataLength; i++){
 						this.doubleArrData[i] = stream.readDouble();
 					}
 					break;
-				case 7:
+				case 8:
 					this.stringArrData = new String[this.dataLength];
 					for(int i = 0; i < this.dataLength; i++){
 						this.stringArrData[i] = stream.readUTF();
+					}
+					break;
+				case 9:
+					this.longArrData = new long[this.dataLength];
+					for(int i = 0; i < this.dataLength; i++){
+						this.longArrData[i] = stream.readLong();
 					}
 					break;
 			}
@@ -149,23 +170,31 @@ public class SaveDataObject {
 					stream.writeUTF(this.stringData);
 					break;
 				case 4:
+					stream.writeLong(this.longData);
+					break;
+				case 5:
 					for(int i = 0; i < this.dataLength; i++){
 						stream.writeBoolean(this.boolArrData[i]);
 					}
 					break;
-				case 5:
+				case 6:
 					for(int i = 0; i < this.dataLength; i++){
 						stream.writeInt(this.intArrData[i]);
 					}
 					break;
-				case 6:
+				case 7:
 					for(int i = 0; i < this.dataLength; i++){
 						stream.writeDouble(this.doubleArrData[i]);
 					}
 					break;
-				case 7:
+				case 8:
 					for(int i = 0; i < this.dataLength; i++){
 						stream.writeUTF(this.stringArrData[i]);
+					}
+					break;
+				case 9:
+					for(int i = 0; i < this.dataLength; i++){
+						stream.writeLong(this.longArrData[i]);
 					}
 					break;
 			}
@@ -183,6 +212,8 @@ public class SaveDataObject {
 			this.setData(obj.doubleData);
 		} else if(obj.type == SaveDataType.STRING){
 			this.setData(obj.stringData);
+		} else if(obj.type == SaveDataType.LONG){
+			this.setData(obj.longData);
 		} else if(obj.type == SaveDataType.BOOLEAN_ARRAY){
 			this.setData(obj.boolArrData);
 		} else if(obj.type == SaveDataType.INTEGER_ARRAY){
@@ -191,7 +222,9 @@ public class SaveDataObject {
 			this.setData(obj.doubleArrData);
 		} else if(obj.type == SaveDataType.STRING_ARRAY){
 			this.setData(obj.stringArrData);
-		}
+		} else if(obj.type == SaveDataType.LONG_ARRAY){
+			this.setData(obj.longArrData);
+		} 
 	}
 	
 	public void setData(boolean data){
@@ -215,7 +248,13 @@ public class SaveDataObject {
 	public void setData(String data){
 		this.stringData = data;
 		this.type = SaveDataType.STRING;
-		this.dataLength = data.length();
+		this.dataLength = 1;
+	}
+	
+	public void setData(long data){
+		this.longData = data;
+		this.type = SaveDataType.LONG;
+		this.dataLength = 1;
 	}
 	
 	public void setData(boolean[] data){
@@ -239,6 +278,12 @@ public class SaveDataObject {
 	public void setData(String[] data){
 		this.stringArrData = data;
 		this.type = SaveDataType.STRING_ARRAY;
+		this.dataLength = data.length;
+	}
+	
+	public void setData(long[] data){
+		this.longArrData = data;
+		this.type = SaveDataType.LONG_ARRAY;
 		this.dataLength = data.length;
 	}
 	
@@ -274,6 +319,20 @@ public class SaveDataObject {
 		try{
 			if(this.type == SaveDataType.DOUBLE){
 				return this.doubleData;
+			} else {
+				throw new Exception("Record Data is in different format");
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public long GetDataLong(){
+		try{
+			if(this.type == SaveDataType.LONG){
+				return this.longData;
 			} else {
 				throw new Exception("Record Data is in different format");
 			}
@@ -344,6 +403,20 @@ public class SaveDataObject {
 		try{
 			if(this.type == SaveDataType.STRING_ARRAY){
 				return this.stringArrData;
+			} else {
+				throw new Exception("Record Data is in different format");
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public long[] GetDataLongArray(){
+		try{
+			if(this.type == SaveDataType.LONG_ARRAY){
+				return this.longArrData;
 			} else {
 				throw new Exception("Record Data is in different format");
 			}
