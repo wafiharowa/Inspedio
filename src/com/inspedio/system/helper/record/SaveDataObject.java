@@ -100,40 +100,40 @@ public class SaveDataObject {
 					this.boolData = stream.readBoolean();
 					break;
 				case 1:
-					this.intData = stream.readInt();
-					break;
-				case 2:
-					this.doubleData = stream.readDouble();
-					break;
-				case 3:
-					this.stringData = stream.readUTF();
-					break;
-				case 4:
-					this.longData = stream.readLong();
-					break;
-				case 5:
 					this.boolArrData = new boolean[this.dataLength];
 					for(int i = 0; i < this.dataLength; i++){
 						this.boolArrData[i] = stream.readBoolean();
 					}
 					break;
-				case 6:
+				case 2:
+					this.intData = stream.readInt();
+					break;
+				case 3:
 					this.intArrData = new int[this.dataLength];
 					for(int i = 0; i < this.dataLength; i++){
 						this.intArrData[i] = stream.readInt();
 					}
 					break;
-				case 7:
+				case 4:
+					this.doubleData = stream.readDouble();
+					break;
+				case 5:
 					this.doubleArrData = new double[this.dataLength];
 					for(int i = 0; i < this.dataLength; i++){
 						this.doubleArrData[i] = stream.readDouble();
 					}
 					break;
-				case 8:
+				case 6:
+					this.stringData = stream.readUTF();
+					break;
+				case 7:
 					this.stringArrData = new String[this.dataLength];
 					for(int i = 0; i < this.dataLength; i++){
 						this.stringArrData[i] = stream.readUTF();
 					}
+					break;
+				case 8:
+					this.longData = stream.readLong();
 					break;
 				case 9:
 					this.longArrData = new long[this.dataLength];
@@ -161,36 +161,36 @@ public class SaveDataObject {
 					stream.writeBoolean(this.boolData);
 					break;
 				case 1:
-					stream.writeInt(this.intData);
-					break;
-				case 2:
-					stream.writeDouble(this.doubleData);
-					break;
-				case 3:
-					stream.writeUTF(this.stringData);
-					break;
-				case 4:
-					stream.writeLong(this.longData);
-					break;
-				case 5:
 					for(int i = 0; i < this.dataLength; i++){
 						stream.writeBoolean(this.boolArrData[i]);
 					}
 					break;
-				case 6:
+				case 2:
+					stream.writeInt(this.intData);
+					break;
+				case 3:
 					for(int i = 0; i < this.dataLength; i++){
 						stream.writeInt(this.intArrData[i]);
 					}
 					break;
-				case 7:
+				case 4:
+					stream.writeDouble(this.doubleData);
+					break;
+				case 5:
 					for(int i = 0; i < this.dataLength; i++){
 						stream.writeDouble(this.doubleArrData[i]);
 					}
 					break;
-				case 8:
+				case 6:
+					stream.writeUTF(this.stringData);
+					break;
+				case 7:
 					for(int i = 0; i < this.dataLength; i++){
 						stream.writeUTF(this.stringArrData[i]);
 					}
+					break;
+				case 8:
+					stream.writeLong(this.longData);
 					break;
 				case 9:
 					for(int i = 0; i < this.dataLength; i++){
