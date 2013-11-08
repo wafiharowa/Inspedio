@@ -109,6 +109,10 @@ public class InsText extends InsBasic{
 			this.size.height = this.fontHeight * this.texts.length;
 		}
 	}
+	
+	public void setColor(int Color){
+		this.color = Color;
+	}
 		
 	public void draw(Graphics g)
 	{

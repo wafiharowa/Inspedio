@@ -167,7 +167,7 @@ public class InsAnimatedSprite extends InsSprite{
 	{
 		if(this.currentAnimation != null)
 		{
-			this.frame = this.currentAnimation.nextFrame();
+			this.setFrame(this.currentAnimation.nextFrame());
 		}
 	}
 }
