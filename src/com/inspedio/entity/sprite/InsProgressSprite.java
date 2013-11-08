@@ -13,6 +13,16 @@ public class InsProgressSprite extends InsAnimatedSprite{
 	InsPoint progress;
 	public InsAlignment stretch;
 	
+	public InsProgressSprite(String spritePath) {
+		super(spritePath);
+		this.initProgress();
+	}
+	
+	public InsProgressSprite(String spritePath, int X, int Y) {
+		super(spritePath, X, Y);
+		this.initProgress();
+	}
+	
 	public InsProgressSprite(String spritePath, int X, int Y, int Width, int Height) {
 		super(spritePath, X, Y, Width, Height);
 		this.initProgress();

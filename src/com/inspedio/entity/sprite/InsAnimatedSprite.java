@@ -24,6 +24,18 @@ public class InsAnimatedSprite extends InsSprite{
 	 */
 	public InsAnim currentAnimation;	
 	
+	public InsAnimatedSprite(String spritePath)
+	{
+		super(spritePath);
+		this.initAnimation();
+	}
+	
+	public InsAnimatedSprite(String spritePath, int X, int Y)
+	{
+		super(spritePath, X, Y);
+		this.initAnimation();
+	}
+	
 	public InsAnimatedSprite(String spritePath, int X, int Y, int Width, int Height)
 	{
 		super(spritePath, X, Y, Width, Height);
