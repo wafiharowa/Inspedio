@@ -75,7 +75,7 @@ public class InsPointer {
 		}
 		
 		for(int i = 0; i < this.holdEvents.size(); i++){
-			InsPointerEvent e = (InsPointerEvent) this.draggedEvents.elementAt(i);
+			InsPointerEvent e = (InsPointerEvent) this.holdEvents.elementAt(i);
 			if(e.type == InsPointerEvent.PRESSED){
 				this.addTouchPoint(e);
 			}
