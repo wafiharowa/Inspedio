@@ -123,7 +123,7 @@ public class InsAnimatedSprite extends InsSprite{
 			{
 				this.currentAnimation = (InsAnim) this.animations.elementAt(idx);
 				this.currentAnimation.currentFrame = 0;
-				this.frame = this.currentAnimation.getFrame();
+				this.setFrame(this.currentAnimation.getFrame());
 				return true;
 			}
 			else
@@ -136,7 +136,7 @@ public class InsAnimatedSprite extends InsSprite{
 				{
 					this.currentAnimation = (InsAnim) this.animations.elementAt(idx);
 					this.currentAnimation.currentFrame = 0;
-					this.frame = this.currentAnimation.getFrame();
+					this.setFrame(this.currentAnimation.getFrame());
 					return true;
 				}
 			}

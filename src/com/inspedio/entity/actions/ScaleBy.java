@@ -10,6 +10,7 @@ package com.inspedio.entity.actions;
  * @version 1.0
  */
 import com.inspedio.entity.InsAction;
+import com.inspedio.entity.InsShape;
 import com.inspedio.entity.primitive.InsCallback;
 import com.inspedio.system.helper.InsUtil;
 
@@ -56,17 +57,17 @@ public class ScaleBy extends InsAction{
 	}
 
 	private void scale(double X, double Y){
-		this.target.addSize((int) X, (int)Y);
+		((InsShape) this.target).addSize((int) X, (int)Y);
 		this.offsetX += X - (int) X;
 		this.offsetY += Y - (int) Y;
 		this.remainingX -= X;
 		this.remainingY -= Y;
 		if(InsUtil.Absolute((int) offsetX) >= 1){
-			this.target.addSize((int) this.offsetX, 0);
+			((InsShape) this.target).addSize((int) this.offsetX, 0);
 			this.offsetX -= (int) this.offsetX;
 		}
 		if(InsUtil.Absolute((int) offsetY) >= 1){
-			this.target.addSize(0, (int) this.offsetY);
+			((InsShape) this.target).addSize(0, (int) this.offsetY);
 			this.offsetY -= (int) this.offsetY;
 		}
 	}
