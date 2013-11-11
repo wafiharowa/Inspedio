@@ -18,18 +18,16 @@ public class SaveDataObject {
 	private double doubleData;
 	private String stringData;
 	private long longData;
+	private byte byteData;
 	
 	private boolean[] boolArrData = null;
 	private int[] intArrData = null;
 	private double[] doubleArrData = null;
 	private String[] stringArrData = null;
 	private long[] longArrData = null;
+	private byte[] byteArrData = null;
 	
-	public SaveDataObject(){
-		
-	}
-	
-	public SaveDataObject(String Name){
+	protected SaveDataObject(String Name){
 		this.name = Name;
 		this.nameLength = Name.length();
 	}
@@ -59,6 +57,11 @@ public class SaveDataObject {
 		this.setData(Data);
 	}
 	
+	public SaveDataObject(String Name, byte Data){
+		this(Name);
+		this.setData(Data);
+	}
+	
 	public SaveDataObject(String Name, boolean[] Data){
 		this(Name);
 		this.setData(Data);
@@ -80,6 +83,11 @@ public class SaveDataObject {
 	}
 	
 	public SaveDataObject(String Name, long[] Data){
+		this(Name);
+		this.setData(Data);
+	}
+	
+	public SaveDataObject(String Name, byte[] Data){
 		this(Name);
 		this.setData(Data);
 	}
@@ -141,6 +149,15 @@ public class SaveDataObject {
 						this.longArrData[i] = stream.readLong();
 					}
 					break;
+				case 10:
+					this.byteData = stream.readByte();
+					break;
+				case 11:
+					this.byteArrData = new byte[this.dataLength];
+					for(int i = 0; i < this.dataLength; i++){
+						this.byteArrData[i] = stream.readByte();
+					}
+					break;
 			}
 			
 		} catch (IOException e) {
@@ -197,6 +214,14 @@ public class SaveDataObject {
 						stream.writeLong(this.longArrData[i]);
 					}
 					break;
+				case 10:
+					stream.writeByte(this.byteData);
+					break;
+				case 11:
+					for(int i = 0; i < this.dataLength; i++){
+						stream.writeByte(this.byteArrData[i]);
+					}
+					break;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -214,6 +239,8 @@ public class SaveDataObject {
 			this.setData(obj.stringData);
 		} else if(obj.type == SaveDataType.LONG){
 			this.setData(obj.longData);
+		} else if(obj.type == SaveDataType.BYTE){
+			this.setData(obj.byteData);
 		} else if(obj.type == SaveDataType.BOOLEAN_ARRAY){
 			this.setData(obj.boolArrData);
 		} else if(obj.type == SaveDataType.INTEGER_ARRAY){
@@ -224,6 +251,8 @@ public class SaveDataObject {
 			this.setData(obj.stringArrData);
 		} else if(obj.type == SaveDataType.LONG_ARRAY){
 			this.setData(obj.longArrData);
+		} else if(obj.type == SaveDataType.BYTE_ARRAY){
+			this.setData(obj.byteArrData);
 		} 
 	}
 	
@@ -257,6 +286,12 @@ public class SaveDataObject {
 		this.dataLength = 1;
 	}
 	
+	public void setData(byte data){
+		this.byteData = data;
+		this.type = SaveDataType.BYTE;
+		this.dataLength = 1;
+	}
+	
 	public void setData(boolean[] data){
 		this.boolArrData = data;
 		this.type = SaveDataType.BOOLEAN_ARRAY;
@@ -284,6 +319,12 @@ public class SaveDataObject {
 	public void setData(long[] data){
 		this.longArrData = data;
 		this.type = SaveDataType.LONG_ARRAY;
+		this.dataLength = data.length;
+	}
+	
+	public void setData(byte[] data){
+		this.byteArrData = data;
+		this.type = SaveDataType.BYTE_ARRAY;
 		this.dataLength = data.length;
 	}
 	
@@ -329,6 +370,20 @@ public class SaveDataObject {
 		return 0;
 	}
 	
+	public String GetDataString(){
+		try{
+			if(this.type == SaveDataType.STRING){
+				return this.stringData;
+			} else {
+				throw new Exception("Record Data is in different format");
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+	
 	public long GetDataLong(){
 		try{
 			if(this.type == SaveDataType.LONG){
@@ -343,10 +398,10 @@ public class SaveDataObject {
 		return 0;
 	}
 	
-	public String GetDataString(){
+	public byte GetDataByte(){
 		try{
-			if(this.type == SaveDataType.STRING){
-				return this.stringData;
+			if(this.type == SaveDataType.BYTE){
+				return this.byteData;
 			} else {
 				throw new Exception("Record Data is in different format");
 			}
@@ -354,7 +409,7 @@ public class SaveDataObject {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "";
+		return 0;
 	}
 	
 	public boolean[] GetDataBooleanArray(){
@@ -417,6 +472,20 @@ public class SaveDataObject {
 		try{
 			if(this.type == SaveDataType.LONG_ARRAY){
 				return this.longArrData;
+			} else {
+				throw new Exception("Record Data is in different format");
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public byte[] GetDataByteArray(){
+		try{
+			if(this.type == SaveDataType.BYTE_ARRAY){
+				return this.byteArrData;
 			} else {
 				throw new Exception("Record Data is in different format");
 			}

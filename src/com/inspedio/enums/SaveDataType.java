@@ -17,6 +17,11 @@ public class SaveDataType extends InsEnum{
 	public static final SaveDataType LONG = new SaveDataType("LONG", 8);
 	public static final SaveDataType LONG_ARRAY = new SaveDataType("LONG_ARRAY", 9);
 	
+	public static final SaveDataType BYTE = new SaveDataType("BYTE", 10);
+	public static final SaveDataType BYTE_ARRAY = new SaveDataType("BYTE_ARRAY", 11);
+	
+	
+	
 	protected SaveDataType(String Name, int Value) {
 		super(Name, Value);
 	}
@@ -43,6 +48,11 @@ public class SaveDataType extends InsEnum{
 				return LONG;
 			case 9:
 				return LONG_ARRAY;
+			case 10:
+				return BYTE;
+			case 11:
+				return BYTE_ARRAY;
+					
 			default:
 				return null;
 		}
