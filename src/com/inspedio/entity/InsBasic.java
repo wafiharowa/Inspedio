@@ -178,6 +178,10 @@ public class InsBasic extends InsAtom{
 		}
 	}
 	
+	public void clearAction(){
+		this.action = null;
+	}
+	
 	/**
 	 * Override this to implement keyHandler
 	 */
