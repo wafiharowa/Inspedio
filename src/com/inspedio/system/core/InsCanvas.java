@@ -35,8 +35,7 @@ public class InsCanvas extends GameCanvas{
 	public Graphics bufferGraphics;
 	
 	private ScreenOrientation displayMode;
-	private boolean rotateCanvas;
-	private boolean fixedOrientation = false;
+	private boolean rotateCanvas = false;
 	
 	public static final Font defaultFont = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL);
 	public static final Font infoFont = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE);
@@ -97,41 +96,44 @@ public class InsCanvas extends GameCanvas{
 	
 	protected void setScreenSize(int width, int height)
 	{
-		if(!fixedOrientation){
-			
+		this.rotateCanvas = false;
+		if(this.displayMode == ScreenOrientation.PORTRAIT){
 			if(width > height){
-				if(this.displayMode == ScreenOrientation.PORTRAIT){
-					this.rotateCanvas = true;
-				}
+				this.rotateCanvas = true;
 			}
-			else if(width < height){
-				if(this.displayMode == ScreenOrientation.LANDSCAPE){
-					this.rotateCanvas = true;
-				}
+		} else if(this.displayMode == ScreenOrientation.LANDSCAPE){
+			if(width < height){
+				this.rotateCanvas = true;
 			}
-			
-			if(rotateCanvas){
-				InsGlobal.screenWidth = this.deviceWidth = height;
-				InsGlobal.screenHeight = this.deviceHeight = width;
+		} else if(this.displayMode == ScreenOrientation.DYNAMIC){
+			if(width <= height){
+				this.displayMode = ScreenOrientation.PORTRAIT;
 			} else {
-				InsGlobal.screenWidth = this.deviceWidth = width;
-				InsGlobal.screenHeight = this.deviceHeight = height;
+				this.displayMode = ScreenOrientation.LANDSCAPE;
 			}
-			
-			InsGlobal.screenOrientation = this.deviceOrientation = this.displayMode;
-			
-			this.bufferImage = Image.createImage(this.deviceWidth, this.deviceHeight);
-			this.bufferGraphics = this.bufferImage.getGraphics();
-			this.graphic = getGraphics();
-			
-			fixedOrientation = true;
-			
-			InsGlobal.middleX = InsGlobal.screenWidth / 2;
-			InsGlobal.middleY = InsGlobal.screenHeight / 2;
-			
-			System.out.println("Screen Width : " + InsGlobal.screenWidth);
-			System.out.println("Screen Height : " + InsGlobal.screenHeight);
 		}
+		
+		if(rotateCanvas){
+			InsGlobal.screenWidth = this.deviceWidth = height;
+			InsGlobal.screenHeight = this.deviceHeight = width;
+		} else {
+			InsGlobal.screenWidth = this.deviceWidth = width;
+			InsGlobal.screenHeight = this.deviceHeight = height;
+		}
+		
+		InsGlobal.screenOrientation = this.deviceOrientation = this.displayMode;
+		
+		this.bufferImage = Image.createImage(this.deviceWidth, this.deviceHeight);
+		this.bufferGraphics = this.bufferImage.getGraphics();
+		this.graphic = getGraphics();
+		
+		
+		InsGlobal.middleX = InsGlobal.screenWidth / 2;
+		InsGlobal.middleY = InsGlobal.screenHeight / 2;
+		
+		System.out.println("Screen Width : " + InsGlobal.screenWidth);
+		System.out.println("Screen Height : " + InsGlobal.screenHeight);
+		
 	}
 	
 	/**
