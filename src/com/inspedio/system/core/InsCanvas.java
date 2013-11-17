@@ -91,7 +91,7 @@ public class InsCanvas extends GameCanvas{
 	
 	protected void sizeChanged(int width, int height)
 	{
-		this.setScreenSize(width, height);
+		//this.setScreenSize(width, height);
 	}
 	
 	protected void setScreenSize(int width, int height)
