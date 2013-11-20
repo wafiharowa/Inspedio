@@ -78,7 +78,7 @@ public class InsBasic extends InsAtom{
 	 */
 	public void addSize(int Width, int Height)
 	{
-		this.size.setSize(this.size.width + Width, this.size.height + Height);
+		this.setSize(this.size.width + Width, this.size.height + Height);
 	}
 	
 	/**
@@ -94,7 +94,7 @@ public class InsBasic extends InsAtom{
 	 */
 	public void addPosition(int X, int Y)
 	{
-		this.position.setPoint(this.position.x + X, this.position.y + Y);
+		this.setPosition(this.position.x + X, this.position.y + Y);
 	}
 	
 	public void setAlignment(HAlignment horizontal, VAlignment vertical){
