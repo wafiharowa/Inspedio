@@ -162,7 +162,7 @@ public class InsGroup extends InsAtom{
 		for(int i = this.members.size()-1; i >= 0; i--){
 			InsAtom atom = (InsAtom) this.members.elementAt(i);
 			if(atom.exists && atom.active){
-				if(atom.onPointerPressed(X, Y))break;
+				if(atom.onPointerPressed(X, Y)) return true;
 			}
 		}
 		return false;
@@ -172,7 +172,7 @@ public class InsGroup extends InsAtom{
 		for(int i = this.members.size()-1; i >= 0; i--){
 			InsAtom atom = (InsAtom) this.members.elementAt(i);
 			if(atom.exists && atom.active){
-				if(atom.onPointerReleased(X, Y))break;
+				if(atom.onPointerReleased(X, Y)) return true;
 			}
 		}
 		return false;
@@ -182,7 +182,7 @@ public class InsGroup extends InsAtom{
 		for(int i = this.members.size()-1; i >= 0; i--){
 			InsAtom atom = (InsAtom) this.members.elementAt(i);
 			if(atom.exists && atom.active){
-				if(atom.onPointerDragged(X, Y))break;
+				if(atom.onPointerDragged(X, Y)) return true;
 			}
 		}
 		return false;
@@ -192,7 +192,7 @@ public class InsGroup extends InsAtom{
 		for(int i = this.members.size()-1; i >= 0; i--){
 			InsAtom atom = (InsAtom) this.members.elementAt(i);
 			if(atom.exists && atom.active){
-				if(atom.onPointerHold(X, Y))break;
+				if(atom.onPointerHold(X, Y)) return true;
 			}
 		}
 		return false;
