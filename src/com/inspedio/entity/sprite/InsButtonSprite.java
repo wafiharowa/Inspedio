@@ -111,6 +111,11 @@ public class InsButtonSprite extends InsSprite{
 		this.onHoldCallback = c;
 	}
 	
+	public void click(){
+		if(onPressedCallback != null){
+			this.onPressedCallback.call();
+		}
+	}
 	
 
 }

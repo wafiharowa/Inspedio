@@ -142,6 +142,11 @@ public class InsButton extends InsShape{
 		this.caption.setText(Text);
 	}
 	
+	public void click(){
+		if(onPressedCallback != null){
+			this.onPressedCallback.call();
+		}
+	}
 	
 	
 }
