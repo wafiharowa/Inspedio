@@ -22,6 +22,8 @@ public class InsKeys {
 	 */
 	public boolean[] currentKeyState;
 	
+	protected boolean lock = false;
+	
 	public InsKeys()
 	{
 		this.lastKeyState = new boolean[KEY_COUNT];
@@ -50,6 +52,7 @@ public class InsKeys {
 	 */
 	public void updateKeyState(int keystate)
 	{
+		this.lock = false;
 		// Set currentKey to lastKey
 		for(int i = 0; i < KEY_COUNT; i++)
 		{
@@ -77,6 +80,7 @@ public class InsKeys {
 	 */
 	public boolean keyPressed(KeyCode code)
 	{
+		if(lock) return false;
 		return this.currentKeyState[code.getValue()];
 	}
 	
@@ -85,6 +89,7 @@ public class InsKeys {
 	 */
 	public boolean justPressed(KeyCode code)
 	{
+		if(lock) return false;
 		return (this.currentKeyState[code.getValue()] && !this.lastKeyState[code.getValue()]);
 	}
 	
@@ -93,6 +98,7 @@ public class InsKeys {
 	 */
 	public boolean keyReleased(KeyCode code)
 	{
+		if(lock) return false;
 		return !this.currentKeyState[code.getValue()];
 	}
 	
@@ -101,10 +107,12 @@ public class InsKeys {
 	 */
 	public boolean justReleased(KeyCode code)
 	{
+		if(lock) return false;
 		return (!this.currentKeyState[code.getValue()] && this.lastKeyState[code.getValue()]);
 	}
 	
 	public boolean isAnythingPressed(){
+		if(lock) return false;
 		boolean pressed = false;
 		for(int i = 0; i < KEY_COUNT; i++)
 		{
@@ -115,5 +123,13 @@ public class InsKeys {
 		}
 		
 		return pressed;
+	}
+	
+	/**
+	 * Lock key for one frame. This caused all method to return false.
+	 * Useful for blocking other object to get method for one frame.
+	 */
+	public void lockKeys(){
+		this.lock = true;
 	}
 }
