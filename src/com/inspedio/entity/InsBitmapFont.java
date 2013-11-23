@@ -181,7 +181,7 @@ public abstract class InsBitmapFont extends InsBasic{
 			String tmp = new String();
 			int count = 0;
 			for(int i = 0; i < split.length; i++){
-				if(count < maxChar){
+				if(count + split[i].length() + 1 < maxChar){
 					tmp += split[i] + " "; 
 					count += split[i].length() + 1;
 				} else {

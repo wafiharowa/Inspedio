@@ -80,7 +80,7 @@ public class InsText extends InsBasic{
 			String tmp = new String();
 			int count = 0;
 			for(int i = 0; i < split.length; i++){
-				if(count < maxWidth){
+				if(count + this.font.stringWidth(split[i] + " ") < maxWidth){
 					tmp += split[i] + " "; 
 					count += this.font.stringWidth(split[i] + " ");
 				} else {
