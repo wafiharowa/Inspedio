@@ -6,6 +6,8 @@ import javax.microedition.media.Manager;
 import javax.microedition.media.MediaException;
 import javax.microedition.media.Player;
 
+import com.inspedio.enums.AudioEncode;
+import com.inspedio.enums.AudioType;
 import com.inspedio.system.core.InsGlobal;
 
 /**
@@ -17,14 +19,6 @@ import com.inspedio.system.core.InsGlobal;
  */
 public class InsSound {
 
-	public static final int BGM = -1;
-	public static final int SFX = 1;
-	
-	public static final String AUDIO_MIDI = "audio/midi";
-	public static final String AUDIO_WAV = "audio/x-wav";
-	public static final String AUDIO_MP3 = "audio/mpeg";
-	
-	
 	/**
 	 * The file path to audio files
 	 */
@@ -32,11 +26,11 @@ public class InsSound {
 	/**
 	 * Encoding type of audio
 	 */
-	public String encoding;
+	public AudioEncode encoding;
 	/**
 	 * Whether it is a BGM or SFX
 	 */
-	public int type;
+	public AudioType type;
 	/**
 	 * reference to audio class
 	 */
@@ -49,7 +43,7 @@ public class InsSound {
 	 *  @param	audioEncoding	Encoding Type of audio
 	 *  @param	audioType		Whether it is BGM or SFX. -1 for BGM, 1 for SFX
 	 */
-	public InsSound(String audioPath, String audioEncoding, int audioType)
+	public InsSound(String audioPath, AudioEncode audioEncoding, AudioType audioType)
 	{
 		this.filepath = audioPath;
 		this.encoding = audioEncoding;
@@ -62,8 +56,8 @@ public class InsSound {
 		try
 		{
 	      InputStream in = getClass().getResourceAsStream(this.filepath);
-	      this.player = Manager.createPlayer(in, this.encoding);
-	      this.player.setLoopCount(this.type);
+	      this.player = Manager.createPlayer(in, this.encoding.toString());
+	      this.player.setLoopCount(this.type.getValue());
 	      this.player.realize();
 	      this.player.prefetch();
 	      
@@ -89,14 +83,14 @@ public class InsSound {
 	{
 		try
 		{
-			if(this.type == BGM)
+			if(this.type == AudioType.BGM)
 			{
 				if(!InsGlobal.muteBGM)
 				{
 					this.player.start();
 				}
 			}
-			else if(this.type == SFX)
+			else if(this.type == AudioType.SFX)
 			{
 				if(!InsGlobal.muteSFX)
 				{

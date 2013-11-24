@@ -4,6 +4,8 @@ import java.util.Vector;
 
 import com.inspedio.entity.primitive.InsImage;
 import com.inspedio.entity.primitive.InsSound;
+import com.inspedio.enums.AudioEncode;
+import com.inspedio.enums.AudioType;
 
 /**
  * This is helper class for caching assets
@@ -227,7 +229,7 @@ public class InsCache {
 	 * 
 	 * @return	The Sound with given parameters
 	 */
-	public InsSound getSound(String audioPath, String audioEncoding, int audioType)
+	public InsSound getSound(String audioPath, AudioEncode audioEncoding, AudioType audioType)
 	{
 		InsSound s = null;
 		try
@@ -260,7 +262,7 @@ public class InsCache {
 	 * 
 	 * @return	TRUE if Sound is found and deleted, FALSE otherwise
 	 */
-	public boolean deleteSound(String audioPath, String audioEncoding, int audioType)
+	public boolean deleteSound(String audioPath, AudioEncode audioEncoding, AudioType audioType)
 	{
 		boolean deleted = false;
 		try
@@ -293,7 +295,7 @@ public class InsCache {
 	 * 
 	 * @return	Index of Sound found, or -1 if nothing found
 	 */
-	protected int checkSound(String audioPath, String audioEncoding, int audioType)
+	protected int checkSound(String audioPath, AudioEncode audioEncoding, AudioType audioType)
 	{
 		int foundIdx = -1;
 		for(int i = 0; i < this.soundList.size(); i++)

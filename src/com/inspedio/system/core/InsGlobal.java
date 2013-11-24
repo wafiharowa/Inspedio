@@ -7,6 +7,8 @@ import javax.microedition.midlet.MIDlet;
 
 import com.inspedio.entity.InsState;
 import com.inspedio.entity.primitive.InsSound;
+import com.inspedio.enums.AudioEncode;
+import com.inspedio.enums.AudioType;
 import com.inspedio.enums.InputType;
 import com.inspedio.enums.ScreenOrientation;
 import com.inspedio.system.helper.InsCache;
@@ -203,7 +205,7 @@ public class InsGlobal{
 	 * 
 	 * @return TRUe if BGM succesfully set, FALSE if BGM already set, or unable to set
 	 */
-	public static boolean setBGM(String audioPath, String audioEncoding, int audioType)
+	public static boolean setAudio(String audioPath, AudioEncode audioEncoding, AudioType audioType)
 	{
 		if(InsGlobal.bgm == null)
 		{
@@ -218,7 +220,7 @@ public class InsGlobal{
 			}
 			else
 			{
-				InsGlobal.unsetBGM();
+				InsGlobal.unsetAudio();
 				InsGlobal.bgm = new InsSound(audioPath, audioEncoding, audioType);
 				return true;
 			}
@@ -228,7 +230,7 @@ public class InsGlobal{
 	/**
 	 * Stop and destroy current BGM
 	 */
-	public static void unsetBGM()
+	public static void unsetAudio()
 	{
 		if(InsGlobal.bgm != null)
 		{
@@ -241,7 +243,7 @@ public class InsGlobal{
 	/**
 	 * Start current BGM
 	 */
-	public static void startBGM()
+	public static void startAudio()
 	{
 		if(InsGlobal.bgm != null)
 		{
@@ -252,7 +254,7 @@ public class InsGlobal{
 	/**
 	 * Start current BGM
 	 */
-	public static void stopBGM()
+	public static void stopAudio()
 	{
 		if(InsGlobal.bgm != null)
 		{
@@ -263,7 +265,7 @@ public class InsGlobal{
 	/**
 	 * Reset current BGM
 	 */
-	public static void resetBGM()
+	public static void resetAudio()
 	{
 		if(InsGlobal.bgm != null)
 		{
@@ -295,7 +297,7 @@ public class InsGlobal{
 	public static void hideGame()
 	{
 		InsGlobal.hidden = true;
-		InsGlobal.stopBGM();
+		InsGlobal.stopAudio();
 		InsGlobal.pauseGame();
 	}
 	
@@ -305,7 +307,7 @@ public class InsGlobal{
 	public static void showGame()
 	{
 		InsGlobal.hidden = false;
-		InsGlobal.startBGM();
+		InsGlobal.startAudio();
 	}
 	
 	/**
