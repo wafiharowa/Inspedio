@@ -143,8 +143,10 @@ public class InsButton extends InsShape{
 	}
 	
 	public void click(){
-		if(onPressedCallback != null){
-			this.onPressedCallback.call();
+		if(this.active && this.exists){
+			if(onPressedCallback != null){
+				this.onPressedCallback.call();
+			}
 		}
 	}
 	
