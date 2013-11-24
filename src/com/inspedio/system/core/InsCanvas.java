@@ -131,6 +131,8 @@ public class InsCanvas extends GameCanvas{
 		InsGlobal.middleX = InsGlobal.screenWidth / 2;
 		InsGlobal.middleY = InsGlobal.screenHeight / 2;
 		
+		InsGlobal.isScreenRotated = this.rotateCanvas;
+		
 		System.out.println("Screen Width : " + InsGlobal.screenWidth);
 		System.out.println("Screen Height : " + InsGlobal.screenHeight);
 		
