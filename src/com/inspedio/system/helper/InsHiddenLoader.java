@@ -30,7 +30,6 @@ public class InsHiddenLoader implements Runnable{
 	public void run()
 	{
 		InsGlobal.cache.clearCache();
-		System.gc();
 		try {
 			Thread.sleep(200);
 		} catch (InterruptedException e) {

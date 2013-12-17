@@ -41,7 +41,7 @@ public class InsSound {
 	 * 
 	 *  @param	audioPath		The path to audio file
 	 *  @param	audioEncoding	Encoding Type of audio
-	 *  @param	audioType		Whether it is BGM or SFX. -1 for BGM, 1 for SFX
+	 *  @param	audioType		Whether it is BGM or SFX.
 	 */
 	public InsSound(String audioPath, AudioEncode audioEncoding, AudioType audioType)
 	{

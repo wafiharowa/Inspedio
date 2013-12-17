@@ -106,17 +106,17 @@ public class InsImage{
 		}
 	}
 	
-	public void drawFrameRegion(Graphics g, int Frame, int PercentageX, int PercentageY, int X, int Y, InsAlignment alignment, TransformType transform, InsAlignment Stretch){
+	public void drawFrameRegion(Graphics g, int Frame, int PercentageX, int PercentageY, int X, int Y, TransformType transform, InsAlignment Stretch){
 		if(Frame >= 0){
 			Frame = Frame % this.frameTotal;
 			int x_src = ((Frame % this.frameCountX) * this.frameWidth) + (int) ((Stretch.horizontal.getValue() * (100 - PercentageX) * this.frameWidth) / 200);
 			int y_src = (((int) (Frame / this.frameCountX)) * this.frameHeight) + (int) ((Stretch.vertical.getValue() * (100 - PercentageY) * this.frameHeight) / 200);
-			this.drawRegion(g, x_src, y_src, (this.frameWidth * PercentageX) / 100, (this.frameHeight * PercentageY) / 100, transform, X, Y, alignment);
+			this.drawRegion(g, x_src, y_src, (this.frameWidth * PercentageX) / 100, (this.frameHeight * PercentageY) / 100, transform, X, Y, Stretch);
 		} else {
 			Frame = InsUtil.Absolute(Frame) % this.frameTotal;
 			int x_src = ((Frame % this.frameCountX) * this.frameWidth) + (int) ((Stretch.horizontal.getValue() * (100 - PercentageX) * this.frameWidth) / 200);
 			int y_src = (((int) (Frame / this.frameCountX)) * this.frameHeight) + (int) ((Stretch.vertical.getValue() * (100 - PercentageY) * this.frameHeight) / 200);
-			this.drawRegion(g, x_src, y_src, (this.frameWidth * PercentageX) / 100, (this.frameHeight * PercentageY) / 100, TransformType.getMirror(transform), X, Y, alignment);
+			this.drawRegion(g, x_src, y_src, (this.frameWidth * PercentageX) / 100, (this.frameHeight * PercentageY) / 100, TransformType.getMirror(transform), X, Y, Stretch);
 		}
 	}
 	public void destroy()

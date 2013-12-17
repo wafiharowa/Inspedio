@@ -34,6 +34,7 @@ public class InsCache {
 	{
 		this.soundList.removeAllElements();
 		this.imageList.removeAllElements();
+		System.gc();
 	}
 	
 	/**

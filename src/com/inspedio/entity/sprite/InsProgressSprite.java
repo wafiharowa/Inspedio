@@ -58,16 +58,25 @@ public class InsProgressSprite extends InsAnimatedSprite{
 		{
 			if(absolute)
 			{
-				this.image.drawFrameRegion(g, this.frame, this.progress.x, this.progress.y, this.position.x, this.position.y, this.align, this.transform, this.stretch);
+				this.image.drawFrameRegion(g, this.frame, this.progress.x, this.progress.y, this.getStretchAnchorX(), this.getStretchAnchorY(), this.transform, this.stretch);
 			}
 			else
 			{
 				
 				if(this.isOnScreen())
 				{
-					this.image.drawFrameRegion(g, this.frame, this.progress.x, this.progress.y, this.position.x - this.camera.getLeft(), this.position.y - this.camera.getTop(), this.align, this.transform, this.stretch);
+					this.image.drawFrameRegion(g, this.frame, this.progress.x, this.progress.y, this.getStretchAnchorX() - this.camera.getLeft(), this.getStretchAnchorY() - this.camera.getTop(), this.transform, this.stretch);
 				}
 			}	
 		}
 	}
+	
+	public int getStretchAnchorX(){
+		return (getLeft() + ((this.stretch.horizontal.getValue() * this.size.width) / 2));
+	}
+	
+	public int getStretchAnchorY(){
+		return (getTop() + ((this.stretch.vertical.getValue() * this.size.height) / 2));
+	}
+	
 }

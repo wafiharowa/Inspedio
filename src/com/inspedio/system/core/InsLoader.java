@@ -83,7 +83,6 @@ public abstract class InsLoader extends InsState implements Runnable{
 	{
 		InsGlobal.loadProgress = 20;
 		InsGlobal.cache.clearCache();
-		System.gc();
 		try {
 			Thread.sleep(200);
 		} catch (InterruptedException e) {
