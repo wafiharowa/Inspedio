@@ -18,4 +18,16 @@ public class HAlignment extends InsEnum{
 	public static int getTextAnchor(VAlignment Align){
 		return Align.anchor;
 	}
+	
+	public static HAlignment getReverse(HAlignment hor){
+		if(hor == LEFT){
+			return RIGHT;
+		} else if(hor == RIGHT){
+			return LEFT;
+		} else if(hor == CENTER){
+			return CENTER;
+		}
+		return null;
+	}
+	
 }

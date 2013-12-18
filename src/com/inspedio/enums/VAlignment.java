@@ -14,4 +14,15 @@ public class VAlignment extends InsEnum{
 		super(Name, Value);
 		this.anchor = AnchorPoint;
 	}
+	
+	public static VAlignment getReverse(VAlignment ver){
+		if(ver == TOP){
+			return BOTTOM;
+		} else if(ver == BOTTOM){
+			return TOP;
+		} else if(ver == MIDDLE){
+			return MIDDLE;
+		} 
+		return null;
+	}
 }
