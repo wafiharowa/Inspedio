@@ -10,8 +10,8 @@ import com.inspedio.system.helper.extension.InsAlignment;
 
 public class InsProgressSprite extends InsAnimatedSprite{
 
-	InsPoint progress;
-	public InsAlignment stretch;
+	protected InsPoint progress;
+	protected InsAlignment stretch;
 	
 	public InsProgressSprite(String spritePath) {
 		super(spritePath);
