@@ -17,8 +17,8 @@ public class InsProgressSprite extends InsAnimatedSprite{
 	
 	public InsProgressSprite(String spritePath) {
 		super(spritePath);
-		this.initProgress();
 		this.mirror = new InsAlignment();
+		this.initProgress();
 	}
 	
 	public InsProgressSprite(String spritePath, int X, int Y) {
