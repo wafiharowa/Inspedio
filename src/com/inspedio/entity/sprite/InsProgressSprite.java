@@ -4,18 +4,21 @@ import javax.microedition.lcdui.Graphics;
 
 import com.inspedio.entity.primitive.InsPoint;
 import com.inspedio.enums.HAlignment;
+import com.inspedio.enums.TransformType;
 import com.inspedio.enums.VAlignment;
 import com.inspedio.system.helper.InsUtil;
 import com.inspedio.system.helper.extension.InsAlignment;
 
 public class InsProgressSprite extends InsAnimatedSprite{
 
+	protected InsAlignment mirror;
 	protected InsPoint progress;
 	protected InsAlignment stretch;
 	
 	public InsProgressSprite(String spritePath) {
 		super(spritePath);
 		this.initProgress();
+		this.mirror = new InsAlignment();
 	}
 	
 	public InsProgressSprite(String spritePath, int X, int Y) {
@@ -38,6 +41,7 @@ public class InsProgressSprite extends InsAnimatedSprite{
 	 */
 	public void setStrecth(HAlignment horiz, VAlignment vert){
 		this.stretch.setAlignment(horiz, vert);
+		this.refreshMirror();
 	}
 	
 	/**
@@ -52,31 +56,46 @@ public class InsProgressSprite extends InsAnimatedSprite{
 		this.setProgress(this.progress.x + progressX, this.progress.y + progressY);
 	}
 	
+	public void setTransform(TransformType Transform){
+		super.setTransform(Transform);
+		this.refreshMirror();
+	}
+	
+	protected void refreshMirror(){
+		if(this.transform == TransformType.NONE){
+			this.mirror.setAlignment(this.stretch.horizontal, this.stretch.vertical);
+		} else if(this.transform == TransformType.MIRROR){
+			this.mirror.setAlignment(HAlignment.getReverse(this.stretch.horizontal), this.stretch.vertical);
+		} else if(this.transform == TransformType.MIRROR_ROTATED_180){
+			this.mirror.setAlignment(this.stretch.horizontal, VAlignment.getReverse(this.stretch.vertical));
+		}
+	}
+	
 	public void draw(Graphics g)
 	{
 		if(this.image != null)
 		{
 			if(absolute)
 			{
-				this.image.drawFrameRegion(g, this.frame, this.progress.x, this.progress.y, this.getStretchAnchorX(), this.getStretchAnchorY(), this.stretch, this.transform, this.stretch);
+				this.image.drawFrameRegion(g, this.frame, this.progress.x, this.progress.y, this.getStretchAnchorX(), this.getStretchAnchorY(), this.mirror, this.transform, this.stretch);
 			}
 			else
 			{
 				
 				if(this.isOnScreen())
 				{
-					this.image.drawFrameRegion(g, this.frame, this.progress.x, this.progress.y, this.getStretchAnchorX() - this.camera.getLeft(), this.getStretchAnchorY() - this.camera.getTop(), this.stretch, this.transform, this.stretch);
+					this.image.drawFrameRegion(g, this.frame, this.progress.x, this.progress.y, this.getStretchAnchorX() - this.camera.getLeft(), this.getStretchAnchorY() - this.camera.getTop(), this.mirror, this.transform, this.stretch);
 				}
 			}	
 		}
 	}
 	
 	public int getStretchAnchorX(){
-		return (getLeft() + ((this.stretch.horizontal.getValue() * this.size.width) / 2));
+		return (getLeft() + ((this.mirror.horizontal.getValue() * this.size.width) / 2));
 	}
 	
 	public int getStretchAnchorY(){
-		return (getTop() + ((this.stretch.vertical.getValue() * this.size.height) / 2));
+		return (getTop() + ((this.mirror.vertical.getValue() * this.size.height) / 2));
 	}
 	
 }
