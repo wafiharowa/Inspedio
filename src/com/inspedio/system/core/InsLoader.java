@@ -52,7 +52,7 @@ public abstract class InsLoader extends InsState implements Runnable{
 		if(this.currentProgress == 100)
 		{
 			this.progressChanged(this.currentProgress);
-			this.finishLoad();
+			this.onProgressComplete();
 			InsGlobal.loadProgress = 0;
 		}
 		else
@@ -70,6 +70,10 @@ public abstract class InsLoader extends InsState implements Runnable{
 	 * Changes loading depend on current progress
 	 */
 	public abstract void progressChanged(int CurrentProgress);
+	
+	public void onProgressComplete(){
+		this.finishLoad();
+	}
 	
 	public void finishLoad()
 	{
