@@ -40,9 +40,6 @@ public class InspedioLogoState extends InsState{
 			if(!ready){
 				this.logo.setAction(Delay.create(InsGlobal.game.idealFPS, new InsCallback() {
 					public void call() {
-						if(InsGlobal.save.autoLoad){
-							InsGlobal.save.load();
-						}
 						InsGlobal.game.switchState(false);
 					}
 				}));

@@ -147,7 +147,6 @@ public class InsGame implements Runnable {
 		InsGlobal.save = SaveLoad;
 		InsGlobal.pause = Pause;
 		InsGlobal.pause.showPause(InsGlobal.inputType);
-		this.requestedState = new InspedioLogoState();
 		this.loader = Loader;
 		this.loader.create();
 		this.loader.init();
@@ -164,8 +163,14 @@ public class InsGame implements Runnable {
 		this.rightSoftKeyPressed = false;
 		this.stop = false;
 		
+		if(InsGlobal.save.autoLoad){
+			InsGlobal.save.load();
+		}
+		
+		this.requestedState = new InspedioLogoState();
 		this.switchState(false);
 		this.requestedState = InitialState;
+		//this.switchState(false);
 	}
 	
 	/**

@@ -148,6 +148,10 @@ public class InsGlobal{
 	 */
 	public static boolean displayFPS = true;
 	/**
+	 * Set this to FALSE to disable Global pause Behavior
+	 */
+	public static boolean enablePause = true;
+	/**
 	 * Set this to change FPS Display Color
 	 */
 	public static int FPS_COLOR = InsCanvas.COLOR_BLACK;
@@ -315,7 +319,9 @@ public class InsGlobal{
 	 */
 	public static void pauseGame()
 	{
-		InsGlobal.paused = true;
+		if(enablePause){
+			InsGlobal.paused = true;
+		}
 		InsGlobal.game.state.pause();
 	}
 	

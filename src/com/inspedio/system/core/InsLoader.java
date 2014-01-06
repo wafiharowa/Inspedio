@@ -61,6 +61,7 @@ public abstract class InsLoader extends InsState implements Runnable{
 			if(incr > 0)
 			{
 				this.currentProgress += Math.min(this.maxIncrement, incr);
+				this.currentProgress = Math.min(100, Math.max(0, this.currentProgress));
 			}
 			this.progressChanged(this.currentProgress);
 		}
