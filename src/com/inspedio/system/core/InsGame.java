@@ -167,10 +167,14 @@ public class InsGame implements Runnable {
 			InsGlobal.save.load();
 		}
 		
-		this.requestedState = new InspedioLogoState();
-		this.switchState(false);
-		this.requestedState = InitialState;
-		//this.switchState(false);
+		if(InsGlobal.useLogo){
+			this.requestedState = new InspedioLogoState();
+			this.switchState(false);
+			this.requestedState = InitialState;
+		} else {
+			this.requestedState = InitialState;
+			this.switchState(false);
+		}
 	}
 	
 	/**

@@ -152,6 +152,10 @@ public class InsGlobal{
 	 */
 	public static boolean enablePause = true;
 	/**
+	 * DO NOT Change this Value unless you have direct permission
+	 */
+	public static boolean useLogo = true;
+	/**
 	 * Set this to change FPS Display Color
 	 */
 	public static int FPS_COLOR = InsCanvas.COLOR_BLACK;
