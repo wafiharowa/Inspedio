@@ -80,13 +80,18 @@ public class InsText extends InsBasic{
 			String tmp = new String();
 			int count = 0;
 			for(int i = 0; i < split.length; i++){
-				if(count + this.font.stringWidth(split[i] + " ") < maxWidth){
-					tmp += split[i] + " "; 
-					count += this.font.stringWidth(split[i] + " ");
+				if(count + this.font.stringWidth(" " + split[i]) < maxWidth){
+					if(i == 0){
+						tmp = split[i];
+						count = this.font.stringWidth(split[i]);
+					} else {
+						tmp += " " + split[i];
+						count += this.font.stringWidth(" " + split[i]);
+					}
 				} else {
 					v.addElement(tmp);
-					tmp = split[i] + " "; 
-					count = this.font.stringWidth(split[i] + " ");
+					tmp = split[i]; 
+					count = this.font.stringWidth(split[i]);
 				}
 			}
 			

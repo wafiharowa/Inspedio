@@ -30,7 +30,6 @@ public class SampleFontState extends InsState{
 		this.add(bg);
 		
 		fontBig = new DefaultBitmapFontBig("SAMPLE FONT BIG", InsGlobal.middleX, InsGlobal.middleY - 100);
-		//fontBig.setText(new String[]{"SAMPLE FOR", "FONT BIG"});
 		fontBig.wrapText("SAMPLE FOR FONT BIG", 120);
 		
 		fontSmall = new DefaultBitmapFontSmall("SAMPLE FONT SMALL", InsGlobal.middleX, InsGlobal.middleY + 100);
@@ -38,7 +37,6 @@ public class SampleFontState extends InsState{
 		
 		text = new InsText("SAMPLE TEXT", InsGlobal.middleX, InsGlobal.middleY);
 		text.setAlignment(HAlignment.CENTER, VAlignment.TOP);
-		//text.setText(new String[]{"Sample For", "Basic Text"});
 		text.wrapText("This is Sample for Basic Text", 100);
 		
 		this.add(fontBig);

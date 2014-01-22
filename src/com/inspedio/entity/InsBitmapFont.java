@@ -182,16 +182,22 @@ public abstract class InsBitmapFont extends InsBasic{
 			int count = 0;
 			for(int i = 0; i < split.length; i++){
 				if(count + split[i].length() + 1 < maxChar){
-					tmp += split[i] + " "; 
-					count += split[i].length() + 1;
+					if(i == 0){
+						tmp = split[i];
+						count = split[i].length();
+					} else {
+						tmp += " " + split[i];
+						count += split[i].length() + 1;
+					}
 				} else {
 					v.addElement(tmp);
-					tmp = split[i] + " ";
-					count = split[i].length() + 1;
+					tmp = split[i]; 
+					count = split[i].length();
 				}
 			}
+			
 			v.addElement(tmp);
-
+			
 			this.setText(InsUtil.vectorToStringArray(v));
 			
 		} else {
