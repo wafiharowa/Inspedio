@@ -1,7 +1,6 @@
 package com.inspedio.system.helper;
 
-import java.lang.ref.WeakReference;
-import java.util.Vector;
+import java.util.Hashtable;
 
 import com.inspedio.entity.primitive.InsImage;
 import com.inspedio.entity.primitive.InsSound;
@@ -16,32 +15,34 @@ import com.inspedio.enums.AudioType;
  */
 public class InsCache {
 
-	public Vector soundList;
-	public Vector imageList;
+	private Hashtable soundList  = new Hashtable();
+	private Hashtable imageList = new Hashtable();
+	
+	private static InsCache instance = null;
 	
 	/**
 	 * Construct InsAssets
 	 */
-	public InsCache()
+	private InsCache()
 	{
-		this.soundList = new Vector();
-		this.imageList = new Vector();
 	}
+	
+	public static InsCache getInstance(){
+		if(instance == null){
+			instance = new InsCache();
+		}
+		return instance;
+	}
+	
 	
 	/**
 	 * Remove all Cache
 	 */
 	public void clearCache()
 	{
-		for(int i = 0; i < this.soundList.size(); i++){
-			((WeakReference) this.soundList.elementAt(i)).clear();
-		}
-		for(int i = 0; i < this.imageList.size(); i++){
-			((WeakReference) this.imageList.elementAt(i)).clear();
-		}
 		
-		this.soundList.removeAllElements();
-		this.imageList.removeAllElements();
+		this.soundList.clear();
+		this.imageList.clear();
 		System.gc();
 	}
 	
@@ -60,17 +61,12 @@ public class InsCache {
 	{
 		try
 		{
-			int idx = this.checkImage(imagePath, frameWidth, frameHeight);
-			if(idx == -1)
-			{
-				WeakReference img = new WeakReference(new InsImage(imagePath, frameWidth, frameHeight));
-				this.imageList.addElement(img);
-				return (InsImage) img.get();
-			}
-			else
-			{
-				WeakReference img = (WeakReference) this.imageList.elementAt(idx);
-				return (InsImage) img.get();
+			if(this.imageList.containsKey(imagePath)){
+				return (InsImage) this.imageList.get(imagePath);
+			} else {
+				InsImage img = new InsImage(imagePath, frameWidth, frameHeight);
+				this.imageList.put(img, imagePath);
+				return img;
 			}
 		}
 		catch (Exception e)
@@ -94,17 +90,12 @@ public class InsCache {
 	{
 		try
 		{
-			int idx = this.checkImage(imagePath);
-			if(idx == -1)
-			{
-				WeakReference img = new WeakReference(new InsImage(imagePath));
-				this.imageList.addElement(img);
-				return (InsImage) img.get();
-			}
-			else
-			{
-				WeakReference img = (WeakReference) this.imageList.elementAt(idx);
-				return (InsImage) img.get();
+			if(this.imageList.containsKey(imagePath)){
+				return (InsImage) this.imageList.get(imagePath);
+			} else {
+				InsImage img = new InsImage(imagePath);
+				this.imageList.put(img, imagePath);
+				return img;
 			}
 		}
 		catch (Exception e)
@@ -115,41 +106,6 @@ public class InsCache {
 		return null;
 	}
 	
-	/**
-	 * Delete Image from ImageList..
-	 * If there are already image with same path, width, and height, return that Image
-	 * if there isn't any, create new image, add it to list and return it
-	 * 
-	 * @param	imagePath		Path to SpriteSheet Image
-	 * @param	frameWidth		The Width of each frame in this image
-	 * @param	frameHeight		The Height of each frame in this image
-	 * 
-	 * @return	TRUE if Image is found and deleted, FALSE otherwise
-	 */
-	public boolean deleteImage(String imagePath, int frameWidth, int frameHeight)
-	{
-		boolean deleted = false;
-		try
-		{
-			int idx = this.checkImage(imagePath, frameWidth, frameHeight);
-			if(idx == -1)
-			{
-				deleted = false;
-			}
-			else
-			{
-				((WeakReference) this.imageList.elementAt(idx)).clear();
-				this.imageList.removeElementAt(idx);
-				deleted = true;
-			}
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		
-		return deleted;
-	}
 	
 	/**
 	 * Delete Image from ImageList.
@@ -160,75 +116,20 @@ public class InsCache {
 	 */
 	public boolean deleteImage(String imagePath)
 	{
-		boolean deleted = false;
 		try
 		{
-			int idx = this.checkImage(imagePath);
-			if(idx == -1)
-			{
-				deleted = false;
-			}
-			else
-			{
-				((WeakReference) this.imageList.elementAt(idx)).clear();
-				this.imageList.removeElementAt(idx);
-				deleted = true;
+			if(this.imageList.containsKey(imagePath)){
+				this.imageList.remove(imagePath);
+				return true;
+			} else {
+				return false;
 			}
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
-		
-		return deleted;
-	}
-	
-	/**
-	 * Check whether the image with given attributes are already created in ImageList
-	 * 
-	 * @param	imagePath		Path to SpriteSheet Image
-	 * @param	frameWidth		The Width of each frame in this image
-	 * @param	frameHeight		The Height of each frame in this image
-	 * 
-	 * @return	Index of Image found, or -1 if nothing found
-	 */
-	protected int checkImage(String imagePath, int frameWidth, int frameHeight)
-	{
-		int foundIdx = -1;
-		for(int i = 0; i < this.imageList.size(); i++)
-		{
-			InsImage img = (InsImage) ((WeakReference )this.imageList.elementAt(i)).get();
-			if(img.filepath.equals(imagePath) && (img.frameWidth == frameWidth) && (img.frameHeight == frameHeight))
-			{
-				foundIdx = i;
-				break;
-			}
-		}
-		
-		return foundIdx;
-	}
-	
-	/**
-	 * Check whether the image with given path already created in ImageList
-	 * 
-	 * @param	imagePath		Path to SpriteSheet Image
-	 * 
-	 * @return	Index of Image found, or -1 if nothing found
-	 */
-	protected int checkImage(String imagePath)
-	{
-		int foundIdx = -1;
-		for(int i = 0; i < this.imageList.size(); i++)
-		{
-			InsImage img = (InsImage) ((WeakReference) this.imageList.elementAt(i)).get();
-			if(img.filepath.equals(imagePath))
-			{
-				foundIdx = i;
-				break;
-			}
-		}
-		
-		return foundIdx;
+		return false;
 	}
 	
 	/**
@@ -246,17 +147,12 @@ public class InsCache {
 	{
 		try
 		{
-			int idx = this.checkSound(audioPath, audioEncoding, audioType);
-			if(idx == -1)
-			{
-				WeakReference s = new WeakReference (new InsSound(audioPath, audioEncoding, audioType));
-				this.soundList.addElement(s);
-				return (InsSound) s.get();
-			}
-			else
-			{
-				WeakReference s = (WeakReference) this.soundList.elementAt(idx);
-				return (InsSound) s.get();
+			if(this.soundList.containsKey(audioPath)){
+				return (InsSound) this.soundList.get(audioPath);
+			} else {
+				InsSound s = new InsSound(audioPath, audioEncoding, audioType);
+				this.imageList.put(s, audioPath);
+				return s;
 			}
 		}
 		catch (Exception e)
@@ -270,26 +166,18 @@ public class InsCache {
 	 * Delete Sound from SoundList.
 	 * 
 	 * @param	audioPath		The path to audio file
-	 * @param	audioEncoding	Encoding Type of audio
-	 * @param	audioType		Whether it is BGM or SFX. -1 for BGM, 1 for SFX
 	 * 
 	 * @return	TRUE if Sound is found and deleted, FALSE otherwise
 	 */
-	public boolean deleteSound(String audioPath, AudioEncode audioEncoding, AudioType audioType)
+	public boolean deleteSound(String audioPath)
 	{
-		boolean deleted = false;
 		try
 		{
-			int idx = this.checkSound(audioPath, audioEncoding, audioType);
-			if(idx == -1)
-			{
-				deleted = false;
-			}
-			else
-			{
-				((WeakReference) this.soundList.elementAt(idx)).clear();
-				this.soundList.removeElementAt(idx);
-				deleted = true;
+			if(this.soundList.containsKey(audioPath)){
+				this.soundList.remove(audioPath);
+				return true;
+			} else {
+				return false;
 			}
 		}
 		catch (Exception e)
@@ -297,31 +185,7 @@ public class InsCache {
 			e.printStackTrace();
 		}
 		
-		return deleted;
+		return false;
 	}
 	
-	/**
-	 * Check whether the sound with given attributes are already created in SoundList
-	 * 
-	 * @param	audioPath		The path to audio file
-	 * @param	audioEncoding	Encoding Type of audio
-	 * @param	audioType		Whether it is BGM or SFX. -1 for BGM, 1 for SFX
-	 * 
-	 * @return	Index of Sound found, or -1 if nothing found
-	 */
-	protected int checkSound(String audioPath, AudioEncode audioEncoding, AudioType audioType)
-	{
-		int foundIdx = -1;
-		for(int i = 0; i < this.soundList.size(); i++)
-		{
-			InsSound s = (InsSound) ((WeakReference) this.soundList.elementAt(i)).get();
-			if(s.filepath.equals(audioPath) && s.encoding.equals(audioEncoding) && (s.type == audioType))
-			{
-				foundIdx = i;
-				break;
-			}
-		}
-		
-		return foundIdx;
-	}
 }

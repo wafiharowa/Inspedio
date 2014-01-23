@@ -189,7 +189,7 @@ public class InsGame implements Runnable {
 		InsGlobal.keys = new InsKeys();
 		InsGlobal.pointer = new InsPointer();	
 		InsGlobal.camera = new InsCamera();
-		InsGlobal.cache = new InsCache();
+		InsGlobal.cache = InsCache.getInstance();
 		InsGlobal.stats = InsStats.getInstance();
 		InsGlobal.randomizer = new Random(System.currentTimeMillis());
 		InsGlobal.initGlobal();
