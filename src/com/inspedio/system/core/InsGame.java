@@ -391,6 +391,7 @@ public class InsGame implements Runnable {
 		{
 			this.requestedState.create();
 			this.requestedState.finishCreate();
+			this.state = null;
 			this.state = this.requestedState;
 			this.requestedState = null;
 		}

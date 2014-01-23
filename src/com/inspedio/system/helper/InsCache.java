@@ -1,5 +1,6 @@
 package com.inspedio.system.helper;
 
+import java.lang.ref.WeakReference;
 import java.util.Vector;
 
 import com.inspedio.entity.primitive.InsImage;
@@ -32,6 +33,13 @@ public class InsCache {
 	 */
 	public void clearCache()
 	{
+		for(int i = 0; i < this.soundList.size(); i++){
+			((WeakReference) this.soundList.elementAt(i)).clear();
+		}
+		for(int i = 0; i < this.imageList.size(); i++){
+			((WeakReference) this.imageList.elementAt(i)).clear();
+		}
+		
 		this.soundList.removeAllElements();
 		this.imageList.removeAllElements();
 		System.gc();
@@ -50,18 +58,19 @@ public class InsCache {
 	 */
 	public InsImage getImage(String imagePath, int frameWidth, int frameHeight)
 	{
-		InsImage img = null;
 		try
 		{
 			int idx = this.checkImage(imagePath, frameWidth, frameHeight);
 			if(idx == -1)
 			{
-				img = new InsImage(imagePath, frameWidth, frameHeight);
+				WeakReference img = new WeakReference(new InsImage(imagePath, frameWidth, frameHeight));
 				this.imageList.addElement(img);
+				return (InsImage) img.get();
 			}
 			else
 			{
-				img = (InsImage) this.imageList.elementAt(idx);
+				WeakReference img = (WeakReference) this.imageList.elementAt(idx);
+				return (InsImage) img.get();
 			}
 		}
 		catch (Exception e)
@@ -69,7 +78,7 @@ public class InsCache {
 			e.printStackTrace();
 		}
 		
-		return img;
+		return null;
 	}
 	
 	/**
@@ -83,18 +92,19 @@ public class InsCache {
 	 */
 	public InsImage getImage(String imagePath)
 	{
-		InsImage img = null;
 		try
 		{
 			int idx = this.checkImage(imagePath);
 			if(idx == -1)
 			{
-				img = new InsImage(imagePath);
+				WeakReference img = new WeakReference(new InsImage(imagePath));
 				this.imageList.addElement(img);
+				return (InsImage) img.get();
 			}
 			else
 			{
-				img = (InsImage) this.imageList.elementAt(idx);
+				WeakReference img = (WeakReference) this.imageList.elementAt(idx);
+				return (InsImage) img.get();
 			}
 		}
 		catch (Exception e)
@@ -102,7 +112,7 @@ public class InsCache {
 			e.printStackTrace();
 		}
 		
-		return img;
+		return null;
 	}
 	
 	/**
@@ -128,6 +138,7 @@ public class InsCache {
 			}
 			else
 			{
+				((WeakReference) this.imageList.elementAt(idx)).clear();
 				this.imageList.removeElementAt(idx);
 				deleted = true;
 			}
@@ -159,6 +170,7 @@ public class InsCache {
 			}
 			else
 			{
+				((WeakReference) this.imageList.elementAt(idx)).clear();
 				this.imageList.removeElementAt(idx);
 				deleted = true;
 			}
@@ -185,7 +197,7 @@ public class InsCache {
 		int foundIdx = -1;
 		for(int i = 0; i < this.imageList.size(); i++)
 		{
-			InsImage img = (InsImage) this.imageList.elementAt(i);
+			InsImage img = (InsImage) ((WeakReference )this.imageList.elementAt(i)).get();
 			if(img.filepath.equals(imagePath) && (img.frameWidth == frameWidth) && (img.frameHeight == frameHeight))
 			{
 				foundIdx = i;
@@ -208,7 +220,7 @@ public class InsCache {
 		int foundIdx = -1;
 		for(int i = 0; i < this.imageList.size(); i++)
 		{
-			InsImage img = (InsImage) this.imageList.elementAt(i);
+			InsImage img = (InsImage) ((WeakReference) this.imageList.elementAt(i)).get();
 			if(img.filepath.equals(imagePath))
 			{
 				foundIdx = i;
@@ -232,26 +244,26 @@ public class InsCache {
 	 */
 	public InsSound getSound(String audioPath, AudioEncode audioEncoding, AudioType audioType)
 	{
-		InsSound s = null;
 		try
 		{
 			int idx = this.checkSound(audioPath, audioEncoding, audioType);
 			if(idx == -1)
 			{
-				s = new InsSound(audioPath, audioEncoding, audioType);
+				WeakReference s = new WeakReference (new InsSound(audioPath, audioEncoding, audioType));
 				this.soundList.addElement(s);
+				return (InsSound) s.get();
 			}
 			else
 			{
-				s = (InsSound) this.soundList.elementAt(idx);
+				WeakReference s = (WeakReference) this.soundList.elementAt(idx);
+				return (InsSound) s.get();
 			}
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
-		
-		return s;
+		return null;
 	}
 	
 	/**
@@ -275,6 +287,7 @@ public class InsCache {
 			}
 			else
 			{
+				((WeakReference) this.soundList.elementAt(idx)).clear();
 				this.soundList.removeElementAt(idx);
 				deleted = true;
 			}
@@ -301,7 +314,7 @@ public class InsCache {
 		int foundIdx = -1;
 		for(int i = 0; i < this.soundList.size(); i++)
 		{
-			InsSound s = (InsSound) this.soundList.elementAt(i);
+			InsSound s = (InsSound) ((WeakReference) this.soundList.elementAt(i)).get();
 			if(s.filepath.equals(audioPath) && s.encoding.equals(audioEncoding) && (s.type == audioType))
 			{
 				foundIdx = i;
