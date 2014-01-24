@@ -11,6 +11,7 @@ public class Forever extends InsAction{
 	protected Forever(InsAction Action) {
 		super(0, null);
 		this.action = Action;
+		this.action.autoDestroy = false;
 	}
 	
 	public static Forever create(InsAction Action){

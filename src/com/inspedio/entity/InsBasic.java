@@ -153,9 +153,11 @@ public class InsBasic extends InsAtom{
 	 */
 	public boolean setAction(InsAction Action, boolean forceSet){
 		if((this.action == null) || forceSet){
-			InsAction old = this.action;
+			if(this.action != null){
+				this.unsetAction(this.action);
+			}
+			
 			this.action = Action;
-			old.destroy();
 			this.action.setTarget(this);
 			return true;
 		}

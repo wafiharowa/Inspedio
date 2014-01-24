@@ -13,6 +13,7 @@ import com.inspedio.system.helper.InsUtil;
  * @version 1.0
  */
 public abstract class InsAction {
+	public boolean autoDestroy;
 	public boolean active;
 	protected int frameCount;
 	protected int remainingCount;
@@ -23,6 +24,7 @@ public abstract class InsAction {
 		this.callback = Callback;
 		this.remainingCount = this.frameCount = InsUtil.Max(0, FrameCount - 1);
 		this.active = true;
+		this.autoDestroy = true;
 	}
 	
 	public void setTarget(InsBasic Target){
@@ -51,8 +53,10 @@ public abstract class InsAction {
 		}
 		remainingCount = -1;
 		active = false;
-		this.target.unsetAction(this);
-		this.destroy();
+		if(this.autoDestroy){
+			this.target.unsetAction(this);
+			this.destroy();
+		}
 	}
 	
 	public void destroy(){
