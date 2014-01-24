@@ -4,7 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.util.Vector;
+import java.util.Enumeration;
+import java.util.Hashtable;
 import javax.microedition.rms.RecordStore;
 import com.inspedio.enums.LogLevel;
 import com.inspedio.system.helper.InsLogger;
@@ -13,7 +14,7 @@ public class SaveManager {
 
 	protected String recordName;
 	protected String recordVersion;
-	protected Vector dataList;
+	protected Hashtable dataList;
 	protected int dataCount;
 	
 	public SaveManager(String RecordName){
@@ -23,7 +24,7 @@ public class SaveManager {
 	public SaveManager(String RecordName, String RecordVersion){
 		this.recordName = RecordName;
 		this.recordVersion = RecordVersion;
-		this.dataList = new Vector();
+		this.dataList = new Hashtable();
 		this.dataCount = 0;
 	}
 	
@@ -57,9 +58,9 @@ public class SaveManager {
 			InsLogger.writeLog("Record Name : " + this.recordName + ", Version : " + this.recordVersion, LogLevel.PROCESS);
 			InsLogger.writeLog("SaveData Item Count : " + this.dataCount, LogLevel.PROCESS);
 			
-			for(int i = 0; i < dataList.size(); i++)
-			{
-				SaveDataObject obj = (SaveDataObject) dataList.elementAt(i);
+			Enumeration e = dataList.elements();
+			while(e.hasMoreElements()){
+				SaveDataObject obj = (SaveDataObject) e.nextElement();
 				if(obj != null){
 					obj.write(dataStream);
 				}
@@ -108,7 +109,7 @@ public class SaveManager {
 				
 				for(int i = 0; i < dataCount; i++){
 					SaveDataObject obj = new SaveDataObject(dataStream);
-					this.dataList.addElement(obj);
+					this.dataList.put(obj, obj.name);
 				}
 				
 				dataStream.close();
@@ -131,7 +132,7 @@ public class SaveManager {
 	 * Clear all Save Data previously added (Do not delete Data saved on device)
 	 */
 	public void clear(){
-		this.dataList.removeAllElements();
+		this.dataList.clear();
 		this.dataCount = 0;
 	}
 	
@@ -140,31 +141,19 @@ public class SaveManager {
 	 * If there is already other data with same name, change its value instead.
 	 */
 	public void addData(SaveDataObject obj){
-		this.dataList.addElement(obj);
-		this.dataCount++;
+		if(this.dataList.containsKey(obj.name)){
+			this.dataList.put(obj, obj.name);
+			this.dataCount++;
+		}
 	}
 	
 	public boolean isDataExist(String Name){
-		return (this.searchDataId(Name) != -1);
-	}
-	
-	protected int searchDataId(String Name){
-		int foundIdx = -1;
-		for(int i = 0; i < this.dataList.size(); i++)
-		{
-			SaveDataObject obj = (SaveDataObject) this.dataList.elementAt(i);
-			if(obj.name.equals(Name)){
-				foundIdx = i;
-				break;
-			}
-		}
-		return foundIdx;
+		return this.dataList.containsKey(Name);
 	}
 	
 	public SaveDataObject getData(String Name){
-		int idx = this.searchDataId(Name);
-		if(idx != -1){
-			return (SaveDataObject) this.dataList.elementAt(idx);
+		if(this.isDataExist(Name)){
+			return (SaveDataObject) this.dataList.get(Name);
 		}
 		return null;
 	}
