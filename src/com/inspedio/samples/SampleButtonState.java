@@ -64,5 +64,7 @@ public class SampleButtonState extends InsState{
 		this.add(this.FONT);
 		this.add(this.ACTION);
 		this.add(this.EXIT);
+		
+		InsGlobal.save.save();
 	}
 }

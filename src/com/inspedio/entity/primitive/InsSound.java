@@ -1,7 +1,5 @@
 package com.inspedio.entity.primitive;
 
-import java.io.InputStream;
-
 import javax.microedition.media.Manager;
 import javax.microedition.media.MediaException;
 import javax.microedition.media.Player;
@@ -55,14 +53,11 @@ public class InsSound {
 	{
 		try
 		{
-	      InputStream in = getClass().getResourceAsStream(this.filepath);
-	      this.player = Manager.createPlayer(in, this.encoding.toString());
+	      this.player = Manager.createPlayer(getClass().getResourceAsStream(this.filepath), this.encoding.toString());
 	      this.player.setLoopCount(this.type.getValue());
 	      this.player.realize();
 	      this.player.prefetch();
 	      
-	      in.close();
-	      in = null;
 		}
 		catch (Exception e)
 		{

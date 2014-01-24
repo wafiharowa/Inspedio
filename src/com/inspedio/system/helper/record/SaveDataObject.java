@@ -32,6 +32,19 @@ public class SaveDataObject {
 		this.nameLength = Name.length();
 	}
 	
+	public void destroy(){
+		this.type = null;
+		this.name = null;
+		this.stringData = null;
+		this.boolArrData = null;
+		this.intArrData = null;
+		this.doubleArrData = null;
+		this.stringArrData = null;
+		this.longArrData = null;
+		this.byteArrData = null;
+		
+	}
+	
 	public SaveDataObject(String Name, boolean Data){
 		this(Name);
 		this.setData(Data);
@@ -98,7 +111,7 @@ public class SaveDataObject {
 	
 	public void read(DataInputStream stream){
 		try {
-			this.type = SaveDataType.getType(stream.readInt());
+			this.type = SaveDataType.getType(stream.readShort());
 			this.nameLength = stream.readInt();
 			this.dataLength = stream.readInt();
 			this.name = stream.readUTF();
@@ -168,7 +181,7 @@ public class SaveDataObject {
 	public void write(DataOutputStream stream){
 		try {
 			
-			stream.writeInt(this.type.getValue());
+			stream.writeShort(this.type.getValue());
 			stream.writeInt(this.nameLength);
 			stream.writeInt(this.dataLength);
 			stream.writeUTF(this.name);
