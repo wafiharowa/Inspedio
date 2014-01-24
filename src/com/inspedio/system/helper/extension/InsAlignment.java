@@ -31,4 +31,9 @@ public class InsAlignment {
 		}
 		return 0;
 	}
+	
+	public void destroy(){
+		this.vertical = null;
+		this.horizontal = null;
+	}
 }

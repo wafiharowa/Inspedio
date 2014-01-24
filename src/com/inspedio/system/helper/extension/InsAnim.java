@@ -57,6 +57,12 @@ public class InsAnim {
 		this.callback = Callback;
 	}
 	
+	public void destroy(){
+		this.callback = null;
+		this.frames = null;
+		this.name = null;
+	}
+	
 	/**
 	 * Return the next frame in sequence
 	 * 

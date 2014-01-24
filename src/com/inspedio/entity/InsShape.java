@@ -55,6 +55,13 @@ public class InsShape extends InsBasic{
 		this.roundArc = new InsSize(10,10);
 	}
 	
+	public void destroy(){
+		super.destroy();
+		this.borderLayout = null;
+		this.shapeType = null;
+		this.roundArc = null;
+	}
+	
 	public void setColor(int Color, boolean IsFill){
 		this.fillColor = Color;
 		this.isFill = IsFill;

@@ -36,6 +36,13 @@ public class InsProgressSprite extends InsAnimatedSprite{
 		this.stretch = new InsAlignment(HAlignment.LEFT, VAlignment.TOP);
 	}
 	
+	public void destroy(){
+		super.destroy();
+		this.mirror = null;
+		this.stretch = null;
+		this.progress = null;
+	}
+	
 	/**
 	 * Direction where the Stretch started
 	 */

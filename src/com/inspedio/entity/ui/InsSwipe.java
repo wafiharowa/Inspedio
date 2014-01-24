@@ -51,6 +51,16 @@ public class InsSwipe extends InsShape{
 		this.endPoint = new InsPoint(X, Y);
 	}
 	
+	public void destroy(){
+		super.destroy();
+		this.startPoint = null;
+		this.endPoint = null;
+		this.onSwipeDown = null;
+		this.onSwipeLeft = null;
+		this.onSwipeRight = null;
+		this.onSwipeUp = null;
+	}
+	
 	/**
 	 * Set Callback to handle Swipe Left Event
 	 */

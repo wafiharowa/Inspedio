@@ -31,5 +31,11 @@ public class Forever extends InsAction{
 	public void setTarget(InsBasic Target){
 		this.action.setTarget(Target);
 	}
+	
+	public void destroy(){
+		super.destroy();
+		this.action.destroy();
+		this.action = null;
+	}
 
 }

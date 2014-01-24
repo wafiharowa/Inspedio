@@ -37,5 +37,7 @@ public class InsHiddenLoader implements Runnable{
 		}
 		
 		this.callback.call();
+		this.callback = null;
+		this.thread = null;
 	}
 }

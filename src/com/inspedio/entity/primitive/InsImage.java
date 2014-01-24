@@ -82,7 +82,6 @@ public class InsImage{
 		this.frameTotal = this.frameCountX * this.frameCountY;
 	}
 	
-	
 	public void drawImage(Graphics g, int X, int Y, InsAlignment Alignment)
 	{
 		g.drawImage(this.source, X, Y, InsAlignment.getAnchorValue(Alignment));
@@ -122,6 +121,8 @@ public class InsImage{
 	public void destroy()
 	{
 		this.source = null;
+		this.filepath = null;
+		this.size = null;
 	}
 	
 	

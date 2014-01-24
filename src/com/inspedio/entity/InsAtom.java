@@ -17,12 +17,6 @@ public abstract class InsAtom {
 
 	// ATTRIBUTES
 	/**
-	 * This is Object Unique Identifier.<br>
-	 * Object created inside Inspedio Engine will automatically get their unique identifier.<br>
-	 * This is useful for tracking and debugging purpose.
-	 */
-	public String identifier;
-	/**
 	 * Decide whether <code>update()</code> and <code>draw()</code> are automatically called.<br>
 	 * An existing Object will be updated and rendered.
 	 */

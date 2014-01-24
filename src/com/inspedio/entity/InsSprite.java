@@ -88,6 +88,7 @@ public class InsSprite extends InsBasic{
 		super.destroy();
 		this.camera = null;
 		this.image = null;
+		this.transform = null;
 	}
 	
 	/**

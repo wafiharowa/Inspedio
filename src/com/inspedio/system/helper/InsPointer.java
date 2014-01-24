@@ -27,13 +27,21 @@ public class InsPointer {
 	protected Vector draggedEvents;
 	protected Vector holdEvents;
 	
-	public InsPointer(){
-		super();
+	private static InsPointer instance = null;
+	
+	private InsPointer(){
 		this.pressedEvents = new Vector();
 		this.releasedEvents = new Vector();
 		this.draggedEvents = new Vector();
 		this.holdEvents = new Vector();
 		this.holdList = new Vector();
+	}
+	
+	public static InsPointer getInstance(){
+		if(instance == null){
+			instance = new InsPointer();
+		}
+		return instance;
 	}
 	
 	protected void resetEvent(){

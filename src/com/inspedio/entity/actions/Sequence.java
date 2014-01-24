@@ -63,5 +63,13 @@ public class Sequence extends InsAction{
 			this.actions[i].reset();
 		}
 	}
+	
+	public void destroy(){
+		super.destroy();
+		for(int i = 0; i < this.actions.length; i++){
+			this.actions[i].destroy();
+		}
+		this.actions = null;
+	}
 
 }

@@ -57,6 +57,16 @@ public class InsButton extends InsShape{
 		this.caption = new InsText(Caption, X, Y);
 	}
 	
+	public void destroy(){
+		super.destroy();
+		this.caption.destroy();
+		this.caption = null;
+		this.onDraggedCallback = null;
+		this.onHoldCallback = null;
+		this.onPressedCallback = null;
+		this.onReleasedCallback = null;
+	}
+	
 	public boolean onTouchPressed(){
 		if(onPressedCallback != null){
 			this.onPressedCallback.call();

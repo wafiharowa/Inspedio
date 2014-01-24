@@ -51,6 +51,14 @@ public class InsButtonSprite extends InsSprite{
 		super(spritePath);
 	}
 	
+	public void destroy(){
+		super.destroy();
+		this.onDraggedCallback = null;
+		this.onHoldCallback = null;
+		this.onPressedCallback = null;
+		this.onReleasedCallback = null;
+	}
+	
 	public boolean onTouchPressed(){
 		if(onPressedCallback != null){
 			this.onPressedCallback.call();

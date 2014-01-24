@@ -52,7 +52,12 @@ public abstract class InsAction {
 		remainingCount = -1;
 		active = false;
 		this.target.unsetAction(this);
+		this.destroy();
 	}
 	
+	public void destroy(){
+		this.callback = null;
+		this.target = null;
+	}
 	
 }

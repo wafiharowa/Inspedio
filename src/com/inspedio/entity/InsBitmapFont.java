@@ -78,6 +78,16 @@ public abstract class InsBitmapFont extends InsBasic{
 		this.topleft = new InsAlignment(HAlignment.LEFT, VAlignment.TOP);
 	}
 	
+	public void destroy(){
+		super.destroy();
+		this.frameChar = null;
+		this.frameChars = null;
+		this.topleft = null;
+		this.fontsheet = null;
+		this.currentText = null;
+		this.currentTexts = null;
+	}
+	
 	
 	public void draw(Graphics g)
 	{

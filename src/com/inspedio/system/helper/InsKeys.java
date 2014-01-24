@@ -24,7 +24,9 @@ public class InsKeys {
 	
 	protected boolean lock = false;
 	
-	public InsKeys()
+	private static InsKeys instance = null;
+	
+	private InsKeys()
 	{
 		this.lastKeyState = new boolean[KEY_COUNT];
 		this.currentKeyState = new boolean[KEY_COUNT];
@@ -33,6 +35,13 @@ public class InsKeys {
 			this.lastKeyState[i] = false;
 			this.currentKeyState[i] = false;
 		}
+	}
+	
+	public static InsKeys getInstance(){
+		if(instance == null){
+			instance = new InsKeys();
+		}
+		return instance;
 	}
 	
 	/**

@@ -186,8 +186,8 @@ public class InsGame implements Runnable {
 		InsGlobal.game = this;
 		InsGlobal.canvas = this.canvas;
 		InsGlobal.graphic = this.canvas.bufferGraphics;
-		InsGlobal.keys = new InsKeys();
-		InsGlobal.pointer = new InsPointer();	
+		InsGlobal.keys = InsKeys.getInstance();
+		InsGlobal.pointer = InsPointer.getInstance();	
 		InsGlobal.camera = new InsCamera();
 		InsGlobal.cache = InsCache.getInstance();
 		InsGlobal.stats = InsStats.getInstance();

@@ -65,6 +65,14 @@ public class InsBasic extends InsAtom{
 		this.action = null;
 	}
 	
+	public void destroy(){
+		this.position = null;
+		this.size = null;
+		this.align.destroy();
+		this.align = null;
+		this.action = null;
+	}
+	
 	/**
 	 * Set Object Size
 	 */
@@ -144,8 +152,10 @@ public class InsBasic extends InsAtom{
 	 * @param	forceSet	Set this to FALSE to set action only there is no current active action
 	 */
 	public boolean setAction(InsAction Action, boolean forceSet){
-		if((this.action == null) ||forceSet){
+		if((this.action == null) || forceSet){
+			InsAction old = this.action;
 			this.action = Action;
+			old.destroy();
 			this.action.setTarget(this);
 			return true;
 		}

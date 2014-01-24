@@ -74,6 +74,10 @@ public class InsSound {
 	{
 		this.player.deallocate();
 		this.player.close();
+		this.player = null;
+		this.type = null;
+		this.encoding = null;
+		this.filepath = null;
 	}
 	
 	/**

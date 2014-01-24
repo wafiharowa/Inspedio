@@ -49,6 +49,12 @@ public class InsText extends InsBasic{
 		
 	}
 	
+	public void destroy(){
+		super.destroy();
+		this.texts = null;
+		this.text = null;
+	}
+	
 	/**
 	 * Set Single Line Text
 	 */

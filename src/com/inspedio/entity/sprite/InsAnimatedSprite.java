@@ -1,6 +1,7 @@
 package com.inspedio.entity.sprite;
 
-import java.util.Vector;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
 import com.inspedio.entity.InsSprite;
 import com.inspedio.entity.primitive.InsCallback;
@@ -18,11 +19,11 @@ public class InsAnimatedSprite extends InsSprite{
 	/**
 	 * List of animation stored in this object
 	 */
-	protected Vector animations;
+	protected Hashtable animations;
 	/**
 	 * Which animation currently played
 	 */
-	public InsAnim currentAnimation;	
+	public InsAnim currentAnimation;
 	
 	public InsAnimatedSprite(String spritePath)
 	{
@@ -44,14 +45,19 @@ public class InsAnimatedSprite extends InsSprite{
 		
 	private void initAnimation()
 	{
-		this.animations = new Vector();
+		this.animations = new Hashtable();
 		this.currentAnimation = null;
-		
 	}
 	
 	public void destroy()
 	{
+		super.destroy();
+		for(Enumeration e = this.animations.elements(); e.hasMoreElements(); ){
+			((InsAnim) e.nextElement()).destroy();
+		}
+		this.animations.clear();
 		this.animations = null;
+		this.currentAnimation.destroy();
 		this.currentAnimation = null;
 	}
 	
@@ -88,52 +94,34 @@ public class InsAnimatedSprite extends InsSprite{
 	 */
 	public boolean addAnimation(String Name, int[] FrameSequence, int FrameDelay, InsCallback Callback)
 	{
-		int idx = this.checkAnimation(Name);
-		if(idx == -1)
-		{
-			this.animations.addElement(new InsAnim(Name, FrameSequence, FrameDelay, Callback));
+		if(this.animations.containsKey(Name)){
+			this.animations.put(Name, new InsAnim(Name, FrameSequence, FrameDelay, Callback));
 			return true;
 		}
-		else
-		{
-			return false;
-		}
+		return false;
 	}
 	
 	/**
-	 * Find animation with given name, return -1 if not found
-	 * 
-	 * @return	index of animation found
+	 * Playing Animation, ignore if its already played.
 	 */
-	public int checkAnimation(String Name)
-	{
-		int foundIdx = -1;
-		for(int i = 0; i < this.animations.size(); i++)
-		{
-			InsAnim a = (InsAnim) this.animations.elementAt(i);
-			if(a.name.equals(Name))
-			{
-				foundIdx = i;
-				break;
-			}
-		}
-		return foundIdx;
+	public boolean playAnimation(String Name){
+		return this.playAnimation(Name, false);
 	}
 	
 	/**
 	 * Play Animation from <code>animations</code>.
 	 * If animation cannot be found or animation already played, do nothing
 	 * 
+	 * @param	Reset	set this to TRUE to force reset animation, if its already played.
+	 * 
 	 * @return	true if animation exist and not currently played, false otherwise
 	 */
-	public boolean playAnimation(String Name)
+	public boolean playAnimation(String Name, boolean Reset)
 	{
-		int idx = this.checkAnimation(Name);
-		if(idx != -1)
-		{
+		if(this.animations.containsKey(Name)){
 			if(this.currentAnimation == null)
 			{
-				this.currentAnimation = (InsAnim) this.animations.elementAt(idx);
+				this.currentAnimation = (InsAnim) this.animations.get(Name);
 				this.currentAnimation.currentFrame = 0;
 				this.setFrame(this.currentAnimation.getFrame());
 				return true;
@@ -142,21 +130,24 @@ public class InsAnimatedSprite extends InsSprite{
 			{
 				if(this.currentAnimation.name.equals(Name))
 				{
+					if(Reset){
+						this.currentAnimation = (InsAnim) this.animations.get(Name);
+						this.currentAnimation.currentFrame = 0;
+						this.setFrame(this.currentAnimation.getFrame());
+						return true;
+					}
 					return false;
 				}
 				else
 				{
-					this.currentAnimation = (InsAnim) this.animations.elementAt(idx);
+					this.currentAnimation = (InsAnim) this.animations.get(Name);
 					this.currentAnimation.currentFrame = 0;
 					this.setFrame(this.currentAnimation.getFrame());
 					return true;
 				}
 			}
 		}
-		else
-		{
-			return false;
-		}
+		return false;
 	}
 	
 	public boolean stopAnimation(String Name){
