@@ -58,14 +58,13 @@ public class SaveManager {
 			InsLogger.writeLog("Record Name : " + this.recordName + ", Version : " + this.recordVersion, LogLevel.PROCESS);
 			InsLogger.writeLog("SaveData Item Count : " + this.dataCount, LogLevel.PROCESS);
 			
-			Enumeration e = dataList.elements();
-			while(e.hasMoreElements()){
+			for (Enumeration e = this.dataList.elements() ; e.hasMoreElements() ;) {
 				SaveDataObject obj = (SaveDataObject) e.nextElement();
 				if(obj != null){
 					obj.write(dataStream);
 				}
-			}
-			
+		     }
+
 			InsLogger.writeLog("Writing SaveData Object Sucess", LogLevel.PROCESS);
 			
 			byte[] data = byteStream.toByteArray();
@@ -141,7 +140,7 @@ public class SaveManager {
 	 * If there is already other data with same name, change its value instead.
 	 */
 	public void addData(SaveDataObject obj){
-		if(this.dataList.containsKey(obj.name)){
+		if(!this.dataList.containsKey(obj.name)){
 			this.dataList.put(obj, obj.name);
 			this.dataCount++;
 		}
