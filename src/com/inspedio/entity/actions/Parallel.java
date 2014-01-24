@@ -19,6 +19,9 @@ public class Parallel extends InsAction{
 	protected Parallel(InsAction[] ActionList, InsCallback Callback){
 		super(0, Callback);
 		this.actions = ActionList;
+		for(int i = 0; i < this.actions.length; i++){
+			this.actions[i].autoDestroy = false;
+		}
 	}
 	
 	public static Parallel create(InsAction[] ActionList, InsCallback Callback){

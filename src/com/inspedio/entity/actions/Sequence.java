@@ -20,6 +20,9 @@ public class Sequence extends InsAction{
 		super(0, Callback);
 		this.actions = ActionList;
 		this.currentAction = 0;
+		for(int i = 0; i < this.actions.length; i++){
+			this.actions[i].autoDestroy = false;
+		}
 	}
 	
 	public static Sequence create(InsAction[] ActionList, InsCallback Callback){

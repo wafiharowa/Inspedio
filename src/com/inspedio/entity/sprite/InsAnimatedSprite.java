@@ -93,7 +93,7 @@ public class InsAnimatedSprite extends InsSprite{
 	 */
 	public boolean addAnimation(String Name, int[] FrameSequence, int FrameDelay, InsCallback Callback)
 	{
-		if(this.animations.containsKey(Name)){
+		if(!this.animations.containsKey(Name)){
 			this.animations.put(Name, new InsAnim(Name, FrameSequence, FrameDelay, Callback));
 			return true;
 		}
