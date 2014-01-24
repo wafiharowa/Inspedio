@@ -1,6 +1,5 @@
 package com.inspedio.system.helper;
 
-import java.util.Enumeration;
 import java.util.Hashtable;
 
 import com.inspedio.entity.primitive.InsImage;
@@ -41,12 +40,6 @@ public class InsCache {
 	 */
 	public void clearCache()
 	{
-		for(Enumeration e = this.soundList.elements(); e.hasMoreElements();){
-			((InsSound) e.nextElement()).destroy();
-		}
-		for(Enumeration e = this.imageList.elements(); e.hasMoreElements();){
-			((InsImage) e.nextElement()).destroy();
-		}
 		this.soundList.clear();
 		this.imageList.clear();
 		System.gc();
