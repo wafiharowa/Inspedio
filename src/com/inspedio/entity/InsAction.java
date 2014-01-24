@@ -48,13 +48,15 @@ public abstract class InsAction {
 	}
 	
 	protected void finishAction(){
+		if(this.autoDestroy){
+			this.target.unsetAction(this);
+		}
 		if(this.callback != null){
 			this.callback.call();
 		}
 		remainingCount = -1;
 		active = false;
 		if(this.autoDestroy){
-			this.target.unsetAction(this);
 			this.destroy();
 		}
 	}
