@@ -141,7 +141,7 @@ public class SaveManager {
 	 */
 	public void addData(SaveDataObject obj){
 		if(!this.dataList.containsKey(obj.name)){
-			this.dataList.put(obj, obj.name);
+			this.dataList.put(obj.name, obj);
 			this.dataCount++;
 		}
 	}
