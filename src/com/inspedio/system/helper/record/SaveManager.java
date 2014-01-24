@@ -4,7 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.lang.ref.WeakReference;
 import java.util.Vector;
 import javax.microedition.rms.RecordStore;
 import com.inspedio.enums.LogLevel;
@@ -132,9 +131,6 @@ public class SaveManager {
 	 * Clear all Save Data previously added (Do not delete Data saved on device)
 	 */
 	public void clear(){
-		for(int i = 0; i < this.dataList.size(); i++){
-			((WeakReference) this.dataList.elementAt(i)).clear();
-		}
 		this.dataList.removeAllElements();
 		this.dataCount = 0;
 	}
@@ -144,8 +140,7 @@ public class SaveManager {
 	 * If there is already other data with same name, change its value instead.
 	 */
 	public void addData(SaveDataObject obj){
-		WeakReference w = new WeakReference(obj);
-		this.dataList.addElement((SaveDataObject) w.get());
+		this.dataList.addElement(obj);
 		this.dataCount++;
 	}
 	
