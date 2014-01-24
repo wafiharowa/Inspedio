@@ -310,9 +310,13 @@ public class InsGame implements Runnable {
 						this.state.onRightSoftKey();
 						this.rightSoftKeyPressed = false;
 					}
-					this.state.preUpdate();
-					this.state.update();
-					this.state.postUpdate();
+					if(this.state != null){
+						if(!this.state.deleted){
+							this.state.preUpdate();
+							this.state.update();
+							this.state.postUpdate();
+						}
+					}
 				}
 			} else {
 				if(InsGlobal.keys.isAnythingPressed() || InsGlobal.pointer.isAnythingPressed()){
@@ -351,22 +355,24 @@ public class InsGame implements Runnable {
 	{
 		try
 		{
-			long curtime = System.currentTimeMillis();
-			this.canvas.clearScreen();
-			if(!this.state.deleted)
-			{
-				this.state.draw(InsGlobal.graphic);
+			if(this.state != null){
+				if(!this.state.deleted){
+					long curtime = System.currentTimeMillis();
+					this.canvas.clearScreen();
+					this.state.draw(InsGlobal.graphic);
+					
+					if(InsGlobal.paused){
+						InsGlobal.pause.draw(InsGlobal.graphic);
+					}
+					if(InsGlobal.displayFPS)
+					{
+						this.canvas.drawFPS();
+					}
+					this.canvas.flushGraphics();
+					InsGlobal.stats.renderCount++;
+					InsGlobal.stats.renderTime += (System.currentTimeMillis() - curtime);
+				}
 			}
-			if(InsGlobal.paused){
-				InsGlobal.pause.draw(InsGlobal.graphic);
-			}
-			if(InsGlobal.displayFPS)
-			{
-				this.canvas.drawFPS();
-			}
-			this.canvas.flushGraphics();
-			InsGlobal.stats.renderCount++;
-			InsGlobal.stats.renderTime += (System.currentTimeMillis() - curtime);
 		}
 		catch (Exception e)
 		{
@@ -382,7 +388,9 @@ public class InsGame implements Runnable {
 	{
 		if(useLoader)
 		{
-			this.state.destroy();
+			if(this.state != null){
+				this.state.destroy();
+			}
 			this.state = null;
 			this.loader.start();
 			this.state = this.loader;
@@ -391,7 +399,9 @@ public class InsGame implements Runnable {
 		{
 			this.requestedState.create();
 			this.requestedState.finishCreate();
-			this.state = null;
+			if(this.state != null){
+				this.state.destroy();
+			}
 			this.state = this.requestedState;
 			this.requestedState = null;
 		}

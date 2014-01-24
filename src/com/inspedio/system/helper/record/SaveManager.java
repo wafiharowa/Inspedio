@@ -58,13 +58,15 @@ public class SaveManager {
 			InsLogger.writeLog("Record Name : " + this.recordName + ", Version : " + this.recordVersion, LogLevel.PROCESS);
 			InsLogger.writeLog("SaveData Item Count : " + this.dataCount, LogLevel.PROCESS);
 			
-			for (Enumeration e = this.dataList.elements() ; e.hasMoreElements() ;) {
+			int realCount = 0;
+			for (Enumeration e = this.dataList.elements() ; e.hasMoreElements();) {
 				SaveDataObject obj = (SaveDataObject) e.nextElement();
 				if(obj != null){
+					realCount++;
 					obj.write(dataStream);
 				}
 		     }
-
+			InsLogger.writeLog("Actual Item Saved : " + realCount, LogLevel.PROCESS);
 			InsLogger.writeLog("Writing SaveData Object Sucess", LogLevel.PROCESS);
 			
 			byte[] data = byteStream.toByteArray();

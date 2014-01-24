@@ -26,7 +26,7 @@ public abstract class InsState extends InsGroup{
 	{
 		super();
 	}
-	
+		
 	/**
 	 * Handling Key and PointerEvent before passing it to its member
 	 */
@@ -50,6 +50,11 @@ public abstract class InsState extends InsGroup{
 	public void finishCreate()
 	{
 		InsGlobal.loadProgress = 100;
+	}
+	
+	public void destroy()
+	{
+		super.destroy();
 	}
 	
 	/**
