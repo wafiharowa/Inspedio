@@ -98,7 +98,7 @@ public class SaveDataObject {
 	
 	public void read(DataInputStream stream){
 		try {
-			this.type = SaveDataType.getType(stream.readShort());
+			this.type = SaveDataType.getType(stream.readInt());
 			this.nameLength = stream.readInt();
 			this.dataLength = stream.readInt();
 			this.name = stream.readUTF();
@@ -168,7 +168,7 @@ public class SaveDataObject {
 	public void write(DataOutputStream stream){
 		try {
 			
-			stream.writeShort(this.type.getValue());
+			stream.writeInt(this.type.getValue());
 			stream.writeInt(this.nameLength);
 			stream.writeInt(this.dataLength);
 			stream.writeUTF(this.name);

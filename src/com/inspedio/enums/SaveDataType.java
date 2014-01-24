@@ -26,7 +26,7 @@ public class SaveDataType extends InsEnum{
 		super(Name, Value);
 	}
 	
-	public static SaveDataType getType(short Value){
+	public static SaveDataType getType(int Value){
 		switch (Value){
 			case 0:
 				return BOOLEAN;
