@@ -52,12 +52,12 @@ public class InsAnimatedSprite extends InsSprite{
 	public void destroy()
 	{
 		super.destroy();
+		this.currentAnimation = null;
 		for(Enumeration e = this.animations.elements(); e.hasMoreElements(); ){
 			((InsAnim) e.nextElement()).destroy();
 		}
 		this.animations.clear();
 		this.animations = null;
-		this.currentAnimation = null;
 	}
 	
 	/**
