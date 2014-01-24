@@ -57,7 +57,6 @@ public class InsAnimatedSprite extends InsSprite{
 		}
 		this.animations.clear();
 		this.animations = null;
-		this.currentAnimation.destroy();
 		this.currentAnimation = null;
 	}
 	
