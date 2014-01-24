@@ -108,7 +108,7 @@ public class SaveManager {
 				
 				for(int i = 0; i < dataCount; i++){
 					SaveDataObject obj = new SaveDataObject(dataStream);
-					this.dataList.put(obj, obj.name);
+					this.addData(obj);
 				}
 				
 				dataStream.close();
