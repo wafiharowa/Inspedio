@@ -1,4 +1,4 @@
-package com.inspedio.system.helper;
+package com.inspedio.system.helper.payment;
 
 public class InsPaymentTequila {
 
