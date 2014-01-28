@@ -205,14 +205,14 @@ public class InsCanvas extends GameCanvas{
 		switch (keyCode)
 		{
 			case -6:
-				InsGlobal.onLeftSoftKey();
+				InsGlobal.onLeftSoftKeyPressed();
 				break;
 			case -7:
-				InsGlobal.onRightSoftKey();
+				InsGlobal.onRightSoftKeyPressed();
 				break;
 		}
 	}
-	
+		
 	public void flushGraphics(){
 		if(rotateCanvas){
 			this.graphic.drawRegion(this.bufferImage, 0, 0, deviceWidth, deviceHeight, Sprite.TRANS_ROT90, 0, 0, Graphics.LEFT | Graphics.TOP);

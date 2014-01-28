@@ -48,12 +48,17 @@ public abstract class InsMain extends MIDlet{
 	}
 	
 	protected void init(InsState InitialState, InsLoader Loader, InsSave SaveLoad, ScreenOrientation Mode, int FPS, int MaxFrameSkip){
-		InsGame.init(this, InitialState, FPS, MaxFrameSkip, Loader, SaveLoad, new DefaultPause(), Mode);
+		this.init(InitialState, Loader, SaveLoad, new DefaultPause(), Mode, FPS, MaxFrameSkip);
 	}
 	
 	protected void init(InsState InitialState, InsLoader Loader, InsSave SaveLoad, InsPause Pause, ScreenOrientation Mode, int FPS, int MaxFrameSkip){
-		InsGame.init(this, InitialState, FPS, MaxFrameSkip, Loader, SaveLoad, Pause, Mode);
+		this.init(InitialState, Loader, SaveLoad, Pause, Mode, FPS, MaxFrameSkip, false);
 	}
+	
+	protected void init(InsState InitialState, InsLoader Loader, InsSave SaveLoad, InsPause Pause, ScreenOrientation Mode, int FPS, int MaxFrameSkip, boolean enablePause){
+		InsGame.init(this, InitialState, FPS, MaxFrameSkip, Loader, SaveLoad, Pause, Mode, enablePause);
+	}
+	
 	
 	protected void startApp() throws MIDletStateChangeException {
 		game.start();

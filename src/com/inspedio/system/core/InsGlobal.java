@@ -18,6 +18,7 @@ import com.inspedio.system.helper.InsPause;
 import com.inspedio.system.helper.InsPointer;
 import com.inspedio.system.helper.InsSave;
 import com.inspedio.system.helper.InsStats;
+import com.inspedio.system.helper.payment.InsPaymentTequila;
 
 /**
  * This class consist of important global variables and constants that is used on GameLoop<br>
@@ -78,6 +79,10 @@ public class InsGlobal{
 	 * Randomizer for general random usage
 	 */
 	public static Random randomizer;
+	/**
+	 * Reference to Payment Object
+	 */
+	public static InsPaymentTequila payment;
 	/**
 	 * Current BGM played
 	 */
@@ -155,6 +160,14 @@ public class InsGlobal{
 	 * DO NOT Change this Value unless you have direct permission
 	 */
 	public static boolean useLogo = true;
+	/**
+	 * Set this to TRUE to enable Payment from Tequila
+	 */
+	public static boolean enablePaymentTequila = false;
+	/**
+	 * Marker for when Payment take application focus
+	 */
+	public static boolean onFocusPayment = false;	
 	/**
 	 * Set this to change FPS Display Color
 	 */
@@ -345,17 +358,17 @@ public class InsGlobal{
 	/**
 	 * Action executed when LeftSoftKey Pressed
 	 */
-	public static void onLeftSoftKey()
+	public static void onLeftSoftKeyPressed()
 	{
-		InsGlobal.game.leftSoftKeyPressed = true;
+		InsKeys.leftSoftKeyPressed = true;
 	}
 	
 	/**
 	 * Action executed when RightSoftKey Pressed
 	 */
-	public static void onRightSoftKey()
+	public static void onRightSoftKeyPressed()
 	{
-		InsGlobal.game.rightSoftKeyPressed = true;
+		InsKeys.rightSoftKeyPressed = true;
 	}
 	
 }

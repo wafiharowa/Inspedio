@@ -11,7 +11,16 @@ import com.inspedio.system.core.InsCanvas;
  * @version 1.0
  */
 public class InsKeys {
-	public static final int KEY_COUNT = 9;
+	/**
+	 * Marker for detecting LeftsoftKey Press
+	 */
+	public static boolean leftSoftKeyPressed = false;
+	/**
+	 * Marker for detecting RightSoftKey Press
+	 */
+	public static boolean rightSoftKeyPressed = false;
+	
+	public static final int KEY_COUNT = 11;
 		
 	/**
 	 * KeyState on Last Cycle
@@ -53,6 +62,8 @@ public class InsKeys {
 		{
 			this.lastKeyState[i] = false;
 			this.currentKeyState[i] = false;
+			leftSoftKeyPressed = false;
+			rightSoftKeyPressed = false;
 		}
 	}
 	
@@ -74,10 +85,15 @@ public class InsKeys {
 		this.setCurrentKeyState(KeyCode.GetDynamicCode(KeyCode.LEFT), ((keystate & InsCanvas.LEFT_PRESSED) != 0));
 		this.setCurrentKeyState(KeyCode.GetDynamicCode(KeyCode.RIGHT), ((keystate & InsCanvas.RIGHT_PRESSED) != 0));
 		this.setCurrentKeyState(KeyCode.FIRE, ((keystate & InsCanvas.FIRE_PRESSED) != 0));
+		
+		this.setCurrentKeyState(KeyCode.SOFTKEY_LEFT, leftSoftKeyPressed);
+		this.setCurrentKeyState(KeyCode.SOFTKEY_RIGHT, rightSoftKeyPressed);
+		
 		this.setCurrentKeyState(KeyCode.GAME_A, ((keystate & InsCanvas.GAME_A_PRESSED) != 0));
 		this.setCurrentKeyState(KeyCode.GAME_B, ((keystate & InsCanvas.GAME_B_PRESSED) != 0));
 		this.setCurrentKeyState(KeyCode.GAME_C, ((keystate & InsCanvas.GAME_C_PRESSED) != 0));
 		this.setCurrentKeyState(KeyCode.GAME_D, ((keystate & InsCanvas.GAME_D_PRESSED) != 0));
+		
 	}
 	
 	protected void setCurrentKeyState(KeyCode code, boolean state){

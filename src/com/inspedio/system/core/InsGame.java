@@ -6,6 +6,7 @@ import java.util.Random;
 import javax.microedition.midlet.MIDlet;
 
 import com.inspedio.entity.InsState;
+import com.inspedio.enums.KeyCode;
 import com.inspedio.enums.ScreenOrientation;
 import com.inspedio.system.defaults.InspedioLogoState;
 import com.inspedio.system.helper.InsCache;
@@ -15,6 +16,7 @@ import com.inspedio.system.helper.InsPause;
 import com.inspedio.system.helper.InsPointer;
 import com.inspedio.system.helper.InsSave;
 import com.inspedio.system.helper.InsStats;
+import com.inspedio.system.helper.payment.InsPaymentTequila;
 
 /**
  * <code>InsGame</code> is the core of Inspedio Engine.<br>
@@ -81,14 +83,6 @@ public class InsGame implements Runnable {
 	 */
 	public boolean requestedReset = false;;
 	/**
-	 * Marker for detecting LeftsoftKey Press
-	 */
-	public boolean leftSoftKeyPressed = false;
-	/**
-	 * Marker for detecting RightSoftKey Press
-	 */
-	public boolean rightSoftKeyPressed = false;
-	/**
 	 * Marker for detecting SwitchState request
 	 */
 	public boolean switchStateRequested = false;
@@ -124,11 +118,11 @@ public class InsGame implements Runnable {
 	 * 
 	 * @return	Reference to <code>InsGame</code> instance
 	 */
-	public static InsGame init(MIDlet Midlet, InsState InitialState, int FPS, int MaxFrameSkip, InsLoader Loader, InsSave SaveLoad, InsPause Pause, ScreenOrientation Mode){
+	public static InsGame init(MIDlet Midlet, InsState InitialState, int FPS, int MaxFrameSkip, InsLoader Loader, InsSave SaveLoad, InsPause Pause, ScreenOrientation Mode, boolean EnablePayment){
 		try
 		{
 			if(instance == null){
-				instance = new InsGame(Midlet, InitialState, FPS, MaxFrameSkip, Loader, SaveLoad, Pause, Mode);
+				instance = new InsGame(Midlet, InitialState, FPS, MaxFrameSkip, Loader, SaveLoad, Pause, Mode, EnablePayment);
 			} else {
 				throw new Exception("InsGame instance already initialized");
 			}
@@ -140,7 +134,7 @@ public class InsGame implements Runnable {
 	}
 	
 	
-	private InsGame(MIDlet Midlet, InsState InitialState, int FPS, int MaxFrameSkip, InsLoader Loader, InsSave SaveLoad, InsPause Pause, ScreenOrientation Mode)
+	private InsGame(MIDlet Midlet, InsState InitialState, int FPS, int MaxFrameSkip, InsLoader Loader, InsSave SaveLoad, InsPause Pause, ScreenOrientation Mode, boolean EnablePayment)
 	{
 		initGame(Mode);
 		InsGlobal.midlet = Midlet;
@@ -159,8 +153,6 @@ public class InsGame implements Runnable {
 		this.maxframeSkip = MaxFrameSkip;
 
 		this.requestedReset = false;
-		this.leftSoftKeyPressed = false;
-		this.rightSoftKeyPressed = false;
 		this.stop = false;
 		
 		if(InsGlobal.save.autoLoad){
@@ -174,6 +166,11 @@ public class InsGame implements Runnable {
 		} else {
 			this.requestedState = InitialState;
 			this.switchState(false);
+		}
+		
+		InsGlobal.enablePaymentTequila = EnablePayment;
+		if(EnablePayment){
+			InsPaymentTequila.init();
 		}
 	}
 	
@@ -291,36 +288,38 @@ public class InsGame implements Runnable {
 			long curtime = System.currentTimeMillis();
 			this.updateKeyState();
 			this.updatePointerState();
-			if(!InsGlobal.paused){
-				if(!this.state.deleted)
-				{
-					if(this.switchStateRequested)
+			if(InsGlobal.enablePaymentTequila && InsGlobal.onFocusPayment){
+				InsPaymentTequila.getInstance().update();
+			} else{
+				if(!InsGlobal.paused){
+					if(!this.state.deleted)
 					{
-						this.switchState(this.switchStateUseLoader);
-						this.switchStateRequested = false;
-						this.switchStateUseLoader = false;
-					}
-					if(this.leftSoftKeyPressed)
-					{
-						this.state.onLeftSoftKey();
-						this.leftSoftKeyPressed = false;
-					}
-					if(this.rightSoftKeyPressed)
-					{
-						this.state.onRightSoftKey();
-						this.rightSoftKeyPressed = false;
-					}
-					if(this.state != null){
-						if(!this.state.deleted){
-							this.state.preUpdate();
-							this.state.update();
-							this.state.postUpdate();
+						if(this.switchStateRequested)
+						{
+							this.switchState(this.switchStateUseLoader);
+							this.switchStateRequested = false;
+							this.switchStateUseLoader = false;
+						}
+						if(InsGlobal.keys.justPressed(KeyCode.SOFTKEY_LEFT))
+						{
+							this.state.onLeftSoftKey();
+						}
+						if(InsGlobal.keys.justPressed(KeyCode.SOFTKEY_RIGHT))
+						{
+							this.state.onRightSoftKey();
+						}
+						if(this.state != null){
+							if(!this.state.deleted){
+								this.state.preUpdate();
+								this.state.update();
+								this.state.postUpdate();
+							}
 						}
 					}
-				}
-			} else {
-				if(InsGlobal.keys.isAnythingPressed() || InsGlobal.pointer.isAnythingPressed()){
-					InsGlobal.resumeGame();
+				} else {
+					if(InsGlobal.keys.isAnythingPressed() || InsGlobal.pointer.isAnythingPressed()){
+						InsGlobal.resumeGame();
+					}
 				}
 			}
 			InsGlobal.stats.updateCount++;
@@ -355,22 +354,26 @@ public class InsGame implements Runnable {
 	{
 		try
 		{
-			if(this.state != null){
-				if(!this.state.deleted){
-					long curtime = System.currentTimeMillis();
-					this.canvas.clearScreen();
-					this.state.draw(InsGlobal.graphic);
-					
-					if(InsGlobal.paused){
-						InsGlobal.pause.draw(InsGlobal.graphic);
+			if(InsGlobal.enablePaymentTequila && InsGlobal.onFocusPayment){
+				InsPaymentTequila.getInstance().draw(InsGlobal.graphic);
+			} else {
+				if(this.state != null){
+					if(!this.state.deleted){
+						long curtime = System.currentTimeMillis();
+						this.canvas.clearScreen();
+						this.state.draw(InsGlobal.graphic);
+						
+						if(InsGlobal.paused){
+							InsGlobal.pause.draw(InsGlobal.graphic);
+						}
+						if(InsGlobal.displayFPS)
+						{
+							this.canvas.drawFPS();
+						}
+						this.canvas.flushGraphics();
+						InsGlobal.stats.renderCount++;
+						InsGlobal.stats.renderTime += (System.currentTimeMillis() - curtime);
 					}
-					if(InsGlobal.displayFPS)
-					{
-						this.canvas.drawFPS();
-					}
-					this.canvas.flushGraphics();
-					InsGlobal.stats.renderCount++;
-					InsGlobal.stats.renderTime += (System.currentTimeMillis() - curtime);
 				}
 			}
 		}

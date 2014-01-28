@@ -65,7 +65,6 @@ public class SampleSpriteState extends InsState{
 	
 	public void handleKeyEvent(InsKeys key)
 	{
-		
 		if(key.keyPressed(KeyCode.UP)){
 			sprite.playAnimation("UP");
 			sprite.setAction(MoveBy.create(10, 0, -100, null));
