@@ -169,9 +169,6 @@ public class InsGame implements Runnable {
 		}
 		
 		InsGlobal.enablePaymentTequila = EnablePayment;
-		if(EnablePayment){
-			InsPaymentTequila.init();
-		}
 	}
 	
 	/**

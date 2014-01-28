@@ -218,7 +218,6 @@ public class InsCanvas extends GameCanvas{
 			this.graphic.drawRegion(this.bufferImage, 0, 0, deviceWidth, deviceHeight, Sprite.TRANS_ROT90, 0, 0, Graphics.LEFT | Graphics.TOP);
 		} else{
 			this.graphic.drawRegion(this.bufferImage, 0, 0, deviceWidth, deviceHeight, Sprite.TRANS_NONE, 0, 0, Graphics.LEFT | Graphics.TOP);
-			//this.bufferGraphics.drawImage(this.bufferImage, 0, 0, Graphics.LEFT | Graphics.TOP);
 		}
 		super.flushGraphics();
 	}
