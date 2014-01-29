@@ -62,9 +62,9 @@ public class InsKeys {
 		{
 			this.lastKeyState[i] = false;
 			this.currentKeyState[i] = false;
-			leftSoftKeyPressed = false;
-			rightSoftKeyPressed = false;
 		}
+		leftSoftKeyPressed = false;
+		rightSoftKeyPressed = false;
 	}
 	
 	/**
@@ -93,6 +93,9 @@ public class InsKeys {
 		this.setCurrentKeyState(KeyCode.GAME_B, ((keystate & InsCanvas.GAME_B_PRESSED) != 0));
 		this.setCurrentKeyState(KeyCode.GAME_C, ((keystate & InsCanvas.GAME_C_PRESSED) != 0));
 		this.setCurrentKeyState(KeyCode.GAME_D, ((keystate & InsCanvas.GAME_D_PRESSED) != 0));
+		
+		leftSoftKeyPressed = false;
+		rightSoftKeyPressed = false;
 		
 	}
 	
