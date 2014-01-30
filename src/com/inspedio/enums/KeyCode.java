@@ -24,7 +24,7 @@ public class KeyCode extends InsEnum{
 	 * Return keycode considering rotated screen
 	 */
 	public static KeyCode GetDynamicCode(KeyCode K){
-		if(InsGlobal.isScreenRotated){
+		if(InsGlobal.isScreenRotated && !InsGlobal.onFocusPayment){
 			if(K == UP){
 				return LEFT;
 			} else if(K == RIGHT){

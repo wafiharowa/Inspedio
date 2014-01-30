@@ -142,7 +142,7 @@ public class InsCanvas extends GameCanvas{
 	 * Transform Coordinate touched depend on Orientation
 	 */
 	protected InsPointerEvent transformCoordinate(InsPointerEvent e){
-		if(rotateCanvas){
+		if(rotateCanvas && !InsGlobal.onFocusPayment){
 			int tmpX = e.x;
 			int tmpY = e.y;
 			
