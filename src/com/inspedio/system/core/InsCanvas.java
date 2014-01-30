@@ -214,10 +214,14 @@ public class InsCanvas extends GameCanvas{
 	}
 		
 	public void flushGraphics(){
-		if(rotateCanvas){
-			this.graphic.drawRegion(this.bufferImage, 0, 0, deviceWidth, deviceHeight, Sprite.TRANS_ROT90, 0, 0, Graphics.LEFT | Graphics.TOP);
-		} else{
+		if(InsGlobal.onFocusPayment){
 			this.graphic.drawRegion(this.bufferImage, 0, 0, deviceWidth, deviceHeight, Sprite.TRANS_NONE, 0, 0, Graphics.LEFT | Graphics.TOP);
+		} else {
+			if(rotateCanvas){
+				this.graphic.drawRegion(this.bufferImage, 0, 0, deviceWidth, deviceHeight, Sprite.TRANS_ROT90, 0, 0, Graphics.LEFT | Graphics.TOP);
+			} else{
+				this.graphic.drawRegion(this.bufferImage, 0, 0, deviceWidth, deviceHeight, Sprite.TRANS_NONE, 0, 0, Graphics.LEFT | Graphics.TOP);
+			}
 		}
 		super.flushGraphics();
 	}
