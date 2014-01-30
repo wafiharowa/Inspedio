@@ -43,7 +43,11 @@ public class InsPaymentTequila implements PaymentListener, EventListener{
 	        }
 			doneInit = true;
 		}
-		teqInstance.showAdvertisementDialog();
+		showAdvertisement();
+	}
+	
+	public static void showAdvertisement(){
+		getTequilaInstance().showAdvertisementDialog();
 	}
 	
 	public static TequilaPlanetApplication getTequilaInstance(){
@@ -155,6 +159,7 @@ public class InsPaymentTequila implements PaymentListener, EventListener{
 	}
 
 	public void requestQuit() {
+		InsGlobal.save.save();
 		InsGlobal.exitGame();
 	}
 
