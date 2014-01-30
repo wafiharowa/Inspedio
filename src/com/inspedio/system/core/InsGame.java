@@ -351,13 +351,14 @@ public class InsGame implements Runnable {
 	{
 		try
 		{
+			long curtime = System.currentTimeMillis();
+			this.canvas.clearScreen();
 			if(InsGlobal.enablePaymentTequila && InsGlobal.onFocusPayment){
 				InsPaymentTequila.getInstance().draw(InsGlobal.graphic);
 			} else {
 				if(this.state != null){
 					if(!this.state.deleted){
-						long curtime = System.currentTimeMillis();
-						this.canvas.clearScreen();
+						
 						this.state.draw(InsGlobal.graphic);
 						
 						if(InsGlobal.paused){
@@ -367,12 +368,13 @@ public class InsGame implements Runnable {
 						{
 							this.canvas.drawFPS();
 						}
-						this.canvas.flushGraphics();
-						InsGlobal.stats.renderCount++;
-						InsGlobal.stats.renderTime += (System.currentTimeMillis() - curtime);
+						
 					}
 				}
 			}
+			this.canvas.flushGraphics();
+			InsGlobal.stats.renderCount++;
+			InsGlobal.stats.renderTime += (System.currentTimeMillis() - curtime);
 		}
 		catch (Exception e)
 		{

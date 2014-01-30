@@ -47,7 +47,7 @@ public class InsPaymentTequila implements PaymentListener, EventListener{
 	
 	public static void showAdvertisement(){
 		System.out.println("Trying to show Advertisement Dialog");
-		getTequilaInstance().showAdvertisementDialog();
+		getTequilaInstance().showAdvertisementDialog(true);
 		System.out.println("Advertisement Dialog succesfully shown");
 	}
 	
