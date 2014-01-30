@@ -35,19 +35,20 @@ public class InsPaymentTequila implements PaymentListener, EventListener{
 	
 	public static void init(){
 		if(!doneInit){
+			System.out.println("Initiating Tequila Instance");
 			teqInstance = TequilaPlanetApplication.getInstance(InsGlobal.midlet, TequilaPlanetApplication.LANG_ENGLISH);
 			teqInstance.addPaymentListener(getInstance());
 			teqInstance.setEventListener(getInstance());
-			if(teqInstance.getTQPNick() == null){
-	            teqInstance.setTQPNick("Default");
-	        }
 			doneInit = true;
+			System.out.println("Tequila Instance succesfully Created");
 		}
 		showAdvertisement();
 	}
 	
 	public static void showAdvertisement(){
+		System.out.println("Trying to show Advertisement Dialog");
 		getTequilaInstance().showAdvertisementDialog();
+		System.out.println("Advertisement Dialog succesfully shown");
 	}
 	
 	public static TequilaPlanetApplication getTequilaInstance(){
@@ -58,23 +59,36 @@ public class InsPaymentTequila implements PaymentListener, EventListener{
 	}
 	
 	public static VirtualGoodDetails[] getVirtualGoods(){
-		return getTequilaInstance().getVirtualGoodDetails();
+		System.out.println("Trying to get Virtual Goods Detail");
+		VirtualGoodDetails[] vg = getTequilaInstance().getVirtualGoodDetails();
+		System.out.println("VG Data acquired.");
+		if(vg != null){
+			System.out.println("VG Instance Count : " + vg.length);
+		} else {
+			System.out.println("VG Data is null");
+		}
+		
+		return vg;
 	}
 	
 	public static void requestPayment(VirtualGoodDetails vg, InsCallback successCallback, InsCallback failedCallback){
 		paymentSuccessCallback = successCallback;
 		paymentFailedCallback = failedCallback;
+		System.out.println("Trying to Request VG Payment");
 		getTequilaInstance().showVirtualGoodPaymentDialog(vg);
+		System.out.println("VG Payment Request Sent");
 	}
 	
 	public void notifyPaymentStatus(int arg) {
 		switch (arg) {
 			case PAYMENT_STATUS_ACCEPTED:
+				System.out.println("Payment Accepted");
 				if(paymentSuccessCallback != null){
 					paymentSuccessCallback.call();
 				}
 				break;
 			case PAYMENT_STATUS_REJECTED:
+				System.out.println("Payment Rejected");
 				if(paymentFailedCallback != null){
 					paymentFailedCallback.call();
 				}
@@ -141,8 +155,10 @@ public class InsPaymentTequila implements PaymentListener, EventListener{
 	}
 
 	public void gainFocus() {
+		System.out.println("Application gain Focus");
 		InsGlobal.onFocusPayment = false;
 		InsGlobal.resumeGame();
+		System.out.println("Application is Resumed");
 	}
 
 	public boolean isAcceptingDailyReward() {
@@ -154,11 +170,14 @@ public class InsPaymentTequila implements PaymentListener, EventListener{
 	}
 
 	public void loseFocus() {
+		System.out.println("Application Lost Focus");
 		InsGlobal.onFocusPayment = true;
 		InsGlobal.pauseGame();
+		System.out.println("Application is Paused");
 	}
 
 	public void requestQuit() {
+		System.out.println("Application need to Exit");
 		InsGlobal.save.save();
 		InsGlobal.exitGame();
 	}
