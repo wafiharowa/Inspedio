@@ -125,11 +125,11 @@ public class InsPaymentTequila implements PaymentListener, EventListener{
 		}
 		
 		for(int i = 0; i < pointer.released.length; i++){
-			getTequilaInstance().pointerReleased(pointer.pressed[i].x, pointer.pressed[i].y);
+			getTequilaInstance().pointerReleased(pointer.released[i].x, pointer.released[i].y);
 		}
 		
 		for(int i = 0; i < pointer.dragged.length; i++){
-			getTequilaInstance().pointerDragged(pointer.pressed[i].x, pointer.pressed[i].y);
+			getTequilaInstance().pointerDragged(pointer.dragged[i].x, pointer.dragged[i].y);
 		}
 	}
 	
