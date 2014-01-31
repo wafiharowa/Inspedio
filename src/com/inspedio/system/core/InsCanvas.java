@@ -9,6 +9,7 @@ import javax.microedition.lcdui.game.Sprite;
 
 import com.inspedio.enums.InputType;
 import com.inspedio.enums.ScreenOrientation;
+import com.inspedio.system.helper.InsUtil;
 import com.inspedio.system.helper.extension.InsPointerEvent;
 
 /**
@@ -75,6 +76,10 @@ public class InsCanvas extends GameCanvas{
 	}
 	
 	
+	public Graphics getInternalGraphic(){
+		return this.graphic;
+	}
+	
 	private InsCanvas(InsGame Game, ScreenOrientation Mode) {
 		super(false);
 		this.setFullScreenMode(true);
@@ -123,7 +128,8 @@ public class InsCanvas extends GameCanvas{
 		
 		InsGlobal.screenOrientation = this.deviceOrientation = this.displayMode;
 		
-		this.bufferImage = Image.createImage(this.deviceWidth, this.deviceHeight);
+		int max = InsUtil.Max(this.deviceWidth, this.deviceHeight);
+		this.bufferImage = Image.createImage(max, max);
 		this.bufferGraphics = this.bufferImage.getGraphics();
 		this.graphic = getGraphics();
 		
@@ -171,8 +177,13 @@ public class InsCanvas extends GameCanvas{
 	 */
 	public void clearScreen()
 	{
-		this.bufferGraphics.setColor(InsGlobal.BG_COLOR);
-		this.bufferGraphics.fillRect(0, 0, this.deviceWidth, this.deviceHeight);
+		if(InsGlobal.onFocusPayment && InsGlobal.enablePaymentTequila){
+			this.graphic.setColor(InsGlobal.BG_COLOR);
+			this.graphic.fillRect(0, 0, getWidth(), getHeight());
+		} else {
+			this.bufferGraphics.setColor(InsGlobal.BG_COLOR);
+			this.bufferGraphics.fillRect(0, 0, this.deviceWidth, this.deviceHeight);
+		}
 	}
 	
 	/**
@@ -214,13 +225,7 @@ public class InsCanvas extends GameCanvas{
 	}
 		
 	public void flushGraphics(){
-		if(InsGlobal.onFocusPayment){
-			if(rotateCanvas){
-				this.graphic.drawRegion(this.bufferImage, 0, 0, deviceHeight, deviceWidth, Sprite.TRANS_NONE, 0, 0, Graphics.LEFT | Graphics.TOP);
-			} else {
-				this.graphic.drawRegion(this.bufferImage, 0, 0, deviceWidth, deviceHeight, Sprite.TRANS_NONE, 0, 0, Graphics.LEFT | Graphics.TOP);
-			}
-		} else {
+		if(!(InsGlobal.onFocusPayment && InsGlobal.enablePaymentTequila)){
 			if(rotateCanvas){
 				this.graphic.drawRegion(this.bufferImage, 0, 0, deviceWidth, deviceHeight, Sprite.TRANS_ROT90, 0, 0, Graphics.LEFT | Graphics.TOP);
 			} else{

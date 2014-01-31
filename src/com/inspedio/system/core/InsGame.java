@@ -354,7 +354,7 @@ public class InsGame implements Runnable {
 			long curtime = System.currentTimeMillis();
 			this.canvas.clearScreen();
 			if(InsGlobal.enablePaymentTequila && InsGlobal.onFocusPayment){
-				InsPaymentTequila.getInstance().draw(InsGlobal.graphic);
+				InsPaymentTequila.getInstance().draw(InsGlobal.canvas.getInternalGraphic());
 			} else {
 				if(this.state != null){
 					if(!this.state.deleted){
