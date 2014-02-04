@@ -18,7 +18,6 @@ import com.inspedio.system.helper.InsPause;
 import com.inspedio.system.helper.InsPointer;
 import com.inspedio.system.helper.InsSave;
 import com.inspedio.system.helper.InsStats;
-import com.inspedio.system.helper.payment.InsPaymentTequila;
 
 /**
  * This class consist of important global variables and constants that is used on GameLoop<br>
@@ -79,10 +78,6 @@ public class InsGlobal{
 	 * Randomizer for general random usage
 	 */
 	public static Random randomizer;
-	/**
-	 * Reference to Payment Object
-	 */
-	public static InsPaymentTequila payment;
 	/**
 	 * Current BGM played
 	 */
